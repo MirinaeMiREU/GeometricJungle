@@ -1,2 +1,37 @@
-# GeometricJungle
-We plan to make a 2D tower defense/battle arena game mechanically based on the game Clash Royale (website found here) and aesthetically based on the Geometry Wars series (example game found here) and some mechanics from the Plants vs Zombies series. In this game, the player will control a series of geometrical “towers” alongside procedurally spawned “underlings” and a randomly picked list of various heroes to use against a single enemy (AI-controlled, or Human) which is set on the opposite side of a given “arena” playing area in the game. Each character’s spawned minions and enemies will walk towards and begin attacking the closest enemies and towers. The objective of the game is to completely destroy the enemy’s towers to collect money, points, and end the game. 
+## Welcome to GitHub Pages
+
+You can use the [editor on GitHub](https://github.com/varikmp/GeometricJungle/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+
+Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+
+### Markdown
+
+Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+
+```markdown
+Syntax highlighted code block
+
+# Header 1
+## Header 2
+### Header 3
+
+- Bulleted
+- List
+
+1. Numbered
+2. List
+
+**Bold** and _Italic_ and `Code` text
+
+[Link](url) and ![Image](src)
+```
+
+For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+
+### Jekyll Themes
+
+Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/varikmp/GeometricJungle/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+
+### Support or Contact
+
+Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
