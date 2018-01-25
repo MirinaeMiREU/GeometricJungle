@@ -1,4 +1,4 @@
-var KEY_A = 65;
+var KEY_A = "KeyA";
 var KEY_D = 68;
 var KEY_SPACE = 32;
 
@@ -27,7 +27,11 @@ function Controller()
      */
     this.keydown = function(event) 
     {
+		if (event.code === KEY_A) {
+			console.log("keydown");
+		}
         that.keymap[event.keyCode] = true;
+		
         event.preventDefault();
     }
     
@@ -44,4 +48,6 @@ function Controller()
     // strictly hook event listener to the methods
 	document.addEventListener("keydown", this.keydown, false);
 	document.addEventListener("keyup", this.keyup, false);
+	
+	document.addEventListener("click", this.mouseclick, false);
 }

@@ -24,7 +24,9 @@ AM.downloadAll(function () {
     gameEngine.start();
     
 //    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.jpg"), 1024, 512));
-    gameEngine.addEntity(new Elf(gameEngine, AM.getAsset("./img/elf/1/1_IDLE.png")));
+	var elfArr = [];
+	elfArr.push(AM.getAsset("./img/elf/1/1_IDLE.png"));
+    gameEngine.addEntity(new Elf(gameEngine, elfArr));
     
     
     

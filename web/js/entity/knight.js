@@ -4,9 +4,9 @@ function Knight(game, spritesheet)
 	this.animation = new Animation(spritesheet, 136, 128, 4, 0.25, 4 , true, 1);
 	this.x = 0;
 	this.y = 500;
-	this.speed = 100;
+	this.speed = -10;
 	this.ctx = game.ctx;
-	Entity.call(this, game, 100, 350);
+	Entity.call(this, game, 500, 350);
 }
 
 Knight.prototype = new Entity();
