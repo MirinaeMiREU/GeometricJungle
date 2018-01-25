@@ -98,36 +98,12 @@ Cheetah.prototype.draw = function () {
     Entity.prototype.draw.call(this);
 }
 
-// inheritance 
-function Guy(game, spritesheet) {
-    this.animation = new Animation(spritesheet, 154, 215, 4, 0.15, 8, true, 0.5);
-    this.speed = 100;
-    this.ctx = game.ctx;
-    Entity.call(this, game, 0, 450);
-}
-
-Guy.prototype = new Entity();
-Guy.prototype.constructor = Guy;
-
-Guy.prototype.update = function () {
-    this.x += this.game.clockTick * this.speed;
-    if (this.x > 800) this.x = -230;
-    Entity.prototype.update.call(this);
-}
-
-Guy.prototype.draw = function () {
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-    Entity.prototype.draw.call(this);
-}
-
 //Elf1
 function Elf1(game, spritesheet) {
-	this.animation = new Animation(spritesheet, 118, 128, 4, 0.25, 4, true, 1);
-	this.x = 0;
-	this.y = 500;
-	this.speed = 0;
+	this.animation = new Animation(spritesheet, 111, 128, 4, 0.25, 4, true, 1);
+	this.speed = 50;
 	this.ctx = game.ctx;
-	Entity.call(this, game, 100, 500);
+	Entity.call(this, game, 100, 400);
 }
 
 Elf1.prototype = new Entity();
@@ -143,10 +119,9 @@ Elf1.prototype.draw = function() {
     Entity.prototype.draw.call(this);
 }
 
+AM.queueDownload("./img/2_WALK.png");
 AM.queueDownload("./img/1_IDLE.png");
-AM.queueDownload("./img/Elf1.png");
 AM.queueDownload("./img/RobotUnicorn.png");
-AM.queueDownload("./img/guy.jpg");
 AM.queueDownload("./img/mushroomdude.png");
 AM.queueDownload("./img/runningcat.png");
 AM.queueDownload("./img/background.jpg");
@@ -160,10 +135,9 @@ AM.downloadAll(function () {
     gameEngine.start();
     
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.jpg")));
-    gameEngine.addEntity(new Elf1(gameEngine, AM.getAsset("./img/1_IDLE.png")));
+    gameEngine.addEntity(new Elf1(gameEngine, AM.getAsset("./img/2_WALK.png")));
     gameEngine.addEntity(new MushroomDude(gameEngine, AM.getAsset("./img/mushroomdude.png")));
     gameEngine.addEntity(new Cheetah(gameEngine, AM.getAsset("./img/runningcat.png")));
-    gameEngine.addEntity(new Guy(gameEngine, AM.getAsset("./img/guy.jpg")));
 
     console.log("All Done!");
 });
