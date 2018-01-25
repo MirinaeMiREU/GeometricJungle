@@ -26,7 +26,7 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y) {
                  xindex * this.frameWidth, yindex * this.frameHeight,  // source from sheet
                  this.frameWidth, this.frameHeight,
                  x, y,
-                 this.frameWidth * this.scale,
+                 -(this.frameWidth * this.scale),
                  this.frameHeight * this.scale);
 }
 

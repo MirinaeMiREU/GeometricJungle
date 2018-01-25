@@ -1,12 +1,12 @@
 function Knight(game, spritesheet) 
 {
 	// the sprite coordinate must be modified
-	this.animation = new Animation(spritesheet, 118, 128, 4, 0.25, 4, true, 1);
+	this.animation = new Animation(spritesheet, 136, 128, 4, 0.25, 4 , true, 1);
 	this.x = 0;
 	this.y = 500;
-	this.speed = 0;
+	this.speed = 100;
 	this.ctx = game.ctx;
-	Entity.call(this, game, 100, 500);
+	Entity.call(this, game, 100, 350);
 }
 
 Knight.prototype = new Entity();
