@@ -20,6 +20,7 @@ var RIGHT = 1;
  */
 function Controller() 
 {
+	this.ctx = null;
 	/**
 	 * The mapping key
 	 */
@@ -30,6 +31,12 @@ function Controller()
      * the controller class
      */
     var that = this;
+	
+	this.init = function(ctx) 
+	{
+		this.ctx = ctx;
+		console.log(this.ctx);
+	}
     
     /**
      * The method hooks the key
@@ -86,14 +93,16 @@ function Controller()
 	{
 		if (event.button === 0 || event.button === 2) {
 			console.log("x: " + event.x + " y: " + event.y);
+			console.log(that.ctx.fillStyle);
+			that.ctx.fillRect(event.x, event.y, 100, 100);
 		}
 		event.preventDefault();
 	}
-
+	
     // strictly hook event listener to the methods
 	document.addEventListener("keydown", this.keydown, false);
 	document.addEventListener("keyup", this.keyup, false);
 	
 	document.addEventListener("click", this.mouseclick, false);
-	document.addEventListener("contextmenu", this.mouseclick, false);
+	//document.addEventListener("contextmenu", this.mouseclick, false);
 }

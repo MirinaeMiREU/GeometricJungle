@@ -30,6 +30,7 @@ function GameEngine()
     this.init = function(ctx) 
     {
         this.ctx = ctx;
+		this.controller.init(ctx);
         this.surfaceWidth = this.ctx.canvas.width;
         this.surfaceHeight = this.ctx.canvas.height;
         this.timer = new Timer();
