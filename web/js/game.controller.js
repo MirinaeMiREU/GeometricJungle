@@ -18,8 +18,10 @@ var RIGHT = 1;
 /**
  * The class manages key input
  */
-function Controller() 
+function Controller(game, manager) 
 {
+	this.manager = manager;
+	this.game = game;
 	this.ctx = null;
 	/**
 	 * The mapping key
@@ -93,8 +95,17 @@ function Controller()
 	{
 		if (event.button === 0 || event.button === 2) {
 			console.log("x: " + event.x + " y: " + event.y);
-			console.log(that.ctx.fillStyle);
-			that.ctx.fillRect(event.x, event.y, 100, 100);
+			if (event.y < 140) {
+				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 1));
+			} else if (event.y < 245) {
+				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 2));
+			} else if (event.y < 360) {
+				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 3));
+			} else if (event.y < 450) {
+				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 4));
+			}else {
+				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 5));
+			}
 		}
 		event.preventDefault();
 	}

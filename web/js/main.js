@@ -21,7 +21,7 @@ AM.downloadAll(function () {
     var ctx = canvas.getContext("2d");
 	ctx.fillStyle = "white";
 
-    var gameEngine = new GameEngine();
+    var gameEngine = new GameEngine(AM);
     gameEngine.init(ctx);
     gameEngine.start();
     
@@ -39,7 +39,6 @@ AM.downloadAll(function () {
 //    gameEngine.addEntity(new Fairy(gameEngine, AM.getAsset("./img/fairy/1/1_IDLE.png")));
 //    gameEngine.addEntity(new Fairy(gameEngine, AM.getAsset("./img/fairy/1/8_DIE.png")));
 
-    gameEngine.addEntity(new Knight(gameEngine, AM.getAsset("./img/knight/2_KNIGHT/WALK.png")));
 	gameEngine.addEntity(new Fairy(gameEngine, AM.getAsset("./img/fairy/1/2_WALK.png")));
     console.log("All Done!");
     
