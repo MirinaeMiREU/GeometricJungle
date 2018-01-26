@@ -1,5 +1,6 @@
 var AM = new AssetManager();
 
+AM.queueDownload("./img/background.png");
 AM.queueDownload("./img/elf/1/1_IDLE.png");
 
 AM.queueDownload("./img/fairy/1/2_WALK.png");
@@ -23,7 +24,7 @@ AM.downloadAll(function () {
     gameEngine.init(ctx);
     gameEngine.start();
     
-//    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.jpg"), 1024, 512));
+    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png"), 705, 473));
 	var elfArr = [];
 	elfArr.push(AM.getAsset("./img/elf/1/1_IDLE.png"));
     gameEngine.addEntity(new Elf(gameEngine, elfArr));
