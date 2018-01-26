@@ -15,14 +15,15 @@ function ()
  * The class manages animations
  * and the time interacted between them
  */
-function GameEngine() 
+function GameEngine(manager) 
 {
+	this.manager = manager;
 	this.ctx = null;
     this.entities = [];
     
     this.surfaceWidth = null;
     this.surfaceHeight = null;
-    this.controller = new Controller();
+    this.controller = new Controller(this, manager);
     
     /**
      * The method initialize the context (canvas)
@@ -30,6 +31,7 @@ function GameEngine()
     this.init = function(ctx) 
     {
         this.ctx = ctx;
+		this.controller.init(ctx);
         this.surfaceWidth = this.ctx.canvas.width;
         this.surfaceHeight = this.ctx.canvas.height;
         this.timer = new Timer();
