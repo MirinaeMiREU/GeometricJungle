@@ -15,9 +15,9 @@ Fairy.prototype.constructor = Fairy;
 Fairy.prototype.update = function() 
 {
 	// collision
-	for (var i = 0; i < list.length; i++)
+	for (var i = 0; i < this.game.entities.length; i++)
 	{
-		var entity = list[i];
+		var entity = this.game.entities[i];
 		if (entity !== this && this.collide(entity))
 			console.log('colliding...');
 	}
@@ -32,7 +32,7 @@ Fairy.prototype.draw = function()
     Entity.prototype.draw.call(this);
 }
 
-Fairy.prototype.collide = function() 
+Fairy.prototype.collide = function(other) 
 {
 	return distance(this, other) < 10;
 }

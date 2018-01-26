@@ -28,9 +28,9 @@ Knight.prototype.constructor = Knight;
 Knight.prototype.update = function() 
 {
 	// collision
-	for (var i = 0; i < list.length; i++)
+	for (var i = 0; i < this.game.entities.length; i++)
 	{
-		var entity = list[i];
+		var entity = this.game.entities[i];
 		if (entity !== this && this.collide(entity))
 			console.log('colliding...');
 	}
@@ -45,7 +45,7 @@ Knight.prototype.draw = function()
     Entity.prototype.draw.call(this);
 }
 
-Knight.prototype.collide = function() 
+Knight.prototype.collide = function(other) 
 {
 	return distance(this, other) < 10;
 }
