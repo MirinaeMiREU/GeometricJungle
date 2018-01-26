@@ -4,9 +4,9 @@ function Fairy(game, spritesheet)
 	this.animation = new Animation(spritesheet, 150, 128, 4, 0.25, 4 , true, 1);
 	this.x = 0;
 	this.y = 500;
-	this.speed = 100;
+	this.speed = 25;
 	this.ctx = game.ctx;
-	Entity.call(this, game, 100, 500);
+	Entity.call(this, game, 0, 210);
 }
 
 Fairy.prototype = new Entity();

@@ -1,12 +1,12 @@
-function Elf(game, spritesheet) 
+function Elf(game, spritesheets) 
 {
 	// the sprite coordinate must be modified
-	this.animation = new Animation(spritesheet, 118, 128, 4, 0.25, 4, true, 1);
+	this.animation = new Animation(spritesheets[0], 118, 128, 4, 0.25, 4, true, 1);
 	this.x = 100;
-	this.y = 100;
+	this.y = 0;
 	this.speed = 0;
 	this.ctx = game.ctx;
-	Entity.call(this, game, 100, 100);
+	Entity.call(this, game, 100, 0);
 }
 
 Elf.prototype = new Entity();
