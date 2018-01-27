@@ -7,7 +7,7 @@ function Background(game, spritesheet) {
 };
 
 Background.prototype.draw = function () {
-    this.ctx.drawImage(this.spritesheet,this.x, this.y);
+    this.ctx.drawImage(this.spritesheet,this.x, this.y, 960, 540);
 };
 
 Background.prototype.update = function () {
