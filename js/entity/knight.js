@@ -20,6 +20,8 @@ function Knight(game, spritesheet, y)
 		case 5:
 			Entity.call(this, game, 0, 410);
 	}
+	
+	this.game.manager.getMusic('./sound/pop.mp3').play();
 }
 
 Knight.prototype = new Entity();

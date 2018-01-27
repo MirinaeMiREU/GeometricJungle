@@ -1,5 +1,8 @@
 var AM = new AssetManager();
 
+AM.addMusic("./sound/combat.mp3");
+AM.addMusic("./sound/pop.mp3");
+
 AM.queueDownload("./img/background.png");
 AM.queueDownload("./img/elf/1/1_IDLE.png");
 
@@ -30,7 +33,9 @@ AM.downloadAll(function () {
 	elfArr.push(AM.getAsset("./img/elf/1/1_IDLE.png"));
     gameEngine.addEntity(new Elf(gameEngine, elfArr));
     
-    
+    var theme = AM.getMusic("./sound/combat.mp3");
+    theme.loop = true;
+    theme.play();
     
     
     

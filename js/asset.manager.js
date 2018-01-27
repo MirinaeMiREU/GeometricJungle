@@ -6,8 +6,9 @@ function AssetManager()
     this.successCount = 0;
     this.errorCount = 0;
     this.cache = [];
+    this.music = [];
     this.downloadQueue = [];
-    
+
     /**
      * The method puts all
      * paths in queue to download
@@ -27,6 +28,12 @@ function AssetManager()
     {
         return this.downloadQueue.length === this.successCount + this.errorCount;
     }
+    
+//    this.load = function(callback)
+//    {
+//    	console.log("Loaded " + this.src);
+//        callback();
+//    }
     
     /**
      * The method starts downloading
@@ -70,6 +77,20 @@ function AssetManager()
     this.getAsset = function (path)
     {
         return this.cache[path];
+    }
+    
+    this.addMusic = function(path)
+    {
+    	var sound = new Audio();
+    	sound.addEventListener("canplay", null);
+    	sound.addEventListener("error", null);
+    	sound.src = path;
+    	this.music[path] = sound;
+    }
+    
+    this.getMusic = function(path)
+    {
+    	return this.music[path];
     }
 }
 
