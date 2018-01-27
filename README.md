@@ -1,37 +1,93 @@
-## Welcome to GitHub Pages
+# Rumble in the Geometric Jungle
 
-You can use the [editor on GitHub](https://github.com/varikmp/GeometricJungle/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Project Plan for Gold Two
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Cuong Tran - Logan Stafford - Peter Bae - Varik Hoang
 
-### Markdown
+**Introduction**
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+We plan to make a 2D tower defense/battle arena game mechanically based on the game Clash Royale (website found [here](https://clashroyale.com/)) and aesthetically based on the Geometry Wars series (example game found [here](http://store.steampowered.com/app/310790/Geometry_Wars_3_Dimensions_Evolved/)) and some mechanics from the Plants vs Zombies series. In this game, the player will control a series of geometrical &quot;towers&quot; alongside procedurally spawned &quot;underlings&quot; and a randomly picked list of various heroes to use against a single enemy (AIcontrolled, or Human) which is set on the opposite side of a given &quot;arena&quot; playing area in the game. Each character&#39;s spawned minions and enemies will walk towards and begin attacking the closest enemies and towers. The objective of the game is to completely destroy the enemy&#39;s towers to collect money, points, and end the game.
 
-```markdown
-Syntax highlighted code block
+**Animated Resources**
 
-# Header 1
-## Header 2
-### Header 3
+ ****** Underlings (Barbarian, Archer, Wizard, Dragon, Bomb, ...)**
 
-- Bulleted
-- List
+These user controlled characters will have several different animations depending on the characters state.
 
-1. Numbered
-2. List
+ **** Starting from both sides after users dropping the troops
+ **** Moving to the other side and attack any enemy&#39;s troops that face
+ **** Attacking the enemy&#39;s buildings
 
-**Bold** and _Italic_ and `Code` text
+ ****** Buildings**
 
-[Link](url) and ![Image](src)
-```
+Some buildings will protect the user from being attacked. (Walls)
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+ **** These types of buildings will not have much animation other than showing wear and tear as the building is damaged and being destroyed.
 
-### Jekyll Themes
+Some buildings will automatically generate troops after a set interval. (Underling Spawners)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/varikmp/GeometricJungle/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+ **** These types of buildings will have animation when spawning underlings and when damaged and destroyed.
 
-### Support or Contact
+Some buildings will defend the user by damaging attacking underlings. (Watch Tower)
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+ **** These types of buildings will have animation when attacking, receiving damage, and being destroyed.
+
+ ****** Background**
+
+The background will be static.
+
+ ****** Music**
+
+The music and sound effects used for the game will make the game seem more responsive and engaging. (music is made by Logan)
+
+  Attacking
+  Spawning
+  Destruction
+  Point Earning
+  Win Game/Lose Game
+  General Game BG
+  General Menu BG
+
+**Control**
+
+The controls in the game is going to be simple, mostly driven by mouse clicks, with keyboard hotkeys.
+
+**Interaction**
+
+Interaction in our game will be based on collision and coordination of animated assets.
+
+Specifically we track collisions between the underlings and the buildings. Certain underlings and buildings will spawn projectiles, which will also collide with each other.
+
+There will be multiple lanes for interactions similar to lanes in Plants vs. Zombies and there will be underlings and buildings that either attack multiple lanes or take up multiple lanes.
+
+**Extras**
+
+In addition to these components we will explore expanding one or more of the following areas:
+
+1. **1.**** Additional Levels/Underlings**
+
+The game will have a more complete feeling with more than one level. We think three levels would be a good target. Also additional enemies and rewards can be animated and added as time permits.
+
+1. **2.**** The Ability to Level Up Underlings**
+
+The game will reward the player for each level cleared with ability points to enhance underlings or buildings for future levels. This will give the player the ability to either evenly improve all underlings or focus on specializing in a particular underling or building.
+
+**Timeline**
+
+1. **1.**** Prototype**
+
+For the prototype we plan to implement all animations for all our animated resources. We will also implement our simple controls. However, most of the interaction in our game will still be unimplemented. This means our animated resources may hang in space or collide as they move with no effects.
+
+1. **2.**** Minimal Deliverable**
+
+This minimal deliverable will consist of a single level of the game including all animations and controls from the prototype as well as fully functioning interaction for all game elements. A simple score is calculated and the game ends with the death of the player or reaching a predefined ending of the level.
+
+1. **3.**** Final Game**
+
+The final game will include all the features of the minimal deliverable along with one or more of the extras as time permits. We expect the improvements to interaction with curved surfaces will be the simplest followed by a high score database. These will be our first targets.
+
+**References**
+
+[Clash Royale](https://clashroyale.com/)
+
+[Plants vs Zombies](https://www.ea.com/games/plantsvszombies/plantsvszombies2)
