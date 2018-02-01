@@ -1,28 +1,29 @@
+/** 
+ * The Controller class. This class manages keyboard input.
+ * 
+ * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * TCSS491 - Winter 2018
+ */
+
 var KEY_Q = "KeyQ";
 var KEY_W = "KeyW";
 var KEY_E = "KeyE";
 var KEY_R = "KeyR";
 var KEY_T = "KeyT";
-
 var KEY_1 = "Digit1";
 var KEY_2 = "Digit2";
 var KEY_3 = "Digit3";
 var KEY_4 = "Digit4";
 var KEY_5 = "Digit5";
-
 var KEY_SPACE = 32;
-
 var LEFT = 0;
 var RIGHT = 1;
 
-/**
- * The class manages key input
- */
-function Controller(game, manager) 
-{
+function Controller(game, manager) {
 	this.manager = manager;
 	this.game = game;
 	this.ctx = null;
+	
 	/**
 	 * The mapping key
 	 */
@@ -34,8 +35,7 @@ function Controller(game, manager)
      */
     var that = this;
 	
-	this.init = function(ctx) 
-	{
+	this.init = function(ctx) {
 		this.ctx = ctx;
 		console.log(this.ctx);
 	}
@@ -44,8 +44,7 @@ function Controller(game, manager)
      * The method hooks the key
      * pressed with the mapping key
      */
-    this.keydown = function(event) 
-    {
+    this.keydown = function(event) {
 		if (event.code === KEY_Q) {
 			console.log("Q Down");
 		}
@@ -85,14 +84,13 @@ function Controller(game, manager)
      * The method hooks the key
      * pressed with the mapping key
      */
-    this.keyup = function(event) 
-    {
+    this.keyup = function(event) {
         that.keymap[event.keyCode] = false;
         event.preventDefault();
     }
 	
-	this.mouseclick = function(event)
-	{
+    
+	this.mouseclick = function(event) {
 		if (event.button === 0 || event.button === 2) {
 			console.log("x: " + event.x + " y: " + event.y);
 			if (event.y < 140) {
@@ -115,5 +113,4 @@ function Controller(game, manager)
 	document.addEventListener("keyup", this.keyup, false);
 	
 	document.addEventListener("click", this.mouseclick, false);
-	//document.addEventListener("contextmenu", this.mouseclick, false);
 }

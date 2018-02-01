@@ -1,3 +1,9 @@
+/** 
+ * The Animation class. This class manages displaying sprites and animating them.
+ * 
+ * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * TCSS491 - Winter 2018
+ */
 function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale) {
     this.spriteSheet = spriteSheet;
     this.frameWidth = frameWidth;

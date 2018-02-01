@@ -1,3 +1,9 @@
+/** 
+ * The Background. This class represents a game background.
+ * 
+ * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * TCSS491 - Winter 2018
+ */
 function Background(game, spritesheet) {
     this.x = 0;
     this.y = 0;

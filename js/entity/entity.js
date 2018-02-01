@@ -1,3 +1,9 @@
+/** 
+ * The Entity class. Represents any abstract in-game entity.
+ * 
+ * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * TCSS491 - Winter 2018
+ */
 function Entity(game, x, y) {
     this.game = game;
     this.x = x;

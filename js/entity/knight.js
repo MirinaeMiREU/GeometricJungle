@@ -1,6 +1,11 @@
-function Knight(game, spritesheet, y) 
-{
-	// the sprite coordinate must be modified
+/** 
+ * The Knight class. Represents the Knight character.
+ * 
+ * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * TCSS491 - Winter 2018
+ */
+function Knight(game, spritesheet, y) {
+	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animation = new Animation(spritesheet, 136, 128, 4, 0.25, 4 , true, 1.2);
 	this.speed = 25;
 	this.ctx = game.ctx;
@@ -27,27 +32,23 @@ function Knight(game, spritesheet, y)
 Knight.prototype = new Entity();
 Knight.prototype.constructor = Knight;
 
-Knight.prototype.update = function() 
-{
+Knight.prototype.update = function() {
 	// collision
-	for (var i = 0; i < this.game.entities.length; i++)
-	{
+	for (var i = 0; i < this.game.entities.length; i++) {
 		var entity = this.game.entities[i];
 		if (entity !== this && this.collide(entity))
-			console.log('colliding...');
+			console.log('Knight colliding...');
 	}
 	
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
 }
 
-Knight.prototype.draw = function() 
-{
+Knight.prototype.draw = function() {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
     Entity.prototype.draw.call(this);
 }
 
-Knight.prototype.collide = function(other) 
-{
+Knight.prototype.collide = function(other) {
 	return distance(this, other) < 10;
 }
