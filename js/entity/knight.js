@@ -11,19 +11,19 @@ function Knight(game, spritesheet, y) {
 	this.ctx = game.ctx;
 	switch (y) {
 		case 1:
-			Entity.call(this, game, 0, 0);
+			Entity.call(this, game, 0, 50);
 			break;
 		case 2:
-			Entity.call(this, game, 0, 110);
+			Entity.call(this, game, 0, 130);
 			break;
 		case 3:
 			Entity.call(this, game, 0, 210);
 			break;
 		case 4:
-			Entity.call(this, game, 0, 310);
+			Entity.call(this, game, 0, 290);
 			break;
 		case 5:
-			Entity.call(this, game, 0, 410);
+			Entity.call(this, game, 0, 370);
 	}
 	
 	this.game.manager.getMusic('./sound/pop.mp3').play();

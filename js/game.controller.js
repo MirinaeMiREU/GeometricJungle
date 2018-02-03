@@ -93,13 +93,13 @@ function Controller(game, manager) {
 	this.mouseclick = function(event) {
 		if (event.button === 0 || event.button === 2) {
 			console.log("x: " + event.x + " y: " + event.y);
-			if (event.y < 140) {
+			if (event.y < 225) {
 				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 1));
-			} else if (event.y < 245) {
+			} else if (event.y < 305) {
 				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 2));
-			} else if (event.y < 360) {
+			} else if (event.y < 385) {
 				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 3));
-			} else if (event.y < 450) {
+			} else if (event.y < 465) {
 				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 4));
 			}else {
 				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 5));

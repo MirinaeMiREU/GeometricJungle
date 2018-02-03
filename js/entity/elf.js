@@ -4,21 +4,41 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
-function Elf(game, spritesheets) {
+function Elf(game, spritesheets, y) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
-	this.animation = new Animation(spritesheets[0], 118, 128, 4, 0.25, 4, true, 1);
-	this.x = 100;
-	this.y = 0;
-	this.speed = 0;
+	this.animations = spritesheets;
+	this.animation = new Animation(this.animations[1], 111, 128, 5, 0.25, 5, true, 1);
+	this.speed = 20;
+	this.idle = false;
+	this.lane = y;
 	this.ctx = game.ctx;
-	Entity.call(this, game, 100, 0);
+	switch (y) {
+		case 1:
+			Entity.call(this, game, 0, 50);
+			break;
+		case 2:
+			Entity.call(this, game, 0, 130);
+			break;
+		case 3:
+			Entity.call(this, game, 0, 210);
+			break;
+		case 4:
+			Entity.call(this, game, 0, 290);
+			break;
+		case 5:
+			Entity.call(this, game, 0, 370);
+	}
 }
 
 Elf.prototype = new Entity();
 Elf.prototype.constructor = Elf;
 
 Elf.prototype.update = function() {
-	
+	if (this.x > 50 && !this.idle) {
+		this.animation = new Animation(this.animations[0], 118, 128, 4, 0.25, 4, true, 1);
+		this.speed = 0;
+		this.idle = true;
+	}
 	// collision
 	for (var i = 0; i < this.game.entities.length; i++) {
 		var entity = this.game.entities[i];
