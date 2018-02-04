@@ -4,29 +4,30 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
-function Elf(game, spritesheets, y) {
+function Elf(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
 	this.animation = new Animation(this.animations[1], 111, 128, 5, 0.25, 5, true, 1);
-	this.speed = 20;
+	this.speed = 50;
 	this.idle = false;
-	this.lane = y;
+	this.attack = false;
+	this.lane = lane;
 	this.ctx = game.ctx;
-	switch (y) {
+	switch (lane) {
 		case 1:
-			Entity.call(this, game, 0, 50);
+			Entity.call(this, game, 0, 50, 1);
 			break;
 		case 2:
-			Entity.call(this, game, 0, 130);
+			Entity.call(this, game, 0, 130, 2);
 			break;
 		case 3:
-			Entity.call(this, game, 0, 210);
+			Entity.call(this, game, 0, 210, 3);
 			break;
 		case 4:
-			Entity.call(this, game, 0, 290);
+			Entity.call(this, game, 0, 290, 4);
 			break;
 		case 5:
-			Entity.call(this, game, 0, 370);
+			Entity.call(this, game, 0, 370, 5);
 	}
 }
 
@@ -34,17 +35,21 @@ Elf.prototype = new Entity();
 Elf.prototype.constructor = Elf;
 
 Elf.prototype.update = function() {
-	if (this.x > 100 && !this.idle) {
+	if (this.x > 400 && !this.idle) {
 		this.animation = new Animation(this.animations[2], 254, 128, 5, 0.25, 5, true, 1);
 		this.speed = 0;
 		this.idle = true;
-		this.removeFromWorld = true;
+		//this.removeFromWorld = true;
 	}
 	// collision
 	for (var i = 0; i < this.game.entities.length; i++) {
 		var entity = this.game.entities[i];
-		if (entity !== this && this.collide(entity))
+		if (entity !== this && this.collide(entity) && !this.idle) {
 			console.log('Elf colliding...');
+			this.animation = new Animation(this.animations[2], 254, 128, 5, 0.25, 5, true, 1);
+			this.speed = 0;
+			this.idle = true;
+		}
 	}
 	
 	this.x += this.game.clockTick * this.speed;
@@ -61,5 +66,5 @@ Elf.prototype.draw = function() {
 }
 
 Elf.prototype.collide = function(other) {
-	return distance(this, other) < 10;
+	return distanceX(this, other) < 90;
 }

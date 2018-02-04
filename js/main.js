@@ -54,7 +54,7 @@ AM.downloadAll(function () {
 	elfArr.push(AM.getAsset("./img/elf/1/WALK.png"));
 	elfArr.push(AM.getAsset("./img/elf/1/ATTACK.png"));
 	elfArr.push(AM.getAsset("./img/elf/1/DIE.png"));
-    gameEngine.addEntity(new Elf(gameEngine, elfArr, 1));  
+    gameEngine.addEntity(new Elf(gameEngine, elfArr, 1, 0));  
     gameEngine.addEntity(new Fairy(gameEngine, AM.getAsset("./img/fairy/1/WALK.png")));
     
     /** Play the background music, continuously looping. */

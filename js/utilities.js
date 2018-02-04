@@ -19,6 +19,13 @@ function distance(point1, point2) {
     return Math.sqrt(dx * dx + dy * dy);
 }
 
+function distanceX(entity1, entity2) {
+	if (entity1.lane === entity2.lane) {
+		return Math.abs(entity1.x - entity2.x);
+	}
+	return Infinity;
+}
+
 /**
  * The flip method, which flips an image either 
  * vertically, horizontally, or both.
