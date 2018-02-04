@@ -34,10 +34,11 @@ Elf.prototype = new Entity();
 Elf.prototype.constructor = Elf;
 
 Elf.prototype.update = function() {
-	if (this.x > 50 && !this.idle) {
-		this.animation = new Animation(this.animations[0], 118, 128, 4, 0.25, 4, true, 1);
+	if (this.x > 100 && !this.idle) {
+		this.animation = new Animation(this.animations[2], 254, 128, 5, 0.25, 5, true, 1);
 		this.speed = 0;
 		this.idle = true;
+		this.removeFromWorld = true;
 	}
 	// collision
 	for (var i = 0; i < this.game.entities.length; i++) {
@@ -47,6 +48,10 @@ Elf.prototype.update = function() {
 	}
 	
 	this.x += this.game.clockTick * this.speed;
+	
+	if (this.removeFromWorld) {
+		console.log("rip");
+	}
 	Entity.prototype.update.call(this);
 }
 

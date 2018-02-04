@@ -60,6 +60,9 @@ function GameEngine(manager) {
     this.addEntity = function(entity) {
         console.log('Added entity.');
         this.entities.push(entity);
+		this.entities.sort(function(a, b) {
+			return a.lane - b.lane;
+		});
     }
 
     /**
