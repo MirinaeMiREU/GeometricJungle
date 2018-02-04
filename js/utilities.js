@@ -46,3 +46,17 @@ function flip(image, context, flipH, flipV) {
     context.drawImage(image, posX, posY, width, height);	// draw the image
     context.restore();								    // restore the last saved state
 }
+
+function spawnUnit(game, animArr, lane, unit, team) {
+	if (unit === 1) {
+		game.addEntity(new Elf(game, animArr[0], lane, team));
+	} else if (unit === 2) {
+		game.addEntity(new Knight(game, animArr[1], lane, team));
+	} else if (unit === 3) {
+	
+	} else if (unit === 4) {
+	
+	} else if (unit === 5) {
+	
+	}
+}

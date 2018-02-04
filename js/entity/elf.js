@@ -9,10 +9,12 @@ function Elf(game, spritesheets, lane, team) {
 	this.animations = spritesheets;
 	this.animation = new Animation(this.animations[1], 111, 128, 5, 0.25, 5, true, 1);
 	this.speed = 50;
-	this.idle = false;
-	this.attack = false;
+	this.isIdle = false;
+	this.isDead = false;
+	this.isAttacking = false;
 	this.lane = lane;
 	this.ctx = game.ctx;
+	this.team = team;
 	switch (lane) {
 		case 1:
 			Entity.call(this, game, 0, 50, 1);
@@ -35,11 +37,10 @@ Elf.prototype = new Entity();
 Elf.prototype.constructor = Elf;
 
 Elf.prototype.update = function() {
-	if (this.x > 400 && !this.idle) {
-		this.animation = new Animation(this.animations[2], 254, 128, 5, 0.25, 5, true, 1);
+	if (this.x > 1000 && !this.isDead) {
+		this.die();
 		this.speed = 0;
-		this.idle = true;
-		//this.removeFromWorld = true;
+		this.isDead = true;
 	}
 	// collision
 	for (var i = 0; i < this.game.entities.length; i++) {
@@ -54,8 +55,8 @@ Elf.prototype.update = function() {
 	
 	this.x += this.game.clockTick * this.speed;
 	
-	if (this.removeFromWorld) {
-		console.log("rip");
+	if (this.isDead && this.animation.isDone()) {
+		this.game.removeEntity(this);
 	}
 	Entity.prototype.update.call(this);
 }
@@ -63,6 +64,11 @@ Elf.prototype.update = function() {
 Elf.prototype.draw = function() {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
     Entity.prototype.draw.call(this);
+}
+
+Elf.prototype.die = function() {
+	this.animation = new Animation(this.animations[3], 144, 128, 5, 0.25, 5, false, 1);
+	this.isDead = true;
 }
 
 Elf.prototype.collide = function(other) {

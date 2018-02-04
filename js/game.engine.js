@@ -19,14 +19,14 @@ function () {
 })();
 
 
-function GameEngine(manager) {
+function GameEngine(manager, animArr) {
 	this.manager = manager;
 	this.ctx = null;
     this.entities = [];
     
     this.surfaceWidth = null;
     this.surfaceHeight = null;
-    this.controller = new Controller(this, manager);
+    this.controller = new Controller(this, manager, animArr);
     
     /**
      * The method initialize the context (canvas).
@@ -61,9 +61,15 @@ function GameEngine(manager) {
         console.log('Added entity.');
         this.entities.push(entity);
 		this.entities.sort(function(a, b) {
-			return a.lane - b.lane;
+			return a.z - b.z;
 		});
     }
+	
+	this.removeEntity = function(entity) {
+		console.log('Removed entity.');
+		var index = this.entities.indexOf(entity);
+		this.entities.splice(index, 1);
+	}
 
     /**
      * The method draws animations

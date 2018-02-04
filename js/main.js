@@ -30,12 +30,28 @@ AM.queueDownload("./img/fairy/1/ATTACK.png");
 AM.queueDownload("./img/fairy/1/IDLE.png");
 AM.queueDownload("./img/fairy/1/DIE.png");
 
-AM.queueDownload("./img/knight/2_KNIGHT/WALK.png");
-AM.queueDownload("./img/knight/2_KNIGHT/ATTACK.png");
-AM.queueDownload("./img/knight/2_KNIGHT/IDLE.png");
-AM.queueDownload("./img/knight/2_KNIGHT/DIE.png");
+AM.queueDownload("./img/knight/2/WALK.png");
+AM.queueDownload("./img/knight/2/ATTACK.png");
+AM.queueDownload("./img/knight/2/IDLE.png");
+AM.queueDownload("./img/knight/2/DIE.png");
 
 AM.downloadAll(function () {
+	var animArr = [];
+	
+	var elfArr = [];
+	elfArr.push(AM.getAsset("./img/elf/1/IDLE.png"));
+	elfArr.push(AM.getAsset("./img/elf/1/WALK.png"));
+	elfArr.push(AM.getAsset("./img/elf/1/ATTACK.png"));
+	elfArr.push(AM.getAsset("./img/elf/1/DIE.png"));
+	
+	var knightArr = [];
+	knightArr.push(AM.getAsset("./img/knight/2/IDLE.png"));
+	knightArr.push(AM.getAsset("./img/knight/2/WALK.png"));
+	knightArr.push(AM.getAsset("./img/knight/2/ATTACK.png"));
+	knightArr.push(AM.getAsset("./img/knight/2/DIE.png"));
+	
+	animArr.push(elfArr);
+	animArr.push(knightArr);
 	
 	/** Setting up page canvas and context. */
     var canvas = document.getElementById("gameWorld");
@@ -43,18 +59,13 @@ AM.downloadAll(function () {
 	ctx.fillStyle = "white";
 
 	/** Setting up game engine. */
-    var gameEngine = new GameEngine(AM);
+    var gameEngine = new GameEngine(AM, animArr);
     gameEngine.init(ctx);
     gameEngine.start();
     
     /** Adding entities into the game.*/
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background/back.png"), 960, 540));
-    var elfArr = [];
-	elfArr.push(AM.getAsset("./img/elf/1/IDLE.png"));
-	elfArr.push(AM.getAsset("./img/elf/1/WALK.png"));
-	elfArr.push(AM.getAsset("./img/elf/1/ATTACK.png"));
-	elfArr.push(AM.getAsset("./img/elf/1/DIE.png"));
-    gameEngine.addEntity(new Elf(gameEngine, elfArr, 1, 0));  
+    gameEngine.addEntity(new Elf(gameEngine, animArr[0], 1, 0));  
     gameEngine.addEntity(new Fairy(gameEngine, AM.getAsset("./img/fairy/1/WALK.png")));
     
     /** Play the background music, continuously looping. */

@@ -4,12 +4,15 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
-function Knight(game, spritesheet, y) {
+function Knight(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
-	this.animation = new Animation(spritesheet, 136, 128, 4, 0.25, 4 , true, 1.2);
+	this.animations = spritesheets;
+	this.animation = new Animation(spritesheets[1], 136, 128, 7, 0.12, 7 , true, 1.1);
 	this.speed = 25;
+	this.lane = lane;
+	this.team = team;
 	this.ctx = game.ctx;
-	switch (y) {
+	switch (lane) {
 		case 1:
 			Entity.call(this, game, 0, 50);
 			break;
