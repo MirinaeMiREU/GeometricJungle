@@ -74,11 +74,17 @@ function Controller(game, manager, animArr) {
 			event.code === KEY_3 ||
 			event.code === KEY_4 ||
 			event.code === KEY_5) {
-			that.unitSelected = false;
 			
 			that.laneSelected = true;
 			console.log("lane selected");  
 			console.log(that.selectedLane + " Down");
+			
+			if (that.unitSelected) {
+				that.unitSelected = false;
+				that.laneSelected = false;
+				that.highlight.changeLane(6);
+				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
+			}
 		}
 		
 		if (event.code === KEY_Q) {
@@ -103,15 +109,16 @@ function Controller(game, manager, animArr) {
 			event.code === KEY_E ||
 			event.code === KEY_R ||
 			event.code === KEY_T) {
-			if (that.laneSelected) {
-				that.laneSelected = false;
-				that.highlight.changeLane(6);
-				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
-			}
-			
 			
 			that.unitSelected = true;
 			console.log("unit selected");
+			
+			if (that.laneSelected) {
+				that.laneSelected = false;
+				that.unitSelected = false;
+				that.highlight.changeLane(6);
+				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
+			}
 		}
 		
 

@@ -7,11 +7,12 @@
 function Elf(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
-	this.animation = new Animation(this.animations[1], 111, 128, 5, 0.25, 5, true, 1);
+	this.animation = new Animation(this.animations[1], 111, 128, 4, 0.25, 4, true, 1);
 	this.speed = 50;
 	this.isIdle = false;
 	this.isDead = false;
 	this.isAttacking = false;
+	this.isBehind = false;
 	this.lane = lane;
 	this.ctx = game.ctx;
 	this.team = team;
@@ -45,13 +46,19 @@ Elf.prototype.update = function() {
 	// collision
 	for (var i = 0; i < this.game.entities.length; i++) {
 		var entity = this.game.entities[i];
-		if (entity !== this && this.collide(entity) && !this.idle) {
+		if (entity !== this && this.collide(entity) && !this.isBehind) {
 			console.log('Elf colliding...');
-			this.animation = new Animation(this.animations[2], 254, 128, 5, 0.25, 5, true, 1);
-			this.speed = 0;
-			this.idle = true;
+			this.isBehind = true;
+			this.speed = entity.speed;
 		}
+		
+		if (entity.speed === 0 && this.isBehind && !this.isIdle) {
+			this.idle();
+		}			
+			
 	}
+	
+	
 	
 	this.x += this.game.clockTick * this.speed;
 	
@@ -69,6 +76,12 @@ Elf.prototype.draw = function() {
 Elf.prototype.die = function() {
 	this.animation = new Animation(this.animations[3], 144, 128, 5, 0.25, 5, false, 1);
 	this.isDead = true;
+}
+
+Elf.prototype.idle = function() {
+	this.animation = new Animation(this.animations[0], 118, 128, 4, 0.25, 4, true, 1);
+	this.isIdle = true;
+	this.speed = 0;
 }
 
 Elf.prototype.collide = function(other) {

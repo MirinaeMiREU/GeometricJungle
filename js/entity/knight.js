@@ -43,6 +43,10 @@ Knight.prototype.update = function() {
 			console.log('Knight colliding...');
 	}
 	
+	if (this.x > 300 && !this.isIdle) {
+		this.idle();
+	}
+	
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
 }
@@ -50,6 +54,12 @@ Knight.prototype.update = function() {
 Knight.prototype.draw = function() {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
     Entity.prototype.draw.call(this);
+}
+
+Knight.prototype.idle = function() {
+	this.animation = new Animation(this.animations[0], 133, 128, 7, 0.13, 7, true, 1.1);
+	this.isIdle = true;
+	this.speed = 0;
 }
 
 Knight.prototype.collide = function(other) {
