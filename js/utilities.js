@@ -20,8 +20,8 @@ function distance(point1, point2) {
 }
 
 function distanceX(entity1, entity2) {
-	if (entity1.lane === entity2.lane) {
-		return Math.abs(entity1.x - entity2.x);
+	if (entity1.z === entity2.z) {
+		return entity2.x - entity1.x;
 	}
 	return Infinity;
 }
@@ -59,4 +59,8 @@ function spawnUnit(game, animArr, lane, unit, team) {
 	} else if (unit === 5) {
 	
 	}
+}
+
+function collision(entity1, entity2, threshold) {
+	if (entity1.z === entity2.z) {}
 }

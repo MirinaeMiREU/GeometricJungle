@@ -30,10 +30,10 @@ AM.queueDownload("./img/fairy/1/ATTACK.png");
 AM.queueDownload("./img/fairy/1/IDLE.png");
 AM.queueDownload("./img/fairy/1/DIE.png");
 
-AM.queueDownload("./img/knight/2/WALK.png");
-AM.queueDownload("./img/knight/2/ATTACK.png");
-AM.queueDownload("./img/knight/2/IDLE.png");
-AM.queueDownload("./img/knight/2/DIE.png");
+AM.queueDownload("./img/knight/1/WALK.png");
+AM.queueDownload("./img/knight/1/ATTACK.png");
+AM.queueDownload("./img/knight/1/IDLE.png");
+AM.queueDownload("./img/knight/1/DIE.png");
 
 AM.downloadAll(function () {
 	var animArr = [];
@@ -45,10 +45,10 @@ AM.downloadAll(function () {
 	elfArr.push(AM.getAsset("./img/elf/1/DIE.png"));
 	
 	var knightArr = [];
-	knightArr.push(AM.getAsset("./img/knight/2/IDLE.png"));
-	knightArr.push(AM.getAsset("./img/knight/2/WALK.png"));
-	knightArr.push(AM.getAsset("./img/knight/2/ATTACK.png"));
-	knightArr.push(AM.getAsset("./img/knight/2/DIE.png"));
+	knightArr.push(AM.getAsset("./img/knight/1/IDLE.png"));
+	knightArr.push(AM.getAsset("./img/knight/1/WALK.png"));
+	knightArr.push(AM.getAsset("./img/knight/1/ATTACK.png"));
+	knightArr.push(AM.getAsset("./img/knight/1/DIE.png"));
 	
 	animArr.push(elfArr);
 	animArr.push(knightArr);

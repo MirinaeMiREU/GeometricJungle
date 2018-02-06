@@ -4,29 +4,35 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
+ var IDLE = 0;
+ var WALK = 1;
+ var ATTACK = 2;
+ var DEAD = 3;
+ 
 function Knight(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
-	this.animation = new Animation(spritesheets[1], 136, 128, 7, 0.12, 7 , true, 1.1);
+	this.animation = new Animation(spritesheets[WALK], 136, 128, 7, 0.12, 7 , true, 1.1);
 	this.speed = 25;
+	this.state = WALK;
 	this.lane = lane;
 	this.team = team;
 	this.ctx = game.ctx;
 	switch (lane) {
 		case 1:
-			Entity.call(this, game, 0, 50);
+			Entity.call(this, game, 0, 60, 1);
 			break;
 		case 2:
-			Entity.call(this, game, 0, 130);
+			Entity.call(this, game, 0, 140, 2);
 			break;
 		case 3:
-			Entity.call(this, game, 0, 210);
+			Entity.call(this, game, 0, 220, 3);
 			break;
 		case 4:
-			Entity.call(this, game, 0, 290);
+			Entity.call(this, game, 0, 300, 4);
 			break;
 		case 5:
-			Entity.call(this, game, 0, 370);
+			Entity.call(this, game, 0, 380, 5);
 	}
 	
 	this.game.manager.getMusic('./sound/pop.mp3').play();
@@ -43,7 +49,7 @@ Knight.prototype.update = function() {
 			console.log('Knight colliding...');
 	}
 	
-	if (this.x > 300 && !this.isIdle) {
+	if (this.x > 300 && this.state !== IDLE) {
 		this.idle();
 	}
 	
@@ -58,7 +64,7 @@ Knight.prototype.draw = function() {
 
 Knight.prototype.idle = function() {
 	this.animation = new Animation(this.animations[0], 133, 128, 7, 0.13, 7, true, 1.1);
-	this.isIdle = true;
+	this.state = IDLE;
 	this.speed = 0;
 }
 
