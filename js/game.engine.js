@@ -61,6 +61,9 @@ function GameEngine(manager, animArr) {
         console.log('Added entity.');
         this.entities.push(entity);
 		this.entities.sort(function(a, b) {
+			if (a.z === b.z) {
+				return a.x - b.x;
+			}
 			return a.z - b.z;
 		});
     }

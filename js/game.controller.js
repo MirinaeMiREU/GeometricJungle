@@ -125,7 +125,9 @@ function Controller(game, manager, animArr) {
 		
         that.keymap[event.keyCode] = true;
 		
-        event.preventDefault();
+		if (that.laneSelected || that.unitSelected) {
+			event.preventDefault();
+		}
     }
     
     /**
@@ -139,7 +141,34 @@ function Controller(game, manager, animArr) {
 	
     
 	this.mouseclick = function(event) {
-		
+		if (event.button === 0) {
+			if (event.y > 145 && event.y < 545) {
+				if (event.y < 225) {
+					that.selectedLane = 1;
+					that.highlight.changeLane(1);
+				} else if (event.y < 305) {
+					that.selectedLane = 2;
+					that.highlight.changeLane(2);
+				} else if (event.y < 385) {
+					that.selectedLane = 3;
+					that.highlight.changeLane(3);
+				} else if (event.y < 465) {
+					that.selectedLane = 4;
+					that.highlight.changeLane(4);  
+				} else {
+					that.selectedLane = 5;
+					that.highlight.changeLane(5); 
+				}
+				that.laneSelected = true;
+			}
+		}
+		if (event.button == 2) {
+			if (that.laneSelected) {
+				that.laneSelected = false;
+				that.highlight.changeLane(6);
+			}
+		}
+		/*
 		if (event.button === 0 && that.laneSelected) {
 			console.log("x: " + event.x + " y: " + event.y);
 			if (event.y > 145) {
@@ -158,12 +187,14 @@ function Controller(game, manager, animArr) {
 			that.highlight.changeLane(6);
 			that.laneSelected = false;
 		}
-		event.preventDefault();
+		*/
+		if (event.y < 545 && event.x < 960)
+			event.preventDefault();
 	}
 	
     // strictly hook event listener to the methods
 	document.addEventListener("keydown", this.keydown, false);
 	document.addEventListener("keyup", this.keyup, false);
-	
+	document.addEventListener("contextmenu", this.mouseclick, false);
 	document.addEventListener("click", this.mouseclick, false);
 }

@@ -4,16 +4,13 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
- var IDLE = 0;
- var WALK = 1;
- var ATTACK = 2;
- var DEAD = 3;
+ var KNIGHT_SPEED = 25;
  
 function Knight(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
 	this.animation = new Animation(spritesheets[WALK], 136, 128, 7, 0.12, 7 , true, 1.1);
-	this.speed = 25;
+	this.speed = KNIGHT_SPEED;
 	this.state = WALK;
 	this.lane = lane;
 	this.team = team;
@@ -63,11 +60,29 @@ Knight.prototype.draw = function() {
 }
 
 Knight.prototype.idle = function() {
-	this.animation = new Animation(this.animations[0], 133, 128, 7, 0.13, 7, true, 1.1);
+	this.animation = new Animation(this.animations[IDLE], 133, 128, 7, 0.13, 7, true, 1.1);
 	this.state = IDLE;
 	this.speed = 0;
 }
 
+Knight.prototype.walk = function() {
+	this.animation = new Animation(this.animations[WALK], 111, 128, 4, 0.25, 4, true, 1);
+	this.state = WALK;
+	this.speed = DEFAULT_SPEED;
+}
+
+Knight.prototype.attack = function() {
+	this.animation = new Animation(this.animations[ATTACK], 254, 128, 5, 0.20, 5, true, 1);
+	this.state = ATTACK;
+	this.speed = 0;
+}
+
+Knight.prototype.die = function() {
+	this.animation = new Animation(this.animations[DEAD], 144, 128, 5, 0.20, 5, false, 1);
+	this.state = DEAD;
+	this.speed = 0;
+}
+
 Knight.prototype.collide = function(other) {
-	return distance(this, other) < 10;
+	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
 }

@@ -53,7 +53,7 @@ function spawnUnit(game, animArr, lane, unit, team) {
 	} else if (unit === 2) {
 		game.addEntity(new Knight(game, animArr[1], lane, team));
 	} else if (unit === 3) {
-	
+		game.addEntity(new Fairy(game, animArr[2], lane, team));
 	} else if (unit === 4) {
 	
 	} else if (unit === 5) {

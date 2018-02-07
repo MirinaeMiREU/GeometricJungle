@@ -6,6 +6,12 @@
  * TCSS491 - Winter 2018
  */
 
+// Global variables
+var IDLE = 0;
+var WALK = 1;
+var ATTACK = 2;
+var DEAD = 3;
+ 
 /** Declaring and initializing asset manager. */
 var AM = new AssetManager();
 
@@ -50,8 +56,15 @@ AM.downloadAll(function () {
 	knightArr.push(AM.getAsset("./img/knight/1/ATTACK.png"));
 	knightArr.push(AM.getAsset("./img/knight/1/DIE.png"));
 	
+	var fairyArr = [];
+	fairyArr.push(AM.getAsset("./img/fairy/1/IDLE.png"));
+	fairyArr.push(AM.getAsset("./img/fairy/1/WALK.png"));
+	fairyArr.push(AM.getAsset("./img/fairy/1/ATTACK.png"));
+	fairyArr.push(AM.getAsset("./img/fairy/1/DIE.png"));
+	
 	animArr.push(elfArr);
 	animArr.push(knightArr);
+	animArr.push(fairyArr);
 	
 	/** Setting up page canvas and context. */
     var canvas = document.getElementById("gameWorld");
@@ -66,7 +79,7 @@ AM.downloadAll(function () {
     /** Adding entities into the game.*/
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background/back.png"), 960, 540));
     gameEngine.addEntity(new Elf(gameEngine, animArr[0], 1, 0));  
-    gameEngine.addEntity(new Fairy(gameEngine, AM.getAsset("./img/fairy/1/WALK.png")));
+    gameEngine.addEntity(new Fairy(gameEngine, animArr[2], 3, 0));
     
     /** Play the background music, continuously looping. */
     var theme = AM.getMusic("./sound/combat.mp3");

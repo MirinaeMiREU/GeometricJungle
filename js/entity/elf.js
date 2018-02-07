@@ -4,17 +4,13 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
- var IDLE = 0;
- var WALK = 1;
- var ATTACK = 2;
- var DEAD = 3;
- var DEFAULT_SPEED = 50;
+ var ELF_SPEED = 50;
  
 function Elf(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
 	this.animation = new Animation(this.animations[WALK], 111, 128, 4, 0.25, 4, true, 1);
-	this.speed = DEFAULT_SPEED;
+	this.speed = ELF_SPEED;
 	this.state = WALK;
 	this.isBehind = null;
 	this.lane = lane;
@@ -46,13 +42,13 @@ Elf.prototype.update = function() {
 		this.game.removeEntity(this);
 	}
 	
-	if (this.x > 600 && this.state !== 3) {
+	if (this.x > 600 && this.state !== DEAD) {
 		this.die();
 	}
 	// collision
 	for (var i = 0; i < this.game.entities.length; i++) {
 		var entity = this.game.entities[i];
-		if (entity !== this && this.collide(entity) && !this.isBehind) {
+		if (entity !== this && entity.state !== DEAD && this.collide(entity) && this.isBehind === null) {
 			console.log('Elf colliding...');
 			this.isBehind = entity;
 			if (entity.speed < this.speed) {
@@ -61,10 +57,20 @@ Elf.prototype.update = function() {
 		}			
 	}
 	
+	// Is this object behind an ally?
 	if (this.isBehind !== null) {
 		if (this.isBehind.state === DEAD) {
 			this.isBehind = null;
 			this.walk();
+		} else if (this.isTouching(this.isBehind)) {
+			if (this.isBehind.state === IDLE && this.state !== IDLE) {
+				this.idle();
+			} else if (this.isBehind.state === WALK && this.state !== WALK) {
+				this.walk();
+			}
+			this.speed = this.isBehind.speed;
+		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
+			this.idle();
 		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
 			this.idle();
 		}
@@ -94,7 +100,7 @@ Elf.prototype.idle = function() {
 Elf.prototype.walk = function() {
 	this.animation = new Animation(this.animations[WALK], 111, 128, 4, 0.25, 4, true, 1);
 	this.state = WALK;
-	this.speed = DEFAULT_SPEED;
+	this.speed = ELF_SPEED;
 }
 
 Elf.prototype.attack = function() {
@@ -107,6 +113,14 @@ Elf.prototype.die = function() {
 	this.animation = new Animation(this.animations[DEAD], 144, 128, 5, 0.20, 5, false, 1);
 	this.state = DEAD;
 	this.speed = 0;
+}
+
+Elf.prototype.onTop = function(other) {
+	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
+}
+
+Elf.prototype.isTouching = function(other) {
+	return distanceX(this, other) > 85 && distanceX(this, other) < 90;
 }
 
 Elf.prototype.collide = function(other) {
