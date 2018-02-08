@@ -19,6 +19,13 @@ function distance(point1, point2) {
     return Math.sqrt(dx * dx + dy * dy);
 }
 
+function distanceX(entity1, entity2) {
+	if (entity1.z === entity2.z) {
+		return entity2.x - entity1.x;
+	}
+	return Infinity;
+}
+
 /**
  * The flip method, which flips an image either 
  * vertically, horizontally, or both.
@@ -38,4 +45,22 @@ function flip(image, context, flipH, flipV) {
     context.scale(scaleH, scaleV);					    // set scale to flip the image
     context.drawImage(image, posX, posY, width, height);	// draw the image
     context.restore();								    // restore the last saved state
+}
+
+function spawnUnit(game, animArr, lane, unit, team) {
+	if (unit === 1) {
+		game.addEntity(new Elf(game, animArr[0], lane, team));
+	} else if (unit === 2) {
+		game.addEntity(new Knight(game, animArr[1], lane, team));
+	} else if (unit === 3) {
+		game.addEntity(new Fairy(game, animArr[2], lane, team));
+	} else if (unit === 4) {
+	
+	} else if (unit === 5) {
+	
+	}
+}
+
+function collision(entity1, entity2, threshold) {
+	if (entity1.z === entity2.z) {}
 }

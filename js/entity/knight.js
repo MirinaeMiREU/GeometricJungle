@@ -4,26 +4,32 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
-function Knight(game, spritesheet, y) {
+ var KNIGHT_SPEED = 25;
+ 
+function Knight(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
-	this.animation = new Animation(spritesheet, 136, 128, 4, 0.25, 4 , true, 1.2);
-	this.speed = 25;
+	this.animations = spritesheets;
+	this.animation = new Animation(spritesheets[WALK], 136, 128, 7, 0.12, 7 , true, 1.1);
+	this.speed = KNIGHT_SPEED;
+	this.state = WALK;
+	this.lane = lane;
+	this.team = team;
 	this.ctx = game.ctx;
-	switch (y) {
+	switch (lane) {
 		case 1:
-			Entity.call(this, game, 0, 0);
+			Entity.call(this, game, 0, 60, 1);
 			break;
 		case 2:
-			Entity.call(this, game, 0, 110);
+			Entity.call(this, game, 0, 140, 2);
 			break;
 		case 3:
-			Entity.call(this, game, 0, 210);
+			Entity.call(this, game, 0, 220, 3);
 			break;
 		case 4:
-			Entity.call(this, game, 0, 310);
+			Entity.call(this, game, 0, 300, 4);
 			break;
 		case 5:
-			Entity.call(this, game, 0, 410);
+			Entity.call(this, game, 0, 380, 5);
 	}
 	
 	this.game.manager.getMusic('./sound/pop.mp3').play();
@@ -40,6 +46,10 @@ Knight.prototype.update = function() {
 			console.log('Knight colliding...');
 	}
 	
+	if (this.x > 300 && this.state !== IDLE) {
+		this.idle();
+	}
+	
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
 }
@@ -49,6 +59,30 @@ Knight.prototype.draw = function() {
     Entity.prototype.draw.call(this);
 }
 
+Knight.prototype.idle = function() {
+	this.animation = new Animation(this.animations[IDLE], 133, 128, 7, 0.13, 7, true, 1.1);
+	this.state = IDLE;
+	this.speed = 0;
+}
+
+Knight.prototype.walk = function() {
+	this.animation = new Animation(this.animations[WALK], 111, 128, 4, 0.25, 4, true, 1);
+	this.state = WALK;
+	this.speed = DEFAULT_SPEED;
+}
+
+Knight.prototype.attack = function() {
+	this.animation = new Animation(this.animations[ATTACK], 254, 128, 5, 0.20, 5, true, 1);
+	this.state = ATTACK;
+	this.speed = 0;
+}
+
+Knight.prototype.die = function() {
+	this.animation = new Animation(this.animations[DEAD], 144, 128, 5, 0.20, 5, false, 1);
+	this.state = DEAD;
+	this.speed = 0;
+}
+
 Knight.prototype.collide = function(other) {
-	return distance(this, other) < 10;
+	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
 }

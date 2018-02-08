@@ -4,10 +4,11 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
-function Entity(game, x, y) {
+function Entity(game, x, y, z) {
     this.game = game;
     this.x = x;
     this.y = y;
+	this.z = z;
     this.removeFromWorld = false;
 }
 

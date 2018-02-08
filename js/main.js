@@ -6,6 +6,12 @@
  * TCSS491 - Winter 2018
  */
 
+// Global variables
+var IDLE = 0;
+var WALK = 1;
+var ATTACK = 2;
+var DEAD = 3;
+ 
 /** Declaring and initializing asset manager. */
 var AM = new AssetManager();
 
@@ -14,20 +20,51 @@ AM.addMusic("./sound/combat.mp3");
 AM.addMusic("./sound/pop.mp3");
 
 /** Queueing download of all art assets. */
-AM.queueDownload("./img/background.png");
-AM.queueDownload("./img/elf/1/1_IDLE.png");
-AM.queueDownload("./img/fairy/1/2_WALK.png");
-AM.queueDownload("./img/fairy/1/6_ATTACK.png");
-AM.queueDownload("./img/fairy/1/7_HURT.png");
-AM.queueDownload("./img/fairy/1/1_IDLE.png");
-AM.queueDownload("./img/fairy/1/8_DIE.png");
-AM.queueDownload("./img/knight/2_KNIGHT/WALK.png");
-AM.queueDownload("./img/knight/2_KNIGHT/ATTACK.png");
-AM.queueDownload("./img/knight/2_KNIGHT/HURT.png");
-AM.queueDownload("./img/knight/2_KNIGHT/IDLE.png");
-AM.queueDownload("./img/knight/2_KNIGHT/DIE.png");
+AM.addMusic("./sound/combat.mp3");
+AM.addMusic("./sound/pop.mp3");
+
+AM.queueDownload("./img/background/back.png");
+AM.queueDownload("./img/background/highlight.png");
+
+AM.queueDownload("./img/elf/1/IDLE.png");
+AM.queueDownload("./img/elf/1/WALK.png");
+AM.queueDownload("./img/elf/1/ATTACK.png");
+AM.queueDownload("./img/elf/1/DIE.png");
+
+AM.queueDownload("./img/fairy/1/WALK.png");
+AM.queueDownload("./img/fairy/1/ATTACK.png");
+AM.queueDownload("./img/fairy/1/IDLE.png");
+AM.queueDownload("./img/fairy/1/DIE.png");
+
+AM.queueDownload("./img/knight/1/WALK.png");
+AM.queueDownload("./img/knight/1/ATTACK.png");
+AM.queueDownload("./img/knight/1/IDLE.png");
+AM.queueDownload("./img/knight/1/DIE.png");
 
 AM.downloadAll(function () {
+	var animArr = [];
+	
+	var elfArr = [];
+	elfArr.push(AM.getAsset("./img/elf/1/IDLE.png"));
+	elfArr.push(AM.getAsset("./img/elf/1/WALK.png"));
+	elfArr.push(AM.getAsset("./img/elf/1/ATTACK.png"));
+	elfArr.push(AM.getAsset("./img/elf/1/DIE.png"));
+	
+	var knightArr = [];
+	knightArr.push(AM.getAsset("./img/knight/1/IDLE.png"));
+	knightArr.push(AM.getAsset("./img/knight/1/WALK.png"));
+	knightArr.push(AM.getAsset("./img/knight/1/ATTACK.png"));
+	knightArr.push(AM.getAsset("./img/knight/1/DIE.png"));
+	
+	var fairyArr = [];
+	fairyArr.push(AM.getAsset("./img/fairy/1/IDLE.png"));
+	fairyArr.push(AM.getAsset("./img/fairy/1/WALK.png"));
+	fairyArr.push(AM.getAsset("./img/fairy/1/ATTACK.png"));
+	fairyArr.push(AM.getAsset("./img/fairy/1/DIE.png"));
+	
+	animArr.push(elfArr);
+	animArr.push(knightArr);
+	animArr.push(fairyArr);
 	
 	/** Setting up page canvas and context. */
     var canvas = document.getElementById("gameWorld");
@@ -35,19 +72,19 @@ AM.downloadAll(function () {
 	ctx.fillStyle = "white";
 
 	/** Setting up game engine. */
-    var gameEngine = new GameEngine(AM);
+    var gameEngine = new GameEngine(AM, animArr);
     gameEngine.init(ctx);
     gameEngine.start();
     
     /** Adding entities into the game.*/
-    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png"), 705, 473));
-    gameEngine.addEntity(new Elf(gameEngine, AM.getAsset("./img/elf/1/1_IDLE.png")));    
-    gameEngine.addEntity(new Fairy(gameEngine, AM.getAsset("./img/fairy/1/2_WALK.png")));
+    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background/back.png"), 960, 540));
+    gameEngine.addEntity(new Elf(gameEngine, animArr[0], 1, 0));  
+    gameEngine.addEntity(new Fairy(gameEngine, animArr[2], 3, 0));
     
     /** Play the background music, continuously looping. */
     var theme = AM.getMusic("./sound/combat.mp3");
     theme.loop = true;
-    theme.play();
+    //theme.play();
 	
 	/** Log to console once completed. */
     console.log("All Done!");    

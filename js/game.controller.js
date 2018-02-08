@@ -19,10 +19,15 @@ var KEY_SPACE = 32;
 var LEFT = 0;
 var RIGHT = 1;
 
-function Controller(game, manager) {
+function Controller(game, manager, animArr) {
 	this.manager = manager;
 	this.game = game;
 	this.ctx = null;
+	this.unitSelected = false;
+	this.laneSelected = false;
+	this.selectedLane = 0;
+	this.selectedUnit = 0;
+	this.highlight;
 	
 	/**
 	 * The mapping key
@@ -36,8 +41,9 @@ function Controller(game, manager) {
     var that = this;
 	
 	this.init = function(ctx) {
+		this.highlight = new Highlight(game, manager.getAsset("./img/background/highlight.png"), 6); 
 		this.ctx = ctx;
-		console.log(this.ctx);
+		game.addEntity(this.highlight);
 	}
     
     /**
@@ -45,39 +51,83 @@ function Controller(game, manager) {
      * pressed with the mapping key
      */
     this.keydown = function(event) {
+	
+		if (event.code === KEY_1) {
+			that.selectedLane = 1;
+			that.highlight.changeLane(1);
+		} else if (event.code === KEY_2) {
+			that.selectedLane = 2;
+			that.highlight.changeLane(2);
+		} else if (event.code === KEY_3) {
+			that.selectedLane = 3;
+			that.highlight.changeLane(3);
+		} else if (event.code === KEY_4) {
+			that.selectedLane = 4;
+			that.highlight.changeLane(4);
+		} else if (event.code === KEY_5) {
+			that.selectedLane = 5;
+			that.highlight.changeLane(5);
+		}
+		
+		if (event.code === KEY_1 ||
+			event.code === KEY_2 ||
+			event.code === KEY_3 ||
+			event.code === KEY_4 ||
+			event.code === KEY_5) {
+			
+			that.laneSelected = true;
+			console.log("lane selected");  
+			console.log(that.selectedLane + " Down");
+			
+			if (that.unitSelected) {
+				that.unitSelected = false;
+				that.laneSelected = false;
+				that.highlight.changeLane(6);
+				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
+			}
+		}
+		
 		if (event.code === KEY_Q) {
 			console.log("Q Down");
-		}
-		if (event.code === KEY_W) {
+			that.selectedUnit = 1;
+		} else if (event.code === KEY_W) {
 			console.log("W Down");
-		}
-		if (event.code === KEY_E) {
+			that.selectedUnit = 2;
+		} else if (event.code === KEY_E) {
 			console.log("E Down");
-		}
-		if (event.code === KEY_R) {
+			that.selectedUnit = 3;
+		} else if (event.code === KEY_R) {
 			console.log("R Down");
-		}
-		if (event.code === KEY_T) {
+			that.selectedUnit = 4;
+		} else if (event.code === KEY_T) {
 			console.log("T Down");
+			that.selectedUnit = 5;
 		}
-		if (event.code === KEY_1) {
-			console.log("1 Down");
+		
+		if (event.code === KEY_Q ||
+			event.code === KEY_W ||
+			event.code === KEY_E ||
+			event.code === KEY_R ||
+			event.code === KEY_T) {
+			
+			that.unitSelected = true;
+			console.log("unit selected");
+			
+			if (that.laneSelected) {
+				that.laneSelected = false;
+				that.unitSelected = false;
+				that.highlight.changeLane(6);
+				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
+			}
 		}
-		if (event.code === KEY_2) {
-			console.log("2 Down");
-		}
-		if (event.code === KEY_3) {
-			console.log("3 Down");
-		}
-		if (event.code === KEY_4) {
-			console.log("4 Down");
-		}
-		if (event.code === KEY_5) {
-			console.log("5 Down");
-		}
+		
+
+		
         that.keymap[event.keyCode] = true;
 		
-        event.preventDefault();
+		if (that.laneSelected || that.unitSelected) {
+			event.preventDefault();
+		}
     }
     
     /**
@@ -91,26 +141,60 @@ function Controller(game, manager) {
 	
     
 	this.mouseclick = function(event) {
-		if (event.button === 0 || event.button === 2) {
-			console.log("x: " + event.x + " y: " + event.y);
-			if (event.y < 140) {
-				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 1));
-			} else if (event.y < 245) {
-				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 2));
-			} else if (event.y < 360) {
-				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 3));
-			} else if (event.y < 450) {
-				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 4));
-			}else {
-				game.addEntity(new Knight(that.game, that.manager.getAsset("./img/knight/2_KNIGHT/WALK.png"), 5));
+		if (event.button === 0) {
+			if (event.y > 145 && event.y < 545) {
+				if (event.y < 225) {
+					that.selectedLane = 1;
+					that.highlight.changeLane(1);
+				} else if (event.y < 305) {
+					that.selectedLane = 2;
+					that.highlight.changeLane(2);
+				} else if (event.y < 385) {
+					that.selectedLane = 3;
+					that.highlight.changeLane(3);
+				} else if (event.y < 465) {
+					that.selectedLane = 4;
+					that.highlight.changeLane(4);  
+				} else {
+					that.selectedLane = 5;
+					that.highlight.changeLane(5); 
+				}
+				that.laneSelected = true;
 			}
 		}
-		event.preventDefault();
+		if (event.button == 2) {
+			if (that.laneSelected) {
+				that.laneSelected = false;
+				that.highlight.changeLane(6);
+			}
+		}
+		/*
+		if (event.button === 0 && that.laneSelected) {
+			console.log("x: " + event.x + " y: " + event.y);
+			if (event.y > 145) {
+				if (event.y < 225) {
+					game.addEntity(new Elf(game, animArr[0], 1, 0));  
+				} else if (event.y < 305) {
+					game.addEntity(new Elf(game, animArr[0], 2, 0));  
+				} else if (event.y < 385) {
+					game.addEntity(new Elf(game, animArr[0], 3, 0));  
+				} else if (event.y < 465) {
+					game.addEntity(new Elf(game, animArr[0], 4, 0));  
+				} else if (event.y < 545) {
+					game.addEntity(new Elf(game, animArr[0], 5, 0));  
+				}
+			}
+			that.highlight.changeLane(6);
+			that.laneSelected = false;
+		}
+		*/
+		if (event.y < 545 && event.x < 960)
+			event.preventDefault();
 	}
 	
     // strictly hook event listener to the methods
 	document.addEventListener("keydown", this.keydown, false);
 	document.addEventListener("keyup", this.keyup, false);
-	
+	document.addEventListener("contextmenu", this.mouseclick, false);
 	document.addEventListener("click", this.mouseclick, false);
 }
