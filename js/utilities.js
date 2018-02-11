@@ -19,6 +19,10 @@ function distance(point1, point2) {
     return Math.sqrt(dx * dx + dy * dy);
 }
 
+function isEnemy(entity1, entity2) {
+	return entity1.speed * entity.speed < 0;
+}
+
 function distanceX(entity1, entity2) {
 	if (entity1.z === entity2.z) {
 		return entity2.x - entity1.x;
@@ -49,11 +53,11 @@ function flip(image, context, flipH, flipV) {
 
 function spawnUnit(game, animArr, lane, unit, team) {
 	if (unit === 1) {
-		game.addEntity(new Elf(game, animArr[0], lane, team));
+		game.addEntity(new Elf(game, animArr, lane, team));
 	} else if (unit === 2) {
-		game.addEntity(new Knight(game, animArr[1], lane, team));
+		game.addEntity(new Knight(game, animArr, lane, team));
 	} else if (unit === 3) {
-		game.addEntity(new Fairy(game, animArr[2], lane, team));
+		game.addEntity(new Fairy(game, animArr, lane, team));
 	} else if (unit === 4) {
 	
 	} else if (unit === 5) {
