@@ -148,11 +148,11 @@ Elf.prototype.createAnimation = function(status, team, animations) {
 		case WALK:
 			if (team === 0)
 				return new Animation(animations[ELF_LEFT_WALK], 111, 128, 4, 0.25, 4, true, 1);
-			else return new Animation(animations[ELF_RIGHT_WALK], 111, 128, 4, 0.25, 4, true, 1);
+			else return new Animation(animations[ELF_RIGHT_WALK], 118, 128, 4, 0.25, 4, true, 1);
 		case ATTACK:
 			if (team === 0)
 				return new Animation(animations[ELF_LEFT_ATTACK], 254, 128, 5, 0.20, 5, true, 1);
-			else return new Animation(animations[ELF_RIGHT_ATTACK], 254, 128, 5, 0.20, 5, true, 1);
+			else return new Animation(animations[ELF_RIGHT_ATTACK], 128, 128, 5, 0.20, 5, true, 1);
 		case DEAD:
 			if (team === 0)
 				return new Animation(animations[ELF_LEFT_DIE], 144, 128, 5, 0.20, 5, false, 1);

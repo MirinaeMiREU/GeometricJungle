@@ -31,30 +31,30 @@ AM.queueDownload("./img/elf/1/WALK.png");
 AM.queueDownload("./img/elf/1/ATTACK.png");
 AM.queueDownload("./img/elf/1/DIE.png");
 
-AM.queueDownload("./img/elf/1/IDLE1.png");
-AM.queueDownload("./img/elf/1/WALK1.png");
-AM.queueDownload("./img/elf/1/ATTACK1.png");
-AM.queueDownload("./img/elf/1/DIE1.png");
+AM.queueDownload("./img/elf/2/IDLE.png");
+AM.queueDownload("./img/elf/2/WALK.png");
+AM.queueDownload("./img/elf/2/ATTACK.png");
+AM.queueDownload("./img/elf/2/DIE.png");
 
 AM.queueDownload("./img/fairy/1/WALK.png");
 AM.queueDownload("./img/fairy/1/ATTACK.png");
 AM.queueDownload("./img/fairy/1/IDLE.png");
 AM.queueDownload("./img/fairy/1/DIE.png");
 
-//AM.queueDownload("./img/fairy/1/WALK1.png");
-//AM.queueDownload("./img/fairy/1/ATTACK1.png");
-//AM.queueDownload("./img/fairy/1/IDLE1.png");
-//AM.queueDownload("./img/fairy/1/DIE1.png");
+AM.queueDownload("./img/fairy/2/WALK.png");
+AM.queueDownload("./img/fairy/2/ATTACK.png");
+AM.queueDownload("./img/fairy/2/IDLE.png");
+AM.queueDownload("./img/fairy/2/DIE.png");
 
 AM.queueDownload("./img/knight/1/WALK.png");
 AM.queueDownload("./img/knight/1/ATTACK.png");
 AM.queueDownload("./img/knight/1/IDLE.png");
 AM.queueDownload("./img/knight/1/DIE.png");
 
-//AM.queueDownload("./img/knight/1/WALK1.png");
-//AM.queueDownload("./img/knight/1/ATTACK1.png");
-//AM.queueDownload("./img/knight/1/IDLE1.png");
-//AM.queueDownload("./img/knight/1/DIE1.png");
+AM.queueDownload("./img/knight/2/WALK.png");
+AM.queueDownload("./img/knight/2/ATTACK.png");
+AM.queueDownload("./img/knight/2/IDLE.png");
+AM.queueDownload("./img/knight/2/DIE.png");
 
 AM.downloadAll(function () {
 	var animArr = [];
@@ -64,30 +64,30 @@ AM.downloadAll(function () {
 	animArr[ELF_LEFT_ATTACK] = AM.getAsset("./img/elf/1/ATTACK.png");
 	animArr[ELF_LEFT_DIE] = AM.getAsset("./img/elf/1/DIE.png");
 	
-	animArr[ELF_RIGHT_IDLE] = AM.getAsset("./img/elf/1/IDLE1.png"); // TODO need to work on sprite
-	animArr[ELF_RIGHT_WALK] = AM.getAsset("./img/elf/1/WALK1.png");
-	animArr[ELF_RIGHT_ATTACK] = AM.getAsset("./img/elf/1/ATTACK1.png"); // TODO need to work on sprite
-	animArr[ELF_RIGHT_DIE] = AM.getAsset("./img/elf/1/DIE1.png"); // TODO need to work on sprite
+	animArr[ELF_RIGHT_IDLE] = AM.getAsset("./img/elf/2/IDLE1.png"); // TODO need to work on sprite
+	animArr[ELF_RIGHT_WALK] = AM.getAsset("./img/elf/2/WALK.png");
+	animArr[ELF_RIGHT_ATTACK] = AM.getAsset("./img/elf/2/ATTACK.png"); // TODO need to work on sprite
+	animArr[ELF_RIGHT_DIE] = AM.getAsset("./img/elf/2/DIE2.png"); // TODO need to work on sprite
 	
 	animArr[KNIGHT_LEFT_IDLE] = AM.getAsset("./img/knight/1/IDLE.png");
 	animArr[KNIGHT_LEFT_WALK] = AM.getAsset("./img/knight/1/WALK.png");
 	animArr[KNIGHT_LEFT_ATTACK] = AM.getAsset("./img/knight/1/ATTACK.png");
 	animArr[KNIGHT_LEFT_DIE] = AM.getAsset("./img/knight/1/DIE.png");
 	
-//	animArr[KNIGHT_RIGHT_IDLE] = AM.getAsset("./img/knight/1/IDLE1.png");
-//	animArr[KNIGHT_RIGHT_WALK] = AM.getAsset("./img/knight/1/WALK1.png");
-//	animArr[KNIGHT_RIGHT_ATTACK] = AM.getAsset("./img/knight/1/ATTACK1.png");
-//	animArr[KNIGHT_RIGHT_DIE] = AM.getAsset("./img/knight/1/DIE1.png");
+	animArr[KNIGHT_RIGHT_IDLE] = AM.getAsset("./img/knight/2/IDLE.png");
+	animArr[KNIGHT_RIGHT_WALK] = AM.getAsset("./img/knight/2/WALK.png");
+	animArr[KNIGHT_RIGHT_ATTACK] = AM.getAsset("./img/knight/2/ATTACK.png");
+	animArr[KNIGHT_RIGHT_DIE] = AM.getAsset("./img/knight/2/DIE.png");
 	
 	animArr[FAIRY_LEFT_IDLE] = AM.getAsset("./img/fairy/1/IDLE.png");
 	animArr[FAIRY_LEFT_WALK] = AM.getAsset("./img/fairy/1/WALK.png");
 	animArr[FAIRY_LEFT_ATTACK] = AM.getAsset("./img/fairy/1/ATTACK.png");
 	animArr[FAIRY_LEFT_DIE] = AM.getAsset("./img/fairy/1/DIE.png");
 	
-//	animArr[FAIRY_RIGHT_IDLE] = AM.getAsset("./img/knight/1/IDLE1.png");
-//	animArr[FAIRY_RIGHT_WALK] = AM.getAsset("./img/knight/1/WALK1.png");
-//	animArr[FAIRY_RIGHT_ATTACK] = AM.getAsset("./img/knight/1/ATTACK1.png");
-//	animArr[FAIRY_RIGHT_DIE] = AM.getAsset("./img/knight/1/DIE1.png");
+	animArr[FAIRY_RIGHT_IDLE] = AM.getAsset("./img/fairy/2/IDLE.png");
+	animArr[FAIRY_RIGHT_WALK] = AM.getAsset("./img/fairy/2/WALK.png");
+	animArr[FAIRY_RIGHT_ATTACK] = AM.getAsset("./img/fairy/2/ATTACK.png");
+	animArr[FAIRY_RIGHT_DIE] = AM.getAsset("./img/fairy/2/DIE.png");
 	
 	/** Setting up page canvas and context. */
     var canvas = document.getElementById("gameWorld");
@@ -105,8 +105,8 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new Elf(gameEngine, animArr, 2, 0));
     gameEngine.addEntity(new Elf(gameEngine, animArr, 2, 1));
     gameEngine.addEntity(new Fairy(gameEngine, animArr, 3, 0));
-    gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 4, 0)); // TODO need to select right sprite position
+    gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 1));
+    gameEngine.addEntity(new Knight(gameEngine, animArr, 4, 0)); // TODO need to select right sprite position
     
     /** Play the background music, continuously looping. */
     var theme = AM.getMusic("./sound/combat.mp3");
