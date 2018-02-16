@@ -20,7 +20,7 @@ function distance(point1, point2) {
 }
 
 function isEnemy(entity1, entity2) {
-	return entity1.speed * entity.speed < 0;
+	return entity1.team !== entity2.team;
 }
 
 function distanceX(entity1, entity2) {
