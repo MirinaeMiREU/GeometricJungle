@@ -14,6 +14,7 @@ function Elf(game, spritesheets, lane, team) {
 	this.state = WALK;
 	this.isBehind = null;
 	this.lane = lane;
+	this.health = 10000;
 	this.ctx = game.ctx;
 	this.team = team;
 	switch (lane) {
@@ -46,15 +47,30 @@ Elf.prototype.update = function() {
 //		this.die();
 //	}
 	// collision
+	
 	for (var i = 0; i < this.game.entities.length; i++) {
 		var entity = this.game.entities[i];
-		if (entity !== this && entity.state !== DEAD && this.collide(entity) && this.isBehind === null) {
-			console.log('Elf colliding...');
-			this.isBehind = entity;
-			if (entity.speed < this.speed) {
-				this.speed = entity.speed;
+		if (this.collide(entity) && entity !== this && entity.state !== DEAD) {
+			if (isEnemy(this, entity)) {
+//				console.log('elf found enemy ... ');
+//				this.attack();
+//				console.log('elf health ... ' + this.health);
+//				if (entity.health > 0)
+//					entity.health -= 1;
+//				else {
+//					entity.die();
+////					this.walk();
+//				}
 			}
-		}			
+		}
+		
+//		if (entity !== this && entity.state !== DEAD && this.collide(entity) && this.isBehind === null) {
+//			console.log('Elf colliding...');
+//			this.isBehind = entity;
+//			if (entity.speed < this.speed) {
+//				this.speed = entity.speed;
+//			}
+//		}			
 	}
 	
 	// Is this object behind an ally?
@@ -151,7 +167,7 @@ Elf.prototype.createAnimation = function(status, team, animations) {
 			else return new Animation(animations[ELF_RIGHT_WALK], 118, 128, 4, 0.25, 4, true, 1);
 		case ATTACK:
 			if (team === 0)
-				return new Animation(animations[ELF_LEFT_ATTACK], 254, 128, 5, 0.20, 5, true, 1);
+				return new Animation(animations[ELF_LEFT_ATTACK], 128, 128, 5, 0.20, 5, true, 1);
 			else return new Animation(animations[ELF_RIGHT_ATTACK], 128, 128, 5, 0.20, 5, true, 1);
 		case DEAD:
 			if (team === 0)
