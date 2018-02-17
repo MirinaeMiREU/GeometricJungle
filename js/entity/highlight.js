@@ -1,5 +1,5 @@
 /** 
- * The Background. This class represents a game background.
+ * The Highlight. This class represents a highlight for the lanes.
  * 
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018

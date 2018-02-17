@@ -25,6 +25,7 @@ AM.addMusic("./sound/pop.mp3");
 
 AM.queueDownload("./img/background/back.png");
 AM.queueDownload("./img/background/highlight.png");
+AM.queueDownload("./img/background/unit.png");
 
 AM.queueDownload("./img/elf/1/IDLE.png");
 AM.queueDownload("./img/elf/1/WALK.png");
