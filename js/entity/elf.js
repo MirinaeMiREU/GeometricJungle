@@ -179,7 +179,7 @@ Elf.prototype.createAnimation = function(status, team, animations) {
 		case IDLE:
 			if (team === 0)
 				return new Animation(animations[ELF_LEFT_IDLE], 118, 128, 4, 0.25, 4, true, 1);
-			else return new Animation(animations[ELF_RIGHT_IDLE], 118, 128, 4, 0.25, 4, true, 1);
+			else return new Animation(animations[ELF_RIGHT_IDLE], 116, 128, 4, 0.25, 4, true, 1);
 		case WALK:
 			if (team === 0)
 				return new Animation(animations[ELF_LEFT_WALK], 111, 128, 4, 0.25, 4, true, 1);
@@ -191,7 +191,7 @@ Elf.prototype.createAnimation = function(status, team, animations) {
 		case DEAD:
 			if (team === 0)
 				return new Animation(animations[ELF_LEFT_DIE], 144, 128, 5, 0.20, 5, false, 1);
-			else return new Animation(animations[ELF_RIGHT_DIE], 144, 128, 5, 0.20, 5, false, 1);
+			else return new Animation(animations[ELF_RIGHT_DIE], 118, 128, 5, 0.20, 5, false, 1);
 		default: return null;
 	}
 }

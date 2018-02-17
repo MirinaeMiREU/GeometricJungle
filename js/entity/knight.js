@@ -124,11 +124,11 @@ Knight.prototype.createAnimation = function(status, team, animations) {
 		case IDLE:
 			if (team === 0)
 				return new Animation(animations[KNIGHT_LEFT_IDLE], 133, 128, 7, 0.14, 7, true, 1.1);
-			else return new Animation(animations[KNIGHT_RIGHT_IDLE], 139, 128, 7, 0.14, 7, true, 1.1);
+			else return new Animation(animations[KNIGHT_RIGHT_IDLE], 140, 128, 7, 0.14, 7, true, 1.1);
 		case WALK:
 			if (team === 0)
 				return new Animation(animations[KNIGHT_LEFT_WALK], 137, 128, 7, 0.14, 7, true, 1.1);
-			else return new Animation(animations[KNIGHT_RIGHT_WALK], 142, 128, 7, 0.14, 7, true, 1.1);
+			else return new Animation(animations[KNIGHT_RIGHT_WALK], 143, 128, 7, 0.14, 7, true, 1.1);
 		case ATTACK:
 			if (team === 0)
 				return new Animation(animations[KNIGHT_LEFT_ATTACK], 124, 128, 7, 0.14, 7, true, 1.2);
@@ -136,7 +136,7 @@ Knight.prototype.createAnimation = function(status, team, animations) {
 		case DEAD:
 			if (team === 0)
 				return new Animation(animations[KNIGHT_LEFT_DIE], 144, 128, 7, 0.14, 7, false, 1);
-			else return new Animation(animations[KNIGHT_RIGHT_DIE], 144, 128, 7, 0.14, 7, false, 1);
+			else return new Animation(animations[KNIGHT_RIGHT_DIE], 153, 128, 7, 0.14, 7, false, 1);
 		default: return null;
 	}
 }
