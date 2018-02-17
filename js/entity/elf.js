@@ -4,10 +4,6 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
- var ELF_SPEED = 50;
- var ELF1_RANGE = 400;
- var ELF2_RANGE = 100;
- 
 function Elf(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
@@ -17,9 +13,10 @@ function Elf(game, spritesheets, lane, team) {
 	this.isBehind = null;
 	this.isTargeting = null;
 	this.isAttacking = false;
-	this.range = team === 0 ? ELF1_RANGE : ELF2_RANGE;
+	this.hit = team === 0 ? ELF_HIT_DAMAGE_1 : ELF_HIT_DAMAGE_2;
+	this.range = team === 0 ? ELF_RANGE_1 : ELF_RANGE_2;
+	this.health = team === 0 ? ELF_HEALTH_1 : ELF_HEALTH_2;
 	this.lane = lane;
-	this.health = 100;
 	this.ctx = game.ctx;
 	this.team = team;
 	switch (lane) {
@@ -44,32 +41,8 @@ Elf.prototype = new Entity();
 Elf.prototype.constructor = Elf;
 
 Elf.prototype.update = function() {
-	if (this.x > 1000) {
-		this.die();
-	}
-	
-	for (var i = 0; i < this.game.entities.length; i++) {
-		var entity = this.game.entities[i];
-		if (entity !== this && entity.state !== DEAD) {
-			if (isEnemy(this,entity)) {
-				if (this.isTargeting === null &&
-					distanceX(this, entity) <= this.range) {
-					console.log('elf found enemy ... ');
-					this.isTargeting = entity;
-				}
-			} else {
-				if (this.collide(entity) && 
-					this.isBehind === null) {
-						
-					console.log('Elf colliding...');
-					this.isBehind = entity;
-					if (entity.speed < this.speed) {
-						this.speed = entity.speed;
-					}	
-				}
-			}
-		}				
-	}
+	// collision
+	this.updateStatus();
 	
 	// Is this object attacking?
 	if (this.isTargeting !== null) {
@@ -106,8 +79,8 @@ Elf.prototype.update = function() {
 				this.walk();
 			}
 			this.speed = this.isBehind.speed;
-//		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
-//			this.idle();
+		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
+			this.idle();
 		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
 			this.idle();
 		}
@@ -127,6 +100,32 @@ Elf.prototype.update = function() {
 		this.game.removeEntity(this);
 	}
 	Entity.prototype.update.call(this);
+}
+
+Elf.prototype.updateStatus = function()
+{
+	for (var i = 0; i < this.game.entities.length; i++) {
+		var entity = this.game.entities[i];
+		if (entity !== this && entity.state !== DEAD) {
+			if (isEnemy(this,entity)) {
+				if (this.isTargeting === null &&
+					distanceX(this, entity) <= this.range) {
+					console.log('knight found enemy ... ');
+					this.isTargeting = entity;
+				}
+			} else {
+				if (this.collide(entity) && 
+					this.isBehind === null) {
+						
+					console.log('knight colliding...');
+					this.isBehind = entity;
+					if (entity.speed < this.speed) {
+						this.speed = entity.speed;
+					}	
+				}
+			}
+		}				
+	}
 }
 
 Elf.prototype.draw = function() {
@@ -154,7 +153,7 @@ Elf.prototype.idle = function() {
 Elf.prototype.walk = function() {
 	this.animation = this.createAnimation(WALK, this.team, this.animations);
 	this.state = WALK;
-	this.speed = ELF_SPEED;
+	this.speed = this.getSpeed(this.team);
 }
 
 Elf.prototype.attack = function() {
@@ -183,8 +182,8 @@ Elf.prototype.collide = function(other) {
 
 Elf.prototype.getSpeed = function(team) {
 	if (team === 0)
-		return ELF_SPEED;
-	else return -ELF_SPEED;
+		return ELF_SPEED_1;
+	else return -ELF_SPEED_2;
 }
 
 Elf.prototype.getPosition = function(team) {
