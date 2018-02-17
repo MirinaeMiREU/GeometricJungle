@@ -4,8 +4,8 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
- var KNIGHT_SPEED = 25;
- var KNIGHT_HEALTH = 200;
+ var KNIGHT_SPEED = 100;
+ var KNIGHT_HEALTH = 10;
  
 function Knight(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
@@ -15,7 +15,9 @@ function Knight(game, spritesheets, lane, team) {
 	this.state = WALK;
 	this.lane = lane;
 	this.team = team;
-	this.health = 10;
+	this.isTargeting = null;
+	this.isAttacking = false;
+	this.health = KNIGHT_HEALTH;
 	this.ctx = game.ctx;
 	switch (lane) {
 	case 1:
@@ -42,22 +44,69 @@ Knight.prototype.constructor = Knight;
 
 Knight.prototype.update = function() {
 	// collision
+//	for (var i = 0; i < this.game.entities.length; i++) {
+//		var entity = this.game.entities[i];
+//		if (this.collide(entity) && entity !== this && entity.state !== DEAD) {
+//			if (isEnemy(this, entity)) {
+//				console.log('knight found enemy ... ');
+//				this.attack();
+//				//console.log('knight health ... ' + this.health);
+//				if (entity.health > 0)
+//					entity.health -= 1;
+//				else {
+//					entity.die();
+//					this.walk();
+//				}
+//			}
+//		}
 	for (var i = 0; i < this.game.entities.length; i++) {
 		var entity = this.game.entities[i];
-		if (this.collide(entity) && entity !== this && entity.state !== DEAD) {
-			if (isEnemy(this, entity)) {
-				console.log('knight found enemy ... ');
-				this.attack();
-				//console.log('knight health ... ' + this.health);
-				if (entity.health > 0)
-					entity.health -= 1;
-				else {
-					entity.die();
-					this.walk();
+		if (entity !== this && entity.state !== DEAD) {
+			if (isEnemy(this,entity)) {
+				if (this.isTargeting === null &&
+					distanceX(this, entity) <= 60) {
+					console.log('knight found enemy ... ');
+					this.isTargeting = entity;
+				}
+			} else {
+				if (this.collide(entity) && 
+					this.isBehind === null) {
+						
+					console.log('knight colliding...');
+					this.isBehind = entity;
+					if (entity.speed < this.speed) {
+						this.speed = entity.speed;
+					}	
 				}
 			}
+		}				
+	}
+	
+	// Is this object attacking?
+	if (this.isTargeting !== null) {
+		if (this.isTargeting.state === DEAD) {
+			this.isTargeting = null;
+			this.y = this.y + 20;
+			this.walk();
+		} else if (this.state === WALK || this.state === IDLE) {
+			yCoor = this.y;
+			this.attack(yCoor);
+		} else if (this.state === ATTACK && 
+		           this.animation.elapsedTime > 0.7 &&
+				   this.animation.elapsedTime < 0.8 &&
+				   !this.isAttacking) {
+			this.isAttacking = true;
+			console.log("attacking");
+		} 
+		if (this.state === ATTACK &&
+		           this.isAttacking &&
+				   this.animation.elapsedTime > 0.9) {
+			console.log("attacked");
+			this.isAttacking = false;
+			this.isTargeting.health -= 1;
 		}
 	}
+
 	
 //	if (this.x > 300 && this.state !== IDLE) {
 //		this.idle();
@@ -91,7 +140,11 @@ Knight.prototype.walk = function() {
 	this.speed = this.getSpeed(this.team);
 }
 
-Knight.prototype.attack = function() {
+Knight.prototype.attack = function(y) {
+	if(this.state === WALK || this.state === IDLE) {
+		this.y = y - 30;
+	}
+	
 	this.animation = this.createAnimation(ATTACK, this.team, this.animations);
 	this.state = ATTACK;
 	this.speed = 0;
@@ -127,15 +180,15 @@ Knight.prototype.createAnimation = function(status, team, animations) {
 			else return new Animation(animations[KNIGHT_RIGHT_IDLE], 140, 128, 7, 0.14, 7, true, 1.1);
 		case WALK:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_WALK], 137, 128, 7, 0.14, 7, true, 1.1);
-			else return new Animation(animations[KNIGHT_RIGHT_WALK], 143, 128, 7, 0.14, 7, true, 1.1);
+				return new Animation(animations[KNIGHT_LEFT_WALK], 137, 128, 7, 0.14, 7, true, 1);
+			else return new Animation(animations[KNIGHT_RIGHT_WALK], 143, 128, 7, 0.14, 7, true, 1);
 		case ATTACK:
 			if (team === 0)
 				return new Animation(animations[KNIGHT_LEFT_ATTACK], 124, 128, 7, 0.14, 7, true, 1.2);
 			else return new Animation(animations[KNIGHT_RIGHT_ATTACK], 147, 128, 7, 0.14, 7, true, 1.1);
 		case DEAD:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_DIE], 144, 128, 7, 0.14, 7, false, 1);
+				return new Animation(animations[KNIGHT_LEFT_DIE], 156, 128, 7, 0.14, 7, false, 1);
 			else return new Animation(animations[KNIGHT_RIGHT_DIE], 153, 128, 7, 0.14, 7, false, 1);
 		default: return null;
 	}
