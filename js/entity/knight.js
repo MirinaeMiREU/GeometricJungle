@@ -82,6 +82,8 @@ Knight.prototype.update = function()
 			this.speed = this.isBehind.speed;
 		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
 			this.idle();
+		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
+			this.idle();
 		}
 	}
 

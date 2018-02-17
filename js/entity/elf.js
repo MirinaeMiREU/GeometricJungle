@@ -17,7 +17,8 @@ function Elf(game, spritesheets, lane, team) {
 	this.isBehind = null;
 	this.isTargeting = null;
 	this.isAttacking = false;
-	this.range = team === 0 ? ELF1_RANGE : ELF2_RANGE;
+	this.hit = team === 0 ? ELF_HIT_DAMAGE_1 : ELF_HIT_DAMAGE_2;
+	this.range = team === 0 ? ELF_RANGE_1 : ELF_RANGE_2;
 	this.lane = lane;
 	this.health = 100;
 	this.ctx = game.ctx;
@@ -86,11 +87,11 @@ Elf.prototype.update = function() {
 			console.log("attacking");
 		} 
 		if (this.state === ATTACK &&
-		           this.isAttacking &&
-				   this.animation.elapsedTime > 0.9) {
+		    this.isAttacking &&
+			this.animation.elapsedTime > 0.9) {
 			console.log("attacked");
 			this.isAttacking = false;
-			this.isTargeting.health -= 1;
+			this.isTargeting.health -= this.hit;
 		}
 	}
 	
@@ -106,8 +107,8 @@ Elf.prototype.update = function() {
 				this.walk();
 			}
 			this.speed = this.isBehind.speed;
-//		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
-//			this.idle();
+		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
+			this.idle();
 		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
 			this.idle();
 		}
@@ -123,9 +124,6 @@ Elf.prototype.update = function() {
 	
 	this.x += this.game.clockTick * this.speed;
 	
-	if (this.state === DEAD && this.animation.isDone()) {
-		this.game.removeEntity(this);
-	}
 	Entity.prototype.update.call(this);
 }
 
