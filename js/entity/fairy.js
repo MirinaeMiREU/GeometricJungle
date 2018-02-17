@@ -43,6 +43,16 @@ Fairy.prototype.constructor = Fairy;
 
 Fairy.prototype.update = function() 
 {
+	// debug animations
+//	if (this.lane == 1)
+//		this.die();
+//	else if (this.lane == 2)
+//		this.walk();
+//	else if (this.lane == 3)
+//		this.attack();
+//	else if (this.lane == 4)
+//		this.idle();
+//	return;
 	
 	// collision
 	this.updateStatus();
@@ -219,7 +229,7 @@ Fairy.prototype.createAnimation = function(status, team, animations) {
 		case DEAD:
 			if (team === 0)
 				return new Animation(animations[FAIRY_LEFT_DIE], 144, 128, 5, 0.20, 5, false, 1.3);
-			else return new Animation(animations[FAIRY_RIGHT_DIE], 151, 128, 5, 0.20, 5, false, 1.3);
+			else return new Animation(animations[FAIRY_RIGHT_DIE], 144, 128, 5, 0.20, 5, false, 1.3);
 		default: return null;
 	}
 }
