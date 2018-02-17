@@ -41,6 +41,17 @@ Elf.prototype = new Entity();
 Elf.prototype.constructor = Elf;
 
 Elf.prototype.update = function() {
+	// debug animation
+//	if (this.lane == 1)
+//		this.die();
+//	else if (this.lane == 2)
+//		this.walk();
+//	else if (this.lane == 3)
+//		this.attack();
+//	else if (this.lane == 4)
+//		this.idle();
+//	return;
+	
 	// collision
 	this.updateStatus();
 	
@@ -63,7 +74,7 @@ Elf.prototype.update = function() {
 				   this.animation.elapsedTime > 0.9) {
 			console.log("attacked");
 			this.isAttacking = false;
-			this.isTargeting.health -= 1;
+			this.isTargeting.health -= this.hit;
 		}
 	}
 	
@@ -209,7 +220,7 @@ Elf.prototype.createAnimation = function(status, team, animations) {
 		case DEAD:
 			if (team === 0)
 				return new Animation(animations[ELF_LEFT_DIE], 144, 128, 5, 0.20, 5, false, 1);
-			else return new Animation(animations[ELF_RIGHT_DIE], 118, 128, 5, 0.20, 5, false, 1);
+			else return new Animation(animations[ELF_RIGHT_DIE], 144, 128, 5, 0.20, 5, false, 1);
 		default: return null;
 	}
 }

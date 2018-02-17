@@ -71,10 +71,10 @@ AM.downloadAll(function () {
 	animArr[ELF_LEFT_ATTACK] = AM.getAsset("./img/elf/1/ATTACK.png");
 	animArr[ELF_LEFT_DIE] = AM.getAsset("./img/elf/1/DIE.png");
 	
-	animArr[ELF_RIGHT_IDLE] = AM.getAsset("./img/elf/2/IDLE1.png");
+	animArr[ELF_RIGHT_IDLE] = AM.getAsset("./img/elf/2/IDLE.png");
 	animArr[ELF_RIGHT_WALK] = AM.getAsset("./img/elf/2/WALK.png");
 	animArr[ELF_RIGHT_ATTACK] = AM.getAsset("./img/elf/2/ATTACK.png");
-	animArr[ELF_RIGHT_DIE] = AM.getAsset("./img/elf/2/DIE2.png");
+	animArr[ELF_RIGHT_DIE] = AM.getAsset("./img/elf/2/DIE.png");
 	
 	animArr[KNIGHT_LEFT_IDLE] = AM.getAsset("./img/knight/1/IDLE.png");
 	animArr[KNIGHT_LEFT_WALK] = AM.getAsset("./img/knight/1/WALK.png");
@@ -111,24 +111,48 @@ AM.downloadAll(function () {
     
     /** Adding entities into the game.*/
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background/back.png"), 960, 540));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 1, 0));
     gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 3, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 4, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 5, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 1, 1));
     gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 3, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 4, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 5, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 2));
     gameEngine.addEntity(new Knight(gameEngine, animArr, 1, 1));
     gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 0));
     gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 1));
     gameEngine.addEntity(new Fairy(gameEngine, animArr, 3, 1));
     gameEngine.addEntity(new Fairy(gameEngine, animArr, 5, 0));
     gameEngine.addEntity(new Fairy(gameEngine, animArr, 5, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 4, 0)); // TODO need to select right sprite position
+    
+    /** Testing the animation */
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, 1, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, 2, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, 3, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, 4, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, 5, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, 1, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, 2, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, 3, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, 4, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, 5, 1));
+    
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, 1, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, 3, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, 4, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, 5, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, 1, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, 3, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, 4, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, 5, 1));
+    
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 1, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 2, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 3, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 5, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 1, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 2, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 3, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 5, 1));
     
     /** Play the background music, continuously looping. */
     var theme = AM.getMusic("./sound/combat.mp3");
