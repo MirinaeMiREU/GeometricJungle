@@ -45,6 +45,17 @@ Knight.prototype.constructor = Knight;
 
 Knight.prototype.update = function()
 {
+	// debug animation
+//	if (this.lane == 1)
+//		this.die();
+//	else if (this.lane == 2)
+//		this.walk();
+//	else if (this.lane == 3)
+//		this.attack();
+//	else if (this.lane == 4)
+//		this.idle();
+//	return;
+	
 	// collision
 	this.updateStatus();
 	
@@ -209,8 +220,8 @@ Knight.prototype.createAnimation = function(status, team, animations) {
 	switch(status) {
 		case IDLE:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_IDLE], 133, 128, 7, 0.14, 7, true, 1.1);
-			else return new Animation(animations[KNIGHT_RIGHT_IDLE], 140, 128, 7, 0.14, 7, true, 1.1);
+				return new Animation(animations[KNIGHT_LEFT_IDLE], 133, 128, 7, 0.14, 7, true, 1.0);
+			else return new Animation(animations[KNIGHT_RIGHT_IDLE], 140, 128, 7, 0.14, 7, true, 1.0);
 		case WALK:
 			if (team === 0)
 				return new Animation(animations[KNIGHT_LEFT_WALK], 137, 128, 7, 0.14, 7, true, 1);
@@ -221,8 +232,8 @@ Knight.prototype.createAnimation = function(status, team, animations) {
 			else return new Animation(animations[KNIGHT_RIGHT_ATTACK], 147, 128, 7, 0.14, 7, true, 1.1);
 		case DEAD:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_DIE], 156, 128, 7, 0.14, 7, false, 1);
-			else return new Animation(animations[KNIGHT_RIGHT_DIE], 153, 128, 7, 0.14, 7, false, 1);
+				return new Animation(animations[KNIGHT_LEFT_DIE], 156, 128, 7, 0.14, 7, false, 1.16);
+			else return new Animation(animations[KNIGHT_RIGHT_DIE], 153, 128, 7, 0.14, 7, false, 1.3);
 		default: return null;
 	}
 }
