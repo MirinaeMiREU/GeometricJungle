@@ -4,9 +4,6 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
- var KNIGHT_SPEED = 100;
- var KNIGHT_HEALTH = 10;
- 
 function Knight(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
@@ -15,9 +12,13 @@ function Knight(game, spritesheets, lane, team) {
 	this.state = WALK;
 	this.lane = lane;
 	this.team = team;
+	this.hit = team === 0 ? KNIGHT_HIT_DAMAGE_1 : KNIGHT_HIT_DAMAGE_2;
+	this.range = team === 0 ? KNIGHT_RANGE_1 : KNIGHT_RANGE_2;
+	this.health = team === 0 ? KNIGHT_HEALTH_1 : KNIGHT_HEALTH_2;
+	this.isTargeting = null;
+	this.isBehind = null;
 	this.isTargeting = null;
 	this.isAttacking = false;
-	this.health = KNIGHT_HEALTH;
 	this.ctx = game.ctx;
 	switch (lane) {
 	case 1:
@@ -42,29 +43,74 @@ function Knight(game, spritesheets, lane, team) {
 Knight.prototype = new Entity();
 Knight.prototype.constructor = Knight;
 
-Knight.prototype.update = function() {
+Knight.prototype.update = function()
+{
 	// collision
-//	for (var i = 0; i < this.game.entities.length; i++) {
-//		var entity = this.game.entities[i];
-//		if (this.collide(entity) && entity !== this && entity.state !== DEAD) {
-//			if (isEnemy(this, entity)) {
-//				console.log('knight found enemy ... ');
-//				this.attack();
-//				//console.log('knight health ... ' + this.health);
-//				if (entity.health > 0)
-//					entity.health -= 1;
-//				else {
-//					entity.die();
-//					this.walk();
-//				}
-//			}
-//		}
+	this.updateStatus();
+	
+	// the troop gets the target to attack
+	if (this.isTargeting !== null)
+	{
+		if (this.isTargeting.state === DEAD)
+		{
+			this.isTargeting = null;
+			this.walk();
+		}
+		else if (this.state === WALK || this.state === IDLE)
+			this.attack(); // change the status from walk and idle to attack
+		else if (this.state === ATTACK && this.animation.elapsedTime > 0.7 &&
+				 this.animation.elapsedTime < 0.8 && !this.isAttacking)
+		{
+			this.isAttacking = true;
+			console.log("attacking");
+		} 
+		
+		if (this.state === ATTACK && this.isAttacking && this.animation.elapsedTime > 0.9)
+		{
+			console.log("attacked");
+			this.isAttacking = false;
+			this.isTargeting.health -= this.hit;
+		}
+	}
+	
+	// if the knight is behind the ally
+	if (this.isBehind !== null) {
+		if (this.isBehind.state === DEAD) {
+			this.isBehind = null;
+			this.walk();
+		} else if (this.isTouching(this.isBehind)) {
+			if (this.isBehind.state === IDLE && this.state !== IDLE) {
+				this.idle();
+			} else if (this.isBehind.state === WALK && this.state !== WALK) {
+				this.walk();
+			}
+			this.speed = this.isBehind.speed;
+		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
+			this.idle();
+		}
+	}
+
+	
+	if (this.health <= 0 && this.state !== DEAD) {
+		this.die();
+	}
+	
+	if (this.state === DEAD && this.animation.isDone()) {
+		this.game.removeEntity(this);
+	}
+	
+	this.x += this.game.clockTick * this.speed;
+	Entity.prototype.update.call(this);
+}
+
+Knight.prototype.updateStatus = function()
+{
 	for (var i = 0; i < this.game.entities.length; i++) {
 		var entity = this.game.entities[i];
 		if (entity !== this && entity.state !== DEAD) {
 			if (isEnemy(this,entity)) {
 				if (this.isTargeting === null &&
-					distanceX(this, entity) <= 60) {
+					distanceX(this, entity) <= this.range) {
 					console.log('knight found enemy ... ');
 					this.isTargeting = entity;
 				}
@@ -81,51 +127,22 @@ Knight.prototype.update = function() {
 			}
 		}				
 	}
-	
-	// Is this object attacking?
-	if (this.isTargeting !== null) {
-		if (this.isTargeting.state === DEAD) {
-			this.isTargeting = null;
-			this.y = this.y + 20;
-			this.walk();
-		} else if (this.state === WALK || this.state === IDLE) {
-			yCoor = this.y;
-			this.attack(yCoor);
-		} else if (this.state === ATTACK && 
-		           this.animation.elapsedTime > 0.7 &&
-				   this.animation.elapsedTime < 0.8 &&
-				   !this.isAttacking) {
-			this.isAttacking = true;
-			console.log("attacking");
-		} 
-		if (this.state === ATTACK &&
-		           this.isAttacking &&
-				   this.animation.elapsedTime > 0.9) {
-			console.log("attacked");
-			this.isAttacking = false;
-			this.isTargeting.health -= 1;
-		}
-	}
-
-	
-//	if (this.x > 300 && this.state !== IDLE) {
-//		this.idle();
-//	}
-	if (this.health <= 0 && this.state !== DEAD) {
-		this.die();
-	}
-	
-	if (this.state === DEAD && this.animation.isDone()) {
-		this.game.removeEntity(this);
-	}
-	
-	this.x += this.game.clockTick * this.speed;
-	Entity.prototype.update.call(this);
 }
 
 Knight.prototype.draw = function() {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+	this.drawBar();
     Entity.prototype.draw.call(this);
+}
+
+Knight.prototype.drawBar = function()
+{
+	var max = this.team === 0 ? KNIGHT_HEALTH_1 : KNIGHT_HEALTH_2;
+	var current = getPercentBar(this.health, max, BAR_SIZE);
+	this.ctx.fillStyle = "green";
+	this.ctx.fillRect(this.x, this.y + 130, current, 5);
+	this.ctx.fillStyle = "red";
+	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
 }
 
 Knight.prototype.idle = function() {
@@ -156,14 +173,18 @@ Knight.prototype.die = function() {
 	this.speed = 0;
 }
 
+Knight.prototype.isTouching = function(other) {
+	return distanceX(this, other) > 85 && distanceX(this, other) < 90;
+}
+
 Knight.prototype.collide = function(other) {
 	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
 }
 
 Knight.prototype.getSpeed = function(team) {
 	if (team === 0)
-		return KNIGHT_SPEED;
-	else return -KNIGHT_SPEED;
+		return KNIGHT_SPEED_1;
+	else return -KNIGHT_SPEED_2;
 }
 
 Knight.prototype.getPosition = function(team) {

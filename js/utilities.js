@@ -25,7 +25,7 @@ function isEnemy(entity1, entity2) {
 
 function distanceX(entity1, entity2) {
 	if (entity1.z === entity2.z) {
-		return entity2.x - entity1.x;
+		return Math.abs(entity2.x - entity1.x);
 	}
 	return Infinity;
 }
@@ -49,6 +49,11 @@ function flip(image, context, flipH, flipV) {
     context.scale(scaleH, scaleV);					    // set scale to flip the image
     context.drawImage(image, posX, posY, width, height);	// draw the image
     context.restore();								    // restore the last saved state
+}
+
+function getPercentBar(currentHealth, maxHealth, barMaxSize)
+{
+	return currentHealth / maxHealth * barMaxSize;
 }
 
 function spawnUnit(game, animArr, lane, unit, team) {

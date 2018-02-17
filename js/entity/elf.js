@@ -19,7 +19,7 @@ function Elf(game, spritesheets, lane, team) {
 	this.isAttacking = false;
 	this.range = team === 0 ? ELF1_RANGE : ELF2_RANGE;
 	this.lane = lane;
-	this.health = 10000;
+	this.health = 100;
 	this.ctx = game.ctx;
 	this.team = team;
 	switch (lane) {
@@ -53,7 +53,7 @@ Elf.prototype.update = function() {
 		if (entity !== this && entity.state !== DEAD) {
 			if (isEnemy(this,entity)) {
 				if (this.isTargeting === null &&
-					distanceX(this, entity) <= 400) {
+					distanceX(this, entity) <= this.range) {
 					console.log('elf found enemy ... ');
 					this.isTargeting = entity;
 				}
@@ -106,11 +106,19 @@ Elf.prototype.update = function() {
 				this.walk();
 			}
 			this.speed = this.isBehind.speed;
-		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
-			this.idle();
+//		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
+//			this.idle();
 		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
 			this.idle();
 		}
+	}
+	
+	if (this.health <= 0 && this.state !== DEAD) {
+		this.die();
+	}
+	
+	if (this.state === DEAD && this.animation.isDone()) {
+		this.game.removeEntity(this);
 	}
 	
 	this.x += this.game.clockTick * this.speed;
@@ -123,7 +131,18 @@ Elf.prototype.update = function() {
 
 Elf.prototype.draw = function() {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+	this.drawBar();
     Entity.prototype.draw.call(this);
+}
+
+Elf.prototype.drawBar = function()
+{
+	var max = this.team === 0 ? ELF_HEALTH_1 : ELF_HEALTH_2;
+	var current = getPercentBar(this.health, max, BAR_SIZE);
+	this.ctx.fillStyle = "green";
+	this.ctx.fillRect(this.x, this.y + 130, current, 5);
+	this.ctx.fillStyle = "red";
+	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
 }
 
 Elf.prototype.idle = function() {
