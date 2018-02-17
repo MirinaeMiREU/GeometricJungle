@@ -103,7 +103,9 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background/back.png"), 960, 540));
 //    gameEngine.addEntity(new Elf(gameEngine, animArr, 1, 0));
     gameEngine.addEntity(new Elf(gameEngine, animArr, 2, 0));
+    gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 0));
     gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 2));
+    
 //    gameEngine.addEntity(new Fairy(gameEngine, animArr, 3, 0));
 //    gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 1));
     gameEngine.addEntity(new Knight(gameEngine, animArr, 4, 0)); // TODO need to select right sprite position
