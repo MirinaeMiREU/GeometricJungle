@@ -15,7 +15,7 @@ function Knight(game, spritesheets, lane, team) {
 	this.state = WALK;
 	this.lane = lane;
 	this.team = team;
-	this.health = 10000;
+	this.health = 10;
 	this.ctx = game.ctx;
 	switch (lane) {
 	case 1:
@@ -48,7 +48,7 @@ Knight.prototype.update = function() {
 			if (isEnemy(this, entity)) {
 				console.log('knight found enemy ... ');
 				this.attack();
-				console.log('knight health ... ' + this.health);
+				//console.log('knight health ... ' + this.health);
 				if (entity.health > 0)
 					entity.health -= 1;
 				else {
@@ -62,6 +62,13 @@ Knight.prototype.update = function() {
 //	if (this.x > 300 && this.state !== IDLE) {
 //		this.idle();
 //	}
+	if (this.health <= 0 && this.state !== DEAD) {
+		this.die();
+	}
+	
+	if (this.state === DEAD && this.animation.isDone()) {
+		this.game.removeEntity(this);
+	}
 	
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
@@ -100,10 +107,6 @@ Knight.prototype.collide = function(other) {
 	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
 }
 
-Knight.prototype.collide = function(other) {
-	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
-}
-
 Knight.prototype.getSpeed = function(team) {
 	if (team === 0)
 		return KNIGHT_SPEED;
@@ -120,20 +123,20 @@ Knight.prototype.createAnimation = function(status, team, animations) {
 	switch(status) {
 		case IDLE:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_IDLE], 133, 128, 7, 0.13, 7, true, 1.1);
-			else return new Animation(animations[KNIGHT_RIGHT_IDLE], 139, 128, 7, 0.13, 7, true, 1.1);
+				return new Animation(animations[KNIGHT_LEFT_IDLE], 133, 128, 7, 0.14, 7, true, 1.1);
+			else return new Animation(animations[KNIGHT_RIGHT_IDLE], 139, 128, 7, 0.14, 7, true, 1.1);
 		case WALK:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_WALK], 138, 128, 5, 0.20, 5, true, 1);
-			else return new Animation(animations[KNIGHT_RIGHT_WALK], 142, 128, 5, 0.20, 5, true, 1);
+				return new Animation(animations[KNIGHT_LEFT_WALK], 137, 128, 7, 0.14, 7, true, 1.1);
+			else return new Animation(animations[KNIGHT_RIGHT_WALK], 142, 128, 7, 0.14, 7, true, 1.1);
 		case ATTACK:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_ATTACK], 124, 128, 7, 0.20, 7, true, 1.2);
-			else return new Animation(animations[KNIGHT_RIGHT_ATTACK], 147, 128, 7, 0.20, 7, true, 1.1);
+				return new Animation(animations[KNIGHT_LEFT_ATTACK], 124, 128, 7, 0.14, 7, true, 1.2);
+			else return new Animation(animations[KNIGHT_RIGHT_ATTACK], 147, 128, 7, 0.14, 7, true, 1.1);
 		case DEAD:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_DIE], 144, 128, 5, 0.20, 5, false, 1);
-			else return new Animation(animations[KNIGHT_RIGHT_DIE], 144, 128, 5, 0.20, 5, false, 1);
+				return new Animation(animations[KNIGHT_LEFT_DIE], 144, 128, 7, 0.14, 7, false, 1);
+			else return new Animation(animations[KNIGHT_RIGHT_DIE], 144, 128, 7, 0.14, 7, false, 1);
 		default: return null;
 	}
 }
