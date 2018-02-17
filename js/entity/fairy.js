@@ -111,19 +111,19 @@ Fairy.prototype.createAnimation = function(status, team, animations) {
 		case IDLE:
 			if (team === 0)
 				return new Animation(animations[FAIRY_LEFT_IDLE], 147, 128, 5, 0.20, 5, true, 1);
-			else return new Animation(animations[FAIRY_RIGHT_IDLE], 147, 128, 5, 0.20, 5, true, 1);
+			else return new Animation(animations[FAIRY_RIGHT_IDLE], 138, 128, 4, 0.20, 4, true, 1);
 		case WALK:
 			if (team === 0)
 				return new Animation(animations[FAIRY_LEFT_WALK], 149, 128, 5, 0.20, 5, true, 1);
-			else return new Animation(animations[FAIRY_RIGHT_WALK], 149, 128, 5, 0.20, 5, true, 1);
+			else return new Animation(animations[FAIRY_RIGHT_WALK], 139, 128, 4, 0.20, 4, true, 1);
 		case ATTACK:
 			if (team === 0)
-				return new Animation(animations[FAIRY_LEFT_ATTACK], 262, 128, 5, 0.20, 5, true, 1);
-			else return new Animation(animations[FAIRY_RIGHT_ATTACK], 262, 128, 5, 0.20, 5, true, 1);
+				return new Animation(animations[FAIRY_LEFT_ATTACK], 133, 128, 5, 0.20, 5, true, 1);
+			else return new Animation(animations[FAIRY_RIGHT_ATTACK], 128, 128, 5, 0.20, 5, true, 1);
 		case DEAD:
 			if (team === 0)
 				return new Animation(animations[FAIRY_LEFT_DIE], 144, 128, 5, 0.20, 5, false, 1.3);
-			else return new Animation(animations[FAIRY_RIGHT_DIE], 144, 128, 5, 0.20, 5, false, 1.3);
+			else return new Animation(animations[FAIRY_RIGHT_DIE], 151, 128, 5, 0.20, 5, false, 1.3);
 		default: return null;
 	}
 }
