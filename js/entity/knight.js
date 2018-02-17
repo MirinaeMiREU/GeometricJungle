@@ -4,9 +4,6 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
- var KNIGHT_SPEED = 25;
- var KNIGHT_HEALTH = 200;
- 
 function Knight(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
@@ -15,7 +12,11 @@ function Knight(game, spritesheets, lane, team) {
 	this.state = WALK;
 	this.lane = lane;
 	this.team = team;
-	this.health = 10;
+	this.hit = team === 0 ? KNIGHT_HIT_DAMAGE_1 : KNIGHT_HIT_DAMAGE_2;
+	this.range = team === 0 ? KNIGHT_RANGE_1 : KNIGHT_RANGE_2;
+	this.health = team === 0 ? KNIGHT_HEALTH_1 : KNIGHT_HEALTH_2;
+	this.isTargeting = null;
+	this.isBehind = null;
 	this.ctx = game.ctx;
 	switch (lane) {
 	case 1:
@@ -40,28 +41,53 @@ function Knight(game, spritesheets, lane, team) {
 Knight.prototype = new Entity();
 Knight.prototype.constructor = Knight;
 
-Knight.prototype.update = function() {
+Knight.prototype.update = function()
+{
 	// collision
-	for (var i = 0; i < this.game.entities.length; i++) {
-		var entity = this.game.entities[i];
-		if (this.collide(entity) && entity !== this && entity.state !== DEAD) {
-			if (isEnemy(this, entity)) {
-				console.log('knight found enemy ... ');
-				this.attack();
-				//console.log('knight health ... ' + this.health);
-				if (entity.health > 0)
-					entity.health -= 1;
-				else {
-					entity.die();
-					this.walk();
-				}
-			}
+	this.updateStatus();
+	
+	// the troop gets the target to attack
+	if (this.isTargeting !== null)
+	{
+		if (this.isTargeting.state === DEAD)
+		{
+			this.isTargeting = null;
+			this.walk();
+		}
+		else if (this.state === WALK || this.state === IDLE)
+			this.attack(); // change the status from walk and idle to attack
+		else if (this.state === ATTACK && this.animation.elapsedTime > 0.7 &&
+				 this.animation.elapsedTime < 0.8 && !this.isAttacking)
+		{
+			this.isAttacking = true;
+			console.log("attacking");
+		} 
+		
+		if (this.state === ATTACK && this.isAttacking && this.animation.elapsedTime > 0.9)
+		{
+			console.log("attacked");
+			this.isAttacking = false;
+			this.isTargeting.health -= this.hit;
 		}
 	}
 	
-//	if (this.x > 300 && this.state !== IDLE) {
-//		this.idle();
-//	}
+	// if the knight is behind the ally
+	if (this.isBehind !== null) {
+		if (this.isBehind.state === DEAD) {
+			this.isBehind = null;
+			this.walk();
+		} else if (this.isTouching(this.isBehind)) {
+			if (this.isBehind.state === IDLE && this.state !== IDLE) {
+				this.idle();
+			} else if (this.isBehind.state === WALK && this.state !== WALK) {
+				this.walk();
+			}
+			this.speed = this.isBehind.speed;
+		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
+			this.idle();
+		}
+	}
+	
 	if (this.health <= 0 && this.state !== DEAD) {
 		this.die();
 	}
@@ -72,6 +98,32 @@ Knight.prototype.update = function() {
 	
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
+}
+
+Knight.prototype.updateStatus = function()
+{
+	for (var i = 0; i < this.game.entities.length; i++) {
+		var entity = this.game.entities[i];
+		if (entity !== this && entity.state !== DEAD) {
+			if (isEnemy(this,entity)) {
+				if (this.isTargeting === null &&
+					distanceX(this, entity) <= this.range) {
+					console.log('knight found enemy ... ');
+					this.isTargeting = entity;
+				}
+			} else {
+				if (this.collide(entity) && 
+					this.isBehind === null) {
+						
+					console.log('knight colliding...');
+					this.isBehind = entity;
+					if (entity.speed < this.speed) {
+						this.speed = entity.speed;
+					}	
+				}
+			}
+		}				
+	}
 }
 
 Knight.prototype.draw = function() {
@@ -103,14 +155,18 @@ Knight.prototype.die = function() {
 	this.speed = 0;
 }
 
+Knight.prototype.isTouching = function(other) {
+	return distanceX(this, other) > 85 && distanceX(this, other) < 90;
+}
+
 Knight.prototype.collide = function(other) {
 	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
 }
 
 Knight.prototype.getSpeed = function(team) {
 	if (team === 0)
-		return KNIGHT_SPEED;
-	else return -KNIGHT_SPEED;
+		return KNIGHT_SPEED_1;
+	else return -KNIGHT_SPEED_2;
 }
 
 Knight.prototype.getPosition = function(team) {
@@ -135,8 +191,8 @@ Knight.prototype.createAnimation = function(status, team, animations) {
 			else return new Animation(animations[KNIGHT_RIGHT_ATTACK], 147, 128, 7, 0.14, 7, true, 1.1);
 		case DEAD:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_DIE], 144, 128, 7, 0.14, 7, false, 1);
-			else return new Animation(animations[KNIGHT_RIGHT_DIE], 144, 128, 7, 0.14, 7, false, 1);
+				return new Animation(animations[KNIGHT_LEFT_DIE], 155, 128, 7, 0.14, 7, false, 1.3);
+			else return new Animation(animations[KNIGHT_RIGHT_DIE], 155, 128, 7, 0.14, 7, false, 1.3);
 		default: return null;
 	}
 }

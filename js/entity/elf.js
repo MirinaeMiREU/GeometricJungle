@@ -19,7 +19,7 @@ function Elf(game, spritesheets, lane, team) {
 	this.isAttacking = false;
 	this.range = team === 0 ? ELF1_RANGE : ELF2_RANGE;
 	this.lane = lane;
-	this.health = 10000;
+	this.health = 100;
 	this.ctx = game.ctx;
 	this.team = team;
 	switch (lane) {
@@ -53,7 +53,7 @@ Elf.prototype.update = function() {
 		if (entity !== this && entity.state !== DEAD) {
 			if (isEnemy(this,entity)) {
 				if (this.isTargeting === null &&
-					distanceX(this, entity) <= 400) {
+					distanceX(this, entity) <= this.range) {
 					console.log('elf found enemy ... ');
 					this.isTargeting = entity;
 				}

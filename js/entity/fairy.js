@@ -4,15 +4,20 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
- var FAIRY_SPEED = 100;
- 
 function Fairy(game, spritesheets, lane, team) {
 	this.animations = spritesheets;
 	/** Sprite coordinates must be modified if spritesheets are changed! */
+	this.animations = spritesheets;
 	this.animation = this.createAnimation(WALK, team, spritesheets);
-	this.speed = this.getSpeed(team);;
+	this.speed = this.getSpeed(team);
 	this.state = WALK;
+	this.lane = lane;
 	this.team = team;
+	this.hit = team === 0 ? FAIRY_HIT_DAMAGE_1 : FAIRY_HIT_DAMAGE_2;
+	this.range = team === 0 ? FAIRY_RANGE_1 : FAIRY_RANGE_2;
+	this.health = team === 0 ? FAIRY_HEALTH_1 : FAIRY_HEALTH_2;
+	this.isTargeting = null;
+	this.isBehind = null;
 	this.ctx = game.ctx;
 	switch (lane) {
 		case 1:
@@ -35,30 +40,91 @@ function Fairy(game, spritesheets, lane, team) {
 Fairy.prototype = new Entity();
 Fairy.prototype.constructor = Fairy;
 
-Fairy.prototype.update = function() {
-	
-	if (this.x > 1000) {
-		this.game.removeEntity(this);
-	}
-	
-	if (this.x > 600 && this.state !== DEAD) {
-		this.die();
-	}
+Fairy.prototype.update = function() 
+{
 	
 	// collision
-	for (var i = 0; i < this.game.entities.length; i++) {
-		var entity = this.game.entities[i];
-		if (entity !== this && this.collide(entity))
-			console.log('Fairy colliding...');
+	this.updateStatus();
+	
+	// the troop gets the target to attack
+	if (this.isTargeting !== null)
+	{
+		// if the target is dead
+		if (this.isTargeting.state === DEAD)
+		{
+			this.isTargeting = null;
+			this.walk();
+		}
+		else if (this.state === WALK || this.state === IDLE)
+			this.attack(); // change the status from walk and idle to attack
+		else if (this.state === ATTACK && this.animation.elapsedTime > 0.7 &&
+				 this.animation.elapsedTime < 0.8 && !this.isAttacking)
+		{
+			this.isAttacking = true;
+			console.log("fairy is attacking");
+		} 
+		
+		if (this.state === ATTACK && this.isAttacking && this.animation.elapsedTime > 0.9)
+		{
+			console.log("fairy attacked");
+			this.isAttacking = false;
+			this.isTargeting.health -= this.hit;
+		}
 	}
 	
-	this.x += this.game.clockTick * this.speed;
+	// if the fairy is behind the ally
+	if (this.isBehind !== null) {
+		if (this.isBehind.state === DEAD) {
+			this.isBehind = null;
+			this.walk();
+		} else if (this.isTouching(this.isBehind)) {
+			if (this.isBehind.state === IDLE && this.state !== IDLE) {
+				this.idle();
+			} else if (this.isBehind.state === WALK && this.state !== WALK) {
+				this.walk();
+			}
+			this.speed = this.isBehind.speed;
+		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
+			this.idle();
+		}
+	}
+	
+	if (this.health <= 0 && this.state !== DEAD) {
+		this.die();
+	}
 	
 	if (this.state === DEAD && this.animation.isDone()) {
 		this.game.removeEntity(this);
 	}
 	
+	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
+}
+
+Fairy.prototype.updateStatus = function()
+{
+	for (var i = 0; i < this.game.entities.length; i++) {
+		var entity = this.game.entities[i];
+		if (entity !== this && entity.state !== DEAD) {
+			if (isEnemy(this,entity)) {
+				if (this.isTargeting === null &&
+					distanceX(this, entity) <= this.range) {
+					console.log('fairy found enemy ... ');
+					this.isTargeting = entity;
+				}
+			} else {
+				if (this.collide(entity) && 
+					this.isBehind === null) {
+						
+					console.log('fairy colliding...');
+					this.isBehind = entity;
+					if (entity.speed < this.speed) {
+						this.speed = entity.speed;
+					}	
+				}
+			}
+		}				
+	}
 }
 
 Fairy.prototype.draw = function() {
@@ -75,7 +141,7 @@ Fairy.prototype.idle = function() {
 Fairy.prototype.walk = function() {
 	this.animation = this.createAnimation(WALK, this.team, this.animations);
 	this.state = WALK;
-	this.speed = FAIRY_SPEED;
+	this.speed = this.getSpeed(this.team);
 }
 
 Fairy.prototype.attack = function() {
@@ -90,14 +156,18 @@ Fairy.prototype.die = function() {
 	this.speed = 0;
 }
 
+Fairy.prototype.isTouching = function(other) {
+	return distanceX(this, other) > 85 && distanceX(this, other) < 90;
+}
+
 Fairy.prototype.collide = function(other) {
 	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
 }
 
 Fairy.prototype.getSpeed = function(team) {
 	if (team === 0)
-		return FAIRY_SPEED;
-	else return -FAIRY_SPEED;
+		return FAIRY_SPEED_1;
+	else return -FAIRY_SPEED_2;
 }
 
 Fairy.prototype.getPosition = function(team) {
@@ -115,11 +185,11 @@ Fairy.prototype.createAnimation = function(status, team, animations) {
 		case WALK:
 			if (team === 0)
 				return new Animation(animations[FAIRY_LEFT_WALK], 149, 128, 5, 0.20, 5, true, 1);
-			else return new Animation(animations[FAIRY_RIGHT_WALK], 149, 128, 5, 0.20, 5, true, 1);
+			else return new Animation(animations[FAIRY_RIGHT_WALK], 140, 128, 4, 0.20, 4, true, 1);
 		case ATTACK:
 			if (team === 0)
-				return new Animation(animations[FAIRY_LEFT_ATTACK], 262, 128, 5, 0.20, 5, true, 1);
-			else return new Animation(animations[FAIRY_RIGHT_ATTACK], 262, 128, 5, 0.20, 5, true, 1);
+				return new Animation(animations[FAIRY_LEFT_ATTACK], 130, 128, 5, 0.20, 5, true, 1);
+			else return new Animation(animations[FAIRY_RIGHT_ATTACK], 130, 128, 5, 0.20, 5, true, 1);
 		case DEAD:
 			if (team === 0)
 				return new Animation(animations[FAIRY_LEFT_DIE], 144, 128, 5, 0.20, 5, false, 1.3);
