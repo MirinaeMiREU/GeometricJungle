@@ -17,6 +17,8 @@ function Knight(game, spritesheets, lane, team) {
 	this.health = team === 0 ? KNIGHT_HEALTH_1 : KNIGHT_HEALTH_2;
 	this.isTargeting = null;
 	this.isBehind = null;
+	this.isTargeting = null;
+	this.isAttacking = false;
 	this.ctx = game.ctx;
 	switch (lane) {
 	case 1:
@@ -87,6 +89,7 @@ Knight.prototype.update = function()
 			this.idle();
 		}
 	}
+
 	
 	if (this.health <= 0 && this.state !== DEAD) {
 		this.die();
@@ -154,7 +157,11 @@ Knight.prototype.walk = function() {
 	this.speed = this.getSpeed(this.team);
 }
 
-Knight.prototype.attack = function() {
+Knight.prototype.attack = function(y) {
+	if(this.state === WALK || this.state === IDLE) {
+		this.y = y - 30;
+	}
+	
 	this.animation = this.createAnimation(ATTACK, this.team, this.animations);
 	this.state = ATTACK;
 	this.speed = 0;
@@ -191,19 +198,19 @@ Knight.prototype.createAnimation = function(status, team, animations) {
 		case IDLE:
 			if (team === 0)
 				return new Animation(animations[KNIGHT_LEFT_IDLE], 133, 128, 7, 0.14, 7, true, 1.1);
-			else return new Animation(animations[KNIGHT_RIGHT_IDLE], 139, 128, 7, 0.14, 7, true, 1.1);
+			else return new Animation(animations[KNIGHT_RIGHT_IDLE], 140, 128, 7, 0.14, 7, true, 1.1);
 		case WALK:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_WALK], 137, 128, 7, 0.14, 7, true, 1.1);
-			else return new Animation(animations[KNIGHT_RIGHT_WALK], 142, 128, 7, 0.14, 7, true, 1.1);
+				return new Animation(animations[KNIGHT_LEFT_WALK], 137, 128, 7, 0.14, 7, true, 1);
+			else return new Animation(animations[KNIGHT_RIGHT_WALK], 143, 128, 7, 0.14, 7, true, 1);
 		case ATTACK:
 			if (team === 0)
 				return new Animation(animations[KNIGHT_LEFT_ATTACK], 124, 128, 7, 0.14, 7, true, 1.2);
 			else return new Animation(animations[KNIGHT_RIGHT_ATTACK], 147, 128, 7, 0.14, 7, true, 1.1);
 		case DEAD:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_DIE], 155, 128, 7, 0.14, 7, false, 1.3);
-			else return new Animation(animations[KNIGHT_RIGHT_DIE], 155, 128, 7, 0.14, 7, false, 1.3);
+				return new Animation(animations[KNIGHT_LEFT_DIE], 156, 128, 7, 0.14, 7, false, 1);
+			else return new Animation(animations[KNIGHT_RIGHT_DIE], 153, 128, 7, 0.14, 7, false, 1);
 		default: return null;
 	}
 }
