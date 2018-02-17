@@ -28,6 +28,7 @@ function Controller(game, manager, animArr) {
 	this.selectedLane = 0;
 	this.selectedUnit = 0;
 	this.highlight;
+	this.unitHighlight;
 	
 	/**
 	 * The mapping key
@@ -42,8 +43,10 @@ function Controller(game, manager, animArr) {
 	
 	this.init = function(ctx) {
 		this.highlight = new Highlight(game, manager.getAsset("./img/background/highlight.png"), 6); 
+		this.unitHighlight = new HighlightUnit(game, manager.getAsset("./img/background/unit.png"));
 		this.ctx = ctx;
 		game.addEntity(this.highlight);
+		game.addEntity(this.unitHighlight);
 	}
     
     /**
@@ -83,6 +86,7 @@ function Controller(game, manager, animArr) {
 				that.unitSelected = false;
 				that.laneSelected = false;
 				that.highlight.changeLane(6);
+				that.unitHighlight.changeLoc(-2);
 				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
@@ -90,12 +94,15 @@ function Controller(game, manager, animArr) {
 		if (event.code === KEY_Q) {
 			console.log("Q Down");
 			that.selectedUnit = 1;
+			that.unitHighlight.changeLoc(0);
 		} else if (event.code === KEY_W) {
 			console.log("W Down");
 			that.selectedUnit = 2;
+			that.unitHighlight.changeLoc(1);
 		} else if (event.code === KEY_E) {
 			console.log("E Down");
 			that.selectedUnit = 3;
+			that.unitHighlight.changeLoc(2);
 		} else if (event.code === KEY_R) {
 			console.log("R Down");
 			that.selectedUnit = 4;
@@ -117,6 +124,7 @@ function Controller(game, manager, animArr) {
 				that.laneSelected = false;
 				that.unitSelected = false;
 				that.highlight.changeLane(6);
+				that.unitHighlight.changeLoc(-2);
 				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
@@ -142,6 +150,20 @@ function Controller(game, manager, animArr) {
     
 	this.mouseclick = function(event) {
 		if (event.button === 0) {
+			if (event.x > 4 && event.x < 163 &&
+			    event.y > 4 && event.y < 55) {
+				if (event.x > 4 && event.x < 55) {
+					that.selectedUnit = 1;
+					that.unitHighlight.changeLoc(0);
+				} else if (event.x > 58 && event.x < 109) {
+					that.selectedUnit = 2;
+					that.unitHighlight.changeLoc(1);
+				} else if (event.x > 112 && event.x < 163) {
+					that.selectedUnit = 3;
+					that.unitHighlight.changeLoc(2);
+				}
+				that.unitSelected = true;
+			}
 			if (event.y > 145 && event.y < 545) {
 				if (event.y < 225) {
 					that.selectedLane = 1;
@@ -161,11 +183,23 @@ function Controller(game, manager, animArr) {
 				}
 				that.laneSelected = true;
 			}
+			
+			if (that.laneSelected && that.unitSelected) {
+				that.laneSelected = false;
+				that.unitSelected = false;
+				that.highlight.changeLane(6);
+				that.unitHighlight.changeLoc(-2);
+				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
+			}
 		}
 		if (event.button == 2) {
 			if (that.laneSelected) {
 				that.laneSelected = false;
 				that.highlight.changeLane(6);
+			}
+			if (that.unitSelected) {
+				that.unitSelected = false;
+				that.unitHighlight.changeLoc(-2);
 			}
 		}
 		/*
