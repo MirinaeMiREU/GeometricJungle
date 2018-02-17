@@ -48,7 +48,7 @@ Knight.prototype.update = function()
 	// collision
 	this.updateStatus();
 	
-	// the troop gets the target to attack
+	// Is this object attacking?
 	if (this.isTargeting !== null) {
 		if (this.isTargeting.state === DEAD) {
 			this.isTargeting = null;
@@ -68,7 +68,7 @@ Knight.prototype.update = function()
 		}
 	}
 	
-	// if the knight is behind the ally
+	// Is this object behind an ally?
 	if (this.isBehind !== null) {
 		if (this.isBehind.state === DEAD) {
 			this.isBehind = null;
@@ -80,6 +80,8 @@ Knight.prototype.update = function()
 				this.walk();
 			}
 			this.speed = this.isBehind.speed;
+		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
+			this.idle();
 		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
 			this.idle();
 		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
@@ -181,6 +183,10 @@ Knight.prototype.isTouching = function(other) {
 }
 
 Knight.prototype.collide = function(other) {
+	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
+}
+
+Knight.prototype.onTop = function(other) {
 	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
 }
 

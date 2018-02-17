@@ -47,7 +47,7 @@ Fairy.prototype.update = function()
 	// collision
 	this.updateStatus();
 	
-	// the troop gets the target to attack
+	// Is this object attacking?
 	if (this.isTargeting !== null)
 	{
 		// if the target is dead
@@ -73,7 +73,7 @@ Fairy.prototype.update = function()
 		}
 	}
 	
-	// if the fairy is behind the ally
+	// Is this object behind an ally?
 	if (this.isBehind !== null) {
 		if (this.isBehind.state === DEAD) {
 			this.isBehind = null;
@@ -85,6 +85,8 @@ Fairy.prototype.update = function()
 				this.walk();
 			}
 			this.speed = this.isBehind.speed;
+		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
+			this.idle();
 		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
 			this.idle();
 		}
@@ -173,6 +175,10 @@ Fairy.prototype.isTouching = function(other) {
 }
 
 Fairy.prototype.collide = function(other) {
+	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
+}
+
+Fairy.prototype.onTop = function(other) {
 	return distanceX(this, other) > 0 && distanceX(this, other) < 90;
 }
 
