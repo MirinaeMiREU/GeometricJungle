@@ -9,6 +9,7 @@ function Fairy(game, spritesheets, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
 	this.animation = this.createAnimation(WALK, team, spritesheets);
+	this.magicstar = this.createMagicStar(      team, spritesheets);
 	this.speed = this.getSpeed(team);
 	this.state = WALK;
 	this.lane = lane;
@@ -129,7 +130,18 @@ Fairy.prototype.updateStatus = function()
 
 Fairy.prototype.draw = function() {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+	this.drawBar();
     Entity.prototype.draw.call(this);
+}
+
+Fairy.prototype.drawBar = function()
+{
+	var max = this.team === 0 ? FAIRY_HEALTH_1 : FAIRY_HEALTH_2;
+	var current = getPercentBar(this.health, max, BAR_SIZE);
+	this.ctx.fillStyle = "green";
+	this.ctx.fillRect(this.x, this.y + 130, current, 5);
+	this.ctx.fillStyle = "red";
+	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
 }
 
 Fairy.prototype.idle = function() {
@@ -196,4 +208,11 @@ Fairy.prototype.createAnimation = function(status, team, animations) {
 			else return new Animation(animations[FAIRY_RIGHT_DIE], 144, 128, 5, 0.20, 5, false, 1.3);
 		default: return null;
 	}
+}
+
+Fairy.prototype.createMagicStar = function(team, animations)
+{
+	if (team === 0)
+		return new Animation(animations[FAIRY_LEFT_MAGIC_STAR], 144, 128, 5, 0.3, 1, true, 1);
+	else return new Animation(animations[FAIRY_RIGHT_MAGIC_STAR], 144, 128, 5, 0.3, 1, true, 1);
 }

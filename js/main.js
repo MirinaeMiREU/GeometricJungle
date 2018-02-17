@@ -56,6 +56,13 @@ AM.queueDownload("./img/knight/2/ATTACK.png");
 AM.queueDownload("./img/knight/2/IDLE.png");
 AM.queueDownload("./img/knight/2/DIE.png");
 
+AM.queueDownload("./img/projectile/elf1.png");
+AM.queueDownload("./img/projectile/elf2.png");
+AM.queueDownload("./img/projectile/fairy1.png");
+AM.queueDownload("./img/projectile/fairy2.png");
+AM.queueDownload("./img/projectile/wizard1.png");
+AM.queueDownload("./img/projectile/wizard2.png");
+
 AM.downloadAll(function () {
 	var animArr = [];
 	
@@ -64,10 +71,10 @@ AM.downloadAll(function () {
 	animArr[ELF_LEFT_ATTACK] = AM.getAsset("./img/elf/1/ATTACK.png");
 	animArr[ELF_LEFT_DIE] = AM.getAsset("./img/elf/1/DIE.png");
 	
-	animArr[ELF_RIGHT_IDLE] = AM.getAsset("./img/elf/2/IDLE1.png"); // TODO need to work on sprite
+	animArr[ELF_RIGHT_IDLE] = AM.getAsset("./img/elf/2/IDLE1.png");
 	animArr[ELF_RIGHT_WALK] = AM.getAsset("./img/elf/2/WALK.png");
-	animArr[ELF_RIGHT_ATTACK] = AM.getAsset("./img/elf/2/ATTACK.png"); // TODO need to work on sprite
-	animArr[ELF_RIGHT_DIE] = AM.getAsset("./img/elf/2/DIE2.png"); // TODO need to work on sprite
+	animArr[ELF_RIGHT_ATTACK] = AM.getAsset("./img/elf/2/ATTACK.png");
+	animArr[ELF_RIGHT_DIE] = AM.getAsset("./img/elf/2/DIE2.png");
 	
 	animArr[KNIGHT_LEFT_IDLE] = AM.getAsset("./img/knight/1/IDLE.png");
 	animArr[KNIGHT_LEFT_WALK] = AM.getAsset("./img/knight/1/WALK.png");
@@ -88,6 +95,9 @@ AM.downloadAll(function () {
 	animArr[FAIRY_RIGHT_WALK] = AM.getAsset("./img/fairy/2/WALK.png");
 	animArr[FAIRY_RIGHT_ATTACK] = AM.getAsset("./img/fairy/2/ATTACK.png");
 	animArr[FAIRY_RIGHT_DIE] = AM.getAsset("./img/fairy/2/DIE.png");
+	
+	animArr[FAIRY_LEFT_MAGIC_STAR] = AM.getAsset("./img/projectile/fairy1.png");
+	animArr[FAIRY_RIGHT_MAGIC_STAR] = AM.getAsset("./img/projectile/fairy2.png");
 	
 	/** Setting up page canvas and context. */
     var canvas = document.getElementById("gameWorld");

@@ -51,6 +51,11 @@ function flip(image, context, flipH, flipV) {
     context.restore();								    // restore the last saved state
 }
 
+function getPercentBar(currentHealth, maxHealth, barMaxSize)
+{
+	return currentHealth / maxHealth * barMaxSize;
+}
+
 function spawnUnit(game, animArr, lane, unit, team) {
 	if (unit === 1) {
 		game.addEntity(new Elf(game, animArr, lane, team));

@@ -28,6 +28,7 @@ const FAIRY_RIGHT_WALK = "fairy.right.walk";
 const FAIRY_RIGHT_ATTACK = "fairy.right.attack";
 const FAIRY_RIGHT_DIE = "fairy.right.die";
 
+const BAR_SIZE = 80;
 const LANE_1 = 55;
 const LANE_2 = 135;
 const LANE_3 = 215;
@@ -58,5 +59,8 @@ var FAIRY_HEALTH_1 = 100;
 var FAIRY_HEALTH_2 = 80;
 var FAIRY_HIT_DAMAGE_1 = 10;
 var FAIRY_HIT_DAMAGE_2 = 20;
-var FAIRY_RANGE_1 = 600;
-var FAIRY_RANGE_2 = 600;
+var FAIRY_RANGE_1 = 420;
+var FAIRY_RANGE_2 = 420;
+
+var FAIRY_LEFT_MAGIC_STAR = "fairy.left.magicstar";
+var FAIRY_RIGHT_MAGIC_STAR = "fairy.right.magicstar";
