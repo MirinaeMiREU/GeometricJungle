@@ -44,6 +44,31 @@ Elf.prototype.update = function() {
 	// collision
 	this.updateStatus();
 	
+	// Is this object behind an ally?
+	if (this.isBehind !== null) {
+		if (this.isBehind.state === DEAD) {
+			this.isBehind = null;
+			this.walk();
+		} else if (this.isTouching(this.isBehind)) {
+			if ((this.isBehind.state === IDLE || this.isBehind.state === ATTACK) && 
+			    this.state !== IDLE &&
+				this.isTargeting === null) { // only if not targeting anything
+				this.idle();
+			} else if (this.isBehind.state === WALK && this.state !== WALK) {
+				this.walk();
+			}
+			this.speed = this.isBehind.speed;
+		} else if (this.onTop(this.isBehind) && 
+		           this.state !== IDLE && 
+				   this.isTargeting === null) { // only if not targeting anything
+			this.idle();
+		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
+			this.idle();
+		} else if (!this.collide(this.isBehind)) {
+			this.isBehind = null;
+		}
+	}
+	
 	// Is this object attacking?
 	if (this.isTargeting !== null) {
 		if (this.isTargeting.state === DEAD) {
@@ -59,32 +84,15 @@ Elf.prototype.update = function() {
 			console.log("attacking");
 		} 
 		if (this.state === ATTACK &&
-		           this.isAttacking &&
-				   this.animation.elapsedTime > 0.9) {
+		    this.isAttacking &&
+			this.animation.elapsedTime > 0.9) {
 			console.log("attacked");
 			this.isAttacking = false;
-			this.isTargeting.health -= 1;
+			this.isTargeting.health -= this.hit;
 		}
 	}
 	
-	// Is this object behind an ally?
-	if (this.isBehind !== null) {
-		if (this.isBehind.state === DEAD) {
-			this.isBehind = null;
-			this.walk();
-		} else if (this.isTouching(this.isBehind)) {
-			if (this.isBehind.state === IDLE && this.state !== IDLE) {
-				this.idle();
-			} else if (this.isBehind.state === WALK && this.state !== WALK) {
-				this.walk();
-			}
-			this.speed = this.isBehind.speed;
-		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
-			this.idle();
-		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
-			this.idle();
-		}
-	}
+
 	
 	if (this.health <= 0 && this.state !== DEAD) {
 		this.die();
@@ -96,9 +104,6 @@ Elf.prototype.update = function() {
 	
 	this.x += this.game.clockTick * this.speed;
 	
-	if (this.state === DEAD && this.animation.isDone()) {
-		this.game.removeEntity(this);
-	}
 	Entity.prototype.update.call(this);
 }
 
@@ -109,15 +114,15 @@ Elf.prototype.updateStatus = function()
 		if (entity !== this && entity.state !== DEAD) {
 			if (isEnemy(this,entity)) {
 				if (this.isTargeting === null &&
-					distanceX(this, entity) <= this.range) {
-					console.log('knight found enemy ... ');
+					distanceAbs(this, entity) <= this.range) {
+					console.log('elf found enemy ... ');
 					this.isTargeting = entity;
 				}
 			} else {
 				if (this.collide(entity) && 
 					this.isBehind === null) {
 						
-					console.log('knight colliding...');
+					console.log('elf colliding...');
 					this.isBehind = entity;
 					if (entity.speed < this.speed) {
 						this.speed = entity.speed;

@@ -133,7 +133,7 @@ AM.downloadAll(function () {
     /** Play the background music, continuously looping. */
     var theme = AM.getMusic("./sound/combat.mp3");
     theme.loop = true;
-    theme.play();
+    //theme.play();
 	
 	/** Log to console once completed. */
     console.log("All Done!");    

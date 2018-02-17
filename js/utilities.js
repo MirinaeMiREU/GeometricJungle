@@ -25,6 +25,13 @@ function isEnemy(entity1, entity2) {
 
 function distanceX(entity1, entity2) {
 	if (entity1.z === entity2.z) {
+		return entity2.x - entity1.x;
+	}
+	return Infinity;
+}
+
+function distanceAbs(entity1, entity2) {
+	if (entity1.z === entity2.z) {
 		return Math.abs(entity2.x - entity1.x);
 	}
 	return Infinity;
