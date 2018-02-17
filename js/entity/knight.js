@@ -49,24 +49,19 @@ Knight.prototype.update = function()
 	this.updateStatus();
 	
 	// the troop gets the target to attack
-	if (this.isTargeting !== null)
-	{
-		if (this.isTargeting.state === DEAD)
-		{
+	if (this.isTargeting !== null) {
+		if (this.isTargeting.state === DEAD) {
 			this.isTargeting = null;
 			this.walk();
-		}
-		else if (this.state === WALK || this.state === IDLE)
+		} else if (this.state === WALK || this.state === IDLE) {
 			this.attack(); // change the status from walk and idle to attack
-		else if (this.state === ATTACK && this.animation.elapsedTime > 0.7 &&
-				 this.animation.elapsedTime < 0.8 && !this.isAttacking)
-		{
+		} else if (this.state === ATTACK && this.animation.elapsedTime > 0.7 &&
+				 this.animation.elapsedTime < 0.8 && !this.isAttacking) {
 			this.isAttacking = true;
 			console.log("attacking");
 		} 
 		
-		if (this.state === ATTACK && this.isAttacking && this.animation.elapsedTime > 0.9)
-		{
+		if (this.state === ATTACK && this.isAttacking && this.animation.elapsedTime > 0.9) {
 			console.log("attacked");
 			this.isAttacking = false;
 			this.isTargeting.health -= this.hit;
@@ -146,20 +141,26 @@ Knight.prototype.drawBar = function()
 }
 
 Knight.prototype.idle = function() {
+	if (this.state === ATTACK) {
+		this.y += 20;
+	}
 	this.animation = this.createAnimation(IDLE, this.team, this.animations);
 	this.state = IDLE;
 	this.speed = 0;
 }
 
 Knight.prototype.walk = function() {
+	if (this.state === ATTACK) {
+		this.y += 20;
+	}
 	this.animation = this.createAnimation(WALK, this.team, this.animations);
 	this.state = WALK;
 	this.speed = this.getSpeed(this.team);
 }
 
-Knight.prototype.attack = function(y) {
+Knight.prototype.attack = function() {
 	if(this.state === WALK || this.state === IDLE) {
-		this.y = y - 30;
+		this.y -= 20;
 	}
 	
 	this.animation = this.createAnimation(ATTACK, this.team, this.animations);
@@ -205,7 +206,7 @@ Knight.prototype.createAnimation = function(status, team, animations) {
 			else return new Animation(animations[KNIGHT_RIGHT_WALK], 143, 128, 7, 0.14, 7, true, 1);
 		case ATTACK:
 			if (team === 0)
-				return new Animation(animations[KNIGHT_LEFT_ATTACK], 124, 128, 7, 0.14, 7, true, 1.2);
+				return new Animation(animations[KNIGHT_LEFT_ATTACK], 124, 128, 7, 0.14, 7, true, 1.1);
 			else return new Animation(animations[KNIGHT_RIGHT_ATTACK], 147, 128, 7, 0.14, 7, true, 1.1);
 		case DEAD:
 			if (team === 0)
