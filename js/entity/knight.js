@@ -48,6 +48,31 @@ Knight.prototype.update = function()
 	// collision
 	this.updateStatus();
 	
+	// Is this object behind an ally?
+	if (this.isBehind !== null) {
+		if (this.isBehind.state === DEAD) {
+			this.isBehind = null;
+			this.walk();
+		} else if (this.isTouching(this.isBehind)) {
+			if ((this.isBehind.state === IDLE || this.isBehind.state === ATTACK) && 
+			    this.state !== IDLE &&
+				this.isTargeting === null) { // only if not targeting anything
+				this.idle();
+			} else if (this.isBehind.state === WALK && this.state !== WALK) {
+				this.walk();
+			}
+			this.speed = this.isBehind.speed;
+		} else if (this.onTop(this.isBehind) && 
+		           this.state !== IDLE && 
+				   this.isTargeting === null) { // only if not targeting anything
+			this.idle();
+		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
+			this.idle();
+		} else if (!this.collide(this.isBehind)) {
+			this.isBehind = null;
+		}
+	}	
+	
 	// Is this object attacking?
 	if (this.isTargeting !== null) {
 		if (this.isTargeting.state === DEAD) {
@@ -68,28 +93,6 @@ Knight.prototype.update = function()
 		}
 	}
 	
-	// Is this object behind an ally?
-	if (this.isBehind !== null) {
-		if (this.isBehind.state === DEAD) {
-			this.isBehind = null;
-			this.walk();
-		} else if (this.isTouching(this.isBehind)) {
-			if (this.isBehind.state === IDLE && this.state !== IDLE) {
-				this.idle();
-			} else if (this.isBehind.state === WALK && this.state !== WALK) {
-				this.walk();
-			}
-			this.speed = this.isBehind.speed;
-		} else if (this.onTop(this.isBehind) && this.state !== IDLE) {
-			this.idle();
-		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
-			this.idle();
-		} else if (this.isBehind.state === IDLE && this.state !== IDLE) {
-			this.idle();
-		}
-	}
-
-	
 	if (this.health <= 0 && this.state !== DEAD) {
 		this.die();
 	}
@@ -109,7 +112,7 @@ Knight.prototype.updateStatus = function()
 		if (entity !== this && entity.state !== DEAD) {
 			if (isEnemy(this,entity)) {
 				if (this.isTargeting === null &&
-					distanceX(this, entity) <= this.range) {
+					distanceAbs(entity, this) <= this.range) {
 					console.log('knight found enemy ... ');
 					this.isTargeting = entity;
 				}
