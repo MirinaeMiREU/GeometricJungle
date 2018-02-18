@@ -19,14 +19,14 @@ function () {
 })();
 
 
-function GameEngine(manager, animArr) {
+function GameEngine(manager, animArr, soundArr) {
 	this.manager = manager;
 	this.ctx = null;
     this.entities = [];
     
     this.surfaceWidth = null;
     this.surfaceHeight = null;
-    this.controller = new Controller(this, manager, animArr);
+    this.controller = new Controller(this, manager, animArr, soundArr);
     
     /**
      * The method initialize the context (canvas).

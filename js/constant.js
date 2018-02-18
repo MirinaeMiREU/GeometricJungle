@@ -1,3 +1,4 @@
+// Animation Labels
 const ELF_LEFT_IDLE = "elf.left.idle";
 const ELF_LEFT_WALK = "elf.left.walk";
 const ELF_LEFT_ATTACK = "elf.left.attack";
@@ -28,6 +29,20 @@ const FAIRY_RIGHT_WALK = "fairy.right.walk";
 const FAIRY_RIGHT_ATTACK = "fairy.right.attack";
 const FAIRY_RIGHT_DIE = "fairy.right.die";
 
+// Sound Labels
+const ELF_SOUND_DEPLOY = "elf.sound.deploy";
+const ELF_SOUND_ATTACK = "elf.sound.attack";
+const ELF_SOUND_DEAD = "elf.sound.dead";
+
+const KNIGHT_SOUND_DEPLOY = "knight.sound.deploy";
+const KNIGHT_SOUND_ATTACK = "knight.sound.attack";
+const KNIGHT_SOUND_DEAD = "knight.sound.dead";
+
+const FAIRY_SOUND_DEPLOY = "fairy.sound.deploy";
+const FAIRY_SOUND_ATTACK = "fairy.sound.attack";
+const FAIRY_SOUND_DEAD = "fairy.sound.dead";
+
+// Other Labels
 const BAR_SIZE = 80;
 const LANE_1 = 55;
 const LANE_2 = 135;
@@ -35,32 +50,33 @@ const LANE_3 = 215;
 const LANE_4 = 295;
 const LANE_5 = 375;
 
-var ELF_SPEED_1 = 50;
-var ELF_SPEED_2 = 35;
-var ELF_HEALTH_1 = 140;
-var ELF_HEALTH_2 = 160;
-var ELF_HIT_DAMAGE_1 = 30;
-var ELF_HIT_DAMAGE_2 = 100;
-var ELF_RANGE_1 = 400;
-var ELF_RANGE_2 = 100;
+// Troop Properties
+const ELF_SPEED_1 = 50;
+const ELF_SPEED_2 = 35;
+const ELF_HEALTH_1 = 140;
+const ELF_HEALTH_2 = 160;
+const ELF_HIT_DAMAGE_1 = 30;
+const ELF_HIT_DAMAGE_2 = 100;
+const ELF_RANGE_1 = 400;
+const ELF_RANGE_2 = 100;
 
-var KNIGHT_SPEED_1 = 25;
-var KNIGHT_SPEED_2 = 25;
-var KNIGHT_HEALTH_1 = 220;
-var KNIGHT_HEALTH_2 = 200;
-var KNIGHT_HIT_DAMAGE_1 = 100;
-var KNIGHT_HIT_DAMAGE_2 = 100;
-var KNIGHT_RANGE_1 = 100;
-var KNIGHT_RANGE_2 = 100;
+const KNIGHT_SPEED_1 = 25;
+const KNIGHT_SPEED_2 = 25;
+const KNIGHT_HEALTH_1 = 220;
+const KNIGHT_HEALTH_2 = 200;
+const KNIGHT_HIT_DAMAGE_1 = 100;
+const KNIGHT_HIT_DAMAGE_2 = 100;
+const KNIGHT_RANGE_1 = 100;
+const KNIGHT_RANGE_2 = 100;
 
-var FAIRY_SPEED_1 = 100;
-var FAIRY_SPEED_2 = 100;
-var FAIRY_HEALTH_1 = 100;
-var FAIRY_HEALTH_2 = 80;
-var FAIRY_HIT_DAMAGE_1 = 10;
-var FAIRY_HIT_DAMAGE_2 = 20;
-var FAIRY_RANGE_1 = 420;
-var FAIRY_RANGE_2 = 420;
+const FAIRY_SPEED_1 = 100;
+const FAIRY_SPEED_2 = 100;
+const FAIRY_HEALTH_1 = 100;
+const FAIRY_HEALTH_2 = 80;
+const FAIRY_HIT_DAMAGE_1 = 10;
+const FAIRY_HIT_DAMAGE_2 = 20;
+const FAIRY_RANGE_1 = 420;
+const FAIRY_RANGE_2 = 420;
 
-var FAIRY_LEFT_MAGIC_STAR = "fairy.left.magicstar";
-var FAIRY_RIGHT_MAGIC_STAR = "fairy.right.magicstar";
+const FAIRY_LEFT_MAGIC_STAR = "fairy.left.magicstar";
+const FAIRY_RIGHT_MAGIC_STAR = "fairy.right.magicstar";

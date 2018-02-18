@@ -19,7 +19,7 @@ var KEY_SPACE = 32;
 var LEFT = 0;
 var RIGHT = 1;
 
-function Controller(game, manager, animArr) {
+function Controller(game, manager, animArr, soundArr) {
 	this.manager = manager;
 	this.game = game;
 	this.ctx = null;
@@ -87,7 +87,7 @@ function Controller(game, manager, animArr) {
 				that.laneSelected = false;
 				that.highlight.changeLane(6);
 				that.unitHighlight.changeLoc(-2);
-				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
+				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
 		
@@ -125,7 +125,7 @@ function Controller(game, manager, animArr) {
 				that.unitSelected = false;
 				that.highlight.changeLane(6);
 				that.unitHighlight.changeLoc(-2);
-				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
+				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
 		
@@ -189,7 +189,7 @@ function Controller(game, manager, animArr) {
 				that.unitSelected = false;
 				that.highlight.changeLane(6);
 				that.unitHighlight.changeLoc(-2);
-				spawnUnit(game, animArr, that.selectedLane, that.selectedUnit, 0);
+				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
 		if (event.button == 2) {
