@@ -4,10 +4,9 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
-function Fairy(game, spritesheets, lane, team) {
+function Fairy(game, spritesheets, sounds, lane, team) {
 	this.animations = spritesheets;
-	/** Sprite coordinates must be modified if spritesheets are changed! */
-	this.animations = spritesheets;
+	this.sounds = sounds;
 	this.animation = this.createAnimation(WALK, team, spritesheets);
 	this.magicstar = this.createMagicStar(      team, spritesheets);
 	this.speed = this.getSpeed(team);
@@ -98,6 +97,7 @@ Fairy.prototype.update = function()
 		{
 			this.isAttacking = true;
 			console.log("fairy is attacking");
+			this.sounds[FAIRY_SOUND_ATTACK].play();
 		} 
 		
 		if (this.state === ATTACK && this.isAttacking && this.animation.elapsedTime > 0.9)
@@ -184,6 +184,7 @@ Fairy.prototype.attack = function() {
 
 Fairy.prototype.die = function() {
 	this.animation = this.createAnimation(DEAD, this.team, this.animations);
+	this.sounds[FAIRY_SOUND_DEAD].play();
 	this.state = DEAD;
 	this.speed = 0;
 }

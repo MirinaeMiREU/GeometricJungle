@@ -4,9 +4,10 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
-function Knight(game, spritesheets, lane, team) {
+function Knight(game, spritesheets, sounds, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
+	this.sounds = sounds;
 	this.animation = this.createAnimation(WALK, team, spritesheets);
 	this.speed = this.getSpeed(team);
 	this.state = WALK;
@@ -36,8 +37,6 @@ function Knight(game, spritesheets, lane, team) {
 	case 5:
 		Entity.call(this, game, this.getPosition(team), LANE_5, 5);
 	}
-	
-	this.game.manager.getMusic('./sound/pop.mp3').play();
 }
 
 Knight.prototype = new Entity();
@@ -94,11 +93,12 @@ Knight.prototype.update = function()
 		} else if (this.state === ATTACK && this.animation.elapsedTime > 0.7 &&
 				 this.animation.elapsedTime < 0.8 && !this.isAttacking) {
 			this.isAttacking = true;
-			console.log("attacking");
+			console.log("knight is attacking");
+			this.sounds[KNIGHT_SOUND_ATTACK].play();
 		} 
 		
 		if (this.state === ATTACK && this.isAttacking && this.animation.elapsedTime > 0.9) {
-			console.log("attacked");
+			console.log("knight attacked");
 			this.isAttacking = false;
 			this.isTargeting.health -= this.hit;
 		}
@@ -188,6 +188,7 @@ Knight.prototype.attack = function() {
 
 Knight.prototype.die = function() {
 	this.animation = this.createAnimation(DEAD, this.team, this.animations);
+	this.sounds[KNIGHT_SOUND_DEAD].play();
 	this.state = DEAD;
 	this.speed = 0;
 }

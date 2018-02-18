@@ -63,13 +63,16 @@ function getPercentBar(currentHealth, maxHealth, barMaxSize)
 	return currentHealth / maxHealth * barMaxSize;
 }
 
-function spawnUnit(game, animArr, lane, unit, team) {
+function spawnUnit(game, animArr, soundArr, lane, unit, team) {
 	if (unit === 1) {
-		game.addEntity(new Elf(game, animArr, lane, team));
+		game.addEntity(new Elf(game, animArr, soundArr, lane, team));
+		soundArr[ELF_SOUND_DEPLOY].play();
 	} else if (unit === 2) {
-		game.addEntity(new Knight(game, animArr, lane, team));
+		game.addEntity(new Knight(game, animArr, soundArr, lane, team));
+		soundArr[KNIGHT_SOUND_DEPLOY].play();
 	} else if (unit === 3) {
-		game.addEntity(new Fairy(game, animArr, lane, team));
+		game.addEntity(new Fairy(game, animArr, soundArr, lane, team));
+		soundArr[FAIRY_SOUND_DEPLOY].play();
 	} else if (unit === 4) {
 	
 	} else if (unit === 5) {
