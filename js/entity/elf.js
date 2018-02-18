@@ -4,9 +4,10 @@
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * TCSS491 - Winter 2018
  */
-function Elf(game, spritesheets, lane, team) {
+function Elf(game, spritesheets, sounds, lane, team) {
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
+	this.sounds = sounds;
 	this.animation = this.createAnimation(WALK, team, spritesheets);
 	this.speed = this.getSpeed(team);
 	this.state = WALK;
@@ -92,12 +93,13 @@ Elf.prototype.update = function() {
 				   this.animation.elapsedTime < 0.8 &&
 				   !this.isAttacking) {
 			this.isAttacking = true;
-			console.log("attacking");
+			console.log("elf is attacking");
+			this.sounds[ELF_SOUND_ATTACK].play();
 		} 
 		if (this.state === ATTACK &&
 		    this.isAttacking &&
 			this.animation.elapsedTime > 0.9) {
-			console.log("attacked");
+			console.log("elf attacked");
 			this.isAttacking = false;
 			this.isTargeting.health -= this.hit;
 		}
@@ -180,6 +182,7 @@ Elf.prototype.attack = function() {
 
 Elf.prototype.die = function() {
 	this.animation = this.createAnimation(DEAD, this.team, this.animations);
+	this.sounds[ELF_SOUND_DEAD].play();
 	this.state = DEAD;
 	this.speed = 0;
 }

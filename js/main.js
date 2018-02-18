@@ -23,6 +23,18 @@ AM.addMusic("./sound/pop.mp3");
 AM.addMusic("./sound/combat.mp3");
 AM.addMusic("./sound/pop.mp3");
 
+AM.addMusic("./sound/elf-deploy.mp3");
+AM.addMusic("./sound/elf-attack.mp3");
+AM.addMusic("./sound/elf-dead.mp3");
+
+AM.addMusic("./sound/knight-deploy.mp3");
+AM.addMusic("./sound/knight-attack.mp3");
+AM.addMusic("./sound/knight-dead.mp3");
+
+AM.addMusic("./sound/fairy-deploy.mp3");
+AM.addMusic("./sound/fairy-attack.mp3");
+AM.addMusic("./sound/fairy-dead.mp3");
+
 AM.queueDownload("./img/background/back.png");
 AM.queueDownload("./img/background/highlight.png");
 AM.queueDownload("./img/background/unit.png");
@@ -66,6 +78,19 @@ AM.queueDownload("./img/projectile/wizard2.png");
 
 AM.downloadAll(function () {
 	var animArr = [];
+	var soundArr = [];
+	
+	soundArr[ELF_SOUND_DEPLOY] = AM.getMusic("./sound/elf-deploy.mp3");
+	soundArr[ELF_SOUND_ATTACK] = AM.getMusic("./sound/elf-attack.mp3");
+	soundArr[ELF_SOUND_DEAD] = AM.getMusic("./sound/elf-dead.mp3");
+	
+	soundArr[KNIGHT_SOUND_DEPLOY] = AM.getMusic("./sound/knight-deploy.mp3");
+	soundArr[KNIGHT_SOUND_ATTACK] = AM.getMusic("./sound/knight-attack.mp3");
+	soundArr[KNIGHT_SOUND_DEAD] = AM.getMusic("./sound/knight-dead.mp3");
+	
+	soundArr[FAIRY_SOUND_DEPLOY] = AM.getMusic("./sound/fairy-deploy.mp3");
+	soundArr[FAIRY_SOUND_ATTACK] = AM.getMusic("./sound/fairy-attack.mp3");
+	soundArr[FAIRY_SOUND_DEAD] = AM.getMusic("./sound/fairy-dead.mp3");
 	
 	animArr[ELF_LEFT_IDLE] = AM.getAsset("./img/elf/1/IDLE.png");
 	animArr[ELF_LEFT_WALK] = AM.getAsset("./img/elf/1/WALK.png");
@@ -106,59 +131,59 @@ AM.downloadAll(function () {
 	ctx.fillStyle = "white";
 
 	/** Setting up game engine. */
-    var gameEngine = new GameEngine(AM, animArr);
+    var gameEngine = new GameEngine(AM, animArr, soundArr);
     gameEngine.init(ctx);
     gameEngine.start();
     
     /** Adding entities into the game.*/
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background/back.png"), 960, 540));
-    gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 0));
-    gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 1));
-    gameEngine.addEntity(new Knight(gameEngine, animArr, 1, 1));
-    gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 0));
-    gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 1));
-    gameEngine.addEntity(new Fairy(gameEngine, animArr, 3, 1));
-    gameEngine.addEntity(new Fairy(gameEngine, animArr, 5, 0));
-    gameEngine.addEntity(new Fairy(gameEngine, animArr, 5, 1));
+    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 0));
+    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 1));
+    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 1));
+    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 0));
+    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
+    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 1));
+    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 0));
+    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
     
     /** Testing the animation */
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, 1, 0));
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, 2, 0));
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, 3, 0));
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, 4, 0));
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, 5, 0));
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, 1, 1));
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, 2, 1));
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, 3, 1));
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, 4, 1));
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, 5, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 1, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 2, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 4, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 5, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 1, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 2, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 4, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 5, 1));
     
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 1, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 3, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 4, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 5, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 1, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 2, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 3, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 4, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, 5, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 3, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 4, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 5, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 3, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 4, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 5, 1));
     
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 1, 0));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 2, 0));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 3, 0));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 0));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 5, 0));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 1, 1));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 2, 1));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 3, 1));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 4, 1));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, 5, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 1, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 2, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 3, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 1, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 2, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 3, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
     
     /** Play the background music, continuously looping. */
     var theme = AM.getMusic("./sound/combat.mp3");
     theme.loop = true;
-    //theme.play();
+    theme.play();
 	
 	/** Log to console once completed. */
     console.log("All Done!");    
