@@ -86,7 +86,7 @@ AM.downloadAll(function () {
 	
 	soundArr[KNIGHT_SOUND_DEPLOY] = AM.getMusic("./sound/knight-deploy.mp3");
 	soundArr[KNIGHT_SOUND_ATTACK] = AM.getMusic("./sound/knight-attack.mp3");
-	soundArr[KNIGHT_SOUND_DEAD] = AM.getMusic("./sound/knight-dead.mp3");
+	soundArr[KNIGHT_SOUND_DEAD] = AM.getMusic("./sound/knight_dead.wav");
 	
 	soundArr[FAIRY_SOUND_DEPLOY] = AM.getMusic("./sound/fairy-deploy.mp3");
 	soundArr[FAIRY_SOUND_ATTACK] = AM.getMusic("./sound/fairy-attack.mp3");
