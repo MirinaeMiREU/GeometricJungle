@@ -2,6 +2,7 @@
  * The Knight class. Represents the Knight character.
  * 
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * Based on code created by Seth Ladd and edited for use by Chris Marriott.
  * TCSS491 - Winter 2018
  */
 function Knight(game, spritesheets, sounds, lane, team) {

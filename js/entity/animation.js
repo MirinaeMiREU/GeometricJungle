@@ -1,7 +1,8 @@
 /** 
- * The Animation class. This class manages displaying sprites and animating them.
+ * This file manages displaying sprites and animating them.
  * 
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * Based on code created by Seth Ladd and edited for use by Chris Marriott.
  * TCSS491 - Winter 2018
  */
 function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale) {

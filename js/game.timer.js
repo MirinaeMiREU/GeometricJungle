@@ -1,7 +1,8 @@
 /** 
- * The Timer.js file. This class manages the running time of the canvas.
+ * This file represents a basic game timer and manages the running time of the canvas.
  * 
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * Based on code created by Seth Ladd and edited for use by Chris Marriott.
  * TCSS491 - Winter 2018
  */
 function Timer() {

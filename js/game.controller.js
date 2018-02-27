@@ -1,7 +1,8 @@
 /** 
- * The Controller class. This class manages keyboard input.
+ * This file manages keyboard input.
  * 
- * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford 
+ * Based on code created by Seth Ladd and edited for use by Chris Marriott.
  * TCSS491 - Winter 2018
  */
 

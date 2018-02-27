@@ -1,12 +1,13 @@
 /** 
- * The Main.js file. Serves as the main executable code for our game and
- * utilizes all assets, game engine, and asset manager.
+ * This file initializes our game's asset manager and queues all art and sound assets into the game.
+ * Afterwards, entities may be added into the game manually.
  * 
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * Based on code created by Seth Ladd and edited for use by Chris Marriott.
  * TCSS491 - Winter 2018
  */
 
-// Global variables
+/** Global variables. */
 var IDLE = 0;
 var WALK = 1;
 var ATTACK = 2;

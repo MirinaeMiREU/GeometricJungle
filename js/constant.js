@@ -1,4 +1,11 @@
-// Animation Labels
+/** 
+ * This file contains many constants used in our game
+ * 
+ * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * TCSS491 - Winter 2018
+ */
+
+/** ----------- ANIMATIONS -----------------  */
 const ELF_LEFT_IDLE = "elf.left.idle";
 const ELF_LEFT_WALK = "elf.left.walk";
 const ELF_LEFT_ATTACK = "elf.left.attack";
@@ -29,7 +36,7 @@ const FAIRY_RIGHT_WALK = "fairy.right.walk";
 const FAIRY_RIGHT_ATTACK = "fairy.right.attack";
 const FAIRY_RIGHT_DIE = "fairy.right.die";
 
-// Sound Labels
+/** ----------- SOUND -----------------  */
 const ELF_SOUND_DEPLOY = "elf.sound.deploy";
 const ELF_SOUND_ATTACK = "elf.sound.attack";
 const ELF_SOUND_DEAD = "elf.sound.dead";
@@ -42,15 +49,7 @@ const FAIRY_SOUND_DEPLOY = "fairy.sound.deploy";
 const FAIRY_SOUND_ATTACK = "fairy.sound.attack";
 const FAIRY_SOUND_DEAD = "fairy.sound.dead";
 
-// Other Labels
-const BAR_SIZE = 80;
-const LANE_1 = 55;
-const LANE_2 = 135;
-const LANE_3 = 215;
-const LANE_4 = 295;
-const LANE_5 = 375;
-
-// Troop Properties
+/** ----------- UNIT PROPERTIES -----------------  */
 const ELF_SPEED_1 = 50;
 const ELF_SPEED_2 = 35;
 const ELF_HEALTH_1 = 140;
@@ -80,3 +79,11 @@ const FAIRY_RANGE_2 = 420;
 
 const FAIRY_LEFT_MAGIC_STAR = "fairy.left.magicstar";
 const FAIRY_RIGHT_MAGIC_STAR = "fairy.right.magicstar";
+
+/** ----------- OTHER -----------------  */
+const BAR_SIZE = 80;
+const LANE_1 = 55;
+const LANE_2 = 135;
+const LANE_3 = 215;
+const LANE_4 = 295;
+const LANE_5 = 375;
