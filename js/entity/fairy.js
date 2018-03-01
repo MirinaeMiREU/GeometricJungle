@@ -19,6 +19,7 @@ function Fairy(game, spritesheets, sounds, lane, team) {
 	this.health = team === 0 ? FAIRY_HEALTH_1 : FAIRY_HEALTH_2;
 	this.isTargeting = null;
 	this.isBehind = null;
+	this.isAlive = true;
 	this.ctx = game.ctx;
 	switch (lane) {
 		case 1:
@@ -116,9 +117,10 @@ Fairy.prototype.update = function()
 	}
 	
 	if (this.state === DEAD && this.animation.isDone()) {
-		this.game.removeEntity(this);
+		//this.game.removeEntity(this);
+		this.idle();
+		this.health = this.team === 0 ? FAIRY_HEALTH_1 : FAIRY_HEALTH_2;
 	}
-	
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
 }
@@ -189,7 +191,6 @@ Fairy.prototype.die = function() {
 	this.state = DEAD;
 	this.speed = 0;
 }
-
 Fairy.prototype.isTouching = function(other) {
 	return distanceX(this, other) > 85 && distanceX(this, other) < 90;
 }

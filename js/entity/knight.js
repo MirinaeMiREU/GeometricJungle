@@ -111,8 +111,10 @@ Knight.prototype.update = function()
 	
 	if (this.state === DEAD && this.animation.isDone()) {
 		this.game.removeEntity(this);
+		Entity.prototype.draw.call(this);
+		
 	}
-	
+
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
 }
