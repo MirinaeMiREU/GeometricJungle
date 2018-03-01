@@ -36,6 +36,26 @@ const FAIRY_RIGHT_WALK = "fairy.right.walk";
 const FAIRY_RIGHT_ATTACK = "fairy.right.attack";
 const FAIRY_RIGHT_DIE = "fairy.right.die";
 
+const ORC_LEFT_IDLE = "orc.left.idle";
+const ORC_LEFT_WALK = "orc.left.walk";
+const ORC_LEFT_ATTACK = "orc.left.attack";
+const ORC_LEFT_DIE = "orc.left.die";
+
+const ORC_RIGHT_IDLE = "orc.right.idle";
+const ORC_RIGHT_WALK = "orc.right.walk";
+const ORC_RIGHT_ATTACK = "orc.right.attack";
+const ORC_RIGHT_DIE = "orc.right.die";
+
+const DRAGON_LEFT_IDLE = "dragon.left.idle";
+const DRAGON_LEFT_WALK = "dragon.left.walk";
+const DRAGON_LEFT_ATTACK = "dragon.left.attack";
+const DRAGON_LEFT_DIE = "dragon.left.die";
+
+const DRAGON_RIGHT_IDLE = "dragon.right.idle";
+const DRAGON_RIGHT_WALK = "dragon.right.walk";
+const DRAGON_RIGHT_ATTACK = "dragon.right.attack";
+const DRAGON_RIGHT_DIE = "dragon.right.die";
+
 /** ----------- SOUND -----------------  */
 const ELF_SOUND_DEPLOY = "elf.sound.deploy";
 const ELF_SOUND_ATTACK = "elf.sound.attack";
@@ -48,6 +68,14 @@ const KNIGHT_SOUND_DEAD = "knight.sound.dead";
 const FAIRY_SOUND_DEPLOY = "fairy.sound.deploy";
 const FAIRY_SOUND_ATTACK = "fairy.sound.attack";
 const FAIRY_SOUND_DEAD = "fairy.sound.dead";
+
+const ORC_SOUND_DEPLOY = "orc.sound.deploy";
+const ORC_SOUND_ATTACK = "orc.sound.attack";
+const ORC_SOUND_DEAD = "orc.sound.dead";
+
+const DRAGON_SOUND_DEPLOY = "dragon.sound.deploy";
+const DRAGON_SOUND_ATTACK = "dragon.sound.attack";
+const DRAGON_SOUND_DEAD = "dragon.sound.dead";
 
 /** ----------- UNIT PROPERTIES -----------------  */
 const ELF_SPEED_1 = 50;
@@ -76,6 +104,24 @@ const FAIRY_HIT_DAMAGE_1 = 10;
 const FAIRY_HIT_DAMAGE_2 = 20;
 const FAIRY_RANGE_1 = 420;
 const FAIRY_RANGE_2 = 420;
+
+const ORC_SPEED_1 = 25;
+const ORC_SPEED_2 = 25;
+const ORC_HEALTH_1 = 220;
+const ORC_HEALTH_2 = 200;
+const ORC_HIT_DAMAGE_1 = 100;
+const ORC_HIT_DAMAGE_2 = 100;
+const ORC_RANGE_1 = 100;
+const ORC_RANGE_2 = 100;
+
+const DRAGON_SPEED_1 = 50;
+const DRAGON_SPEED_2 = 35;
+const DRAGON_HEALTH_1 = 140;
+const DRAGON_HEALTH_2 = 160;
+const DRAGON_HIT_DAMAGE_1 = 30;
+const DRAGON_HIT_DAMAGE_2 = 100;
+const DRAGON_RANGE_1 = 400;
+const DRAGON_RANGE_2 = 100;
 
 const FAIRY_LEFT_MAGIC_STAR = "fairy.left.magicstar";
 const FAIRY_RIGHT_MAGIC_STAR = "fairy.right.magicstar";

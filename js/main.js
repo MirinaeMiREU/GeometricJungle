@@ -17,25 +17,38 @@ var DEAD = 3;
 var AM = new AssetManager();
 
 /** Queueing download of all sound assets. */
-AM.addMusic("./sound/combat.mp3");
-AM.addMusic("./sound/pop.mp3");
+AM.addMusic("./sound/elf/elf-deploy.mp3");
+AM.addMusic("./sound/elf/elf-attack.mp3");
+AM.addMusic("./sound/elf/elf-dead.mp3");
+
+AM.addMusic("./sound/knight/knight-deploy.mp3");
+AM.addMusic("./sound/knight/knight-attack.mp3");
+AM.addMusic("./sound/knight/knight-dead.mp3");
+
+AM.addMusic("./sound/fairy/fairy-deploy.mp3");
+AM.addMusic("./sound/fairy/fairy-attack.mp3");
+AM.addMusic("./sound/fairy/fairy-dead.mp3");
+
+AM.addMusic("./sound/orc/orc-deploy.mp3");
+AM.addMusic("./sound/orc/orc-attack.mp3");
+AM.addMusic("./sound/orc/orc-dead.mp3");
+
+AM.addMusic("./sound/dragon/dragon-deploy.mp3");
+AM.addMusic("./sound/dragon/dragon-attack.mp3");
+AM.addMusic("./sound/dragon/dragon-dead.mp3");
+
+AM.addMusic("./sound/menu/achievement.mp3");
+AM.addMusic("./sound/menu/combat.mp3");
+AM.addMusic("./sound/menu/error.mp3");
+AM.addMusic("./sound/menu/achievement.mp3");
+AM.addMusic("./sound/menu/menu_music.mp3");
+AM.addMusic("./sound/menu/music.mp3");
+AM.addMusic("./sound/menu/navsounds.mp3");
+AM.addMusic("./sound/menu/pop.mp3");
+AM.addMusic("./sound/menu/success.mp3");
+AM.addMusic("./sound/menu/you_lose_music.mp3");
 
 /** Queueing download of all art assets. */
-AM.addMusic("./sound/combat.mp3");
-AM.addMusic("./sound/pop.mp3");
-
-AM.addMusic("./sound/elf-deploy.mp3");
-AM.addMusic("./sound/elf-attack.mp3");
-AM.addMusic("./sound/elf-dead.mp3");
-
-AM.addMusic("./sound/knight-deploy.mp3");
-AM.addMusic("./sound/knight-attack.mp3");
-AM.addMusic("./sound/knight-dead.mp3");
-
-AM.addMusic("./sound/fairy-deploy.mp3");
-AM.addMusic("./sound/fairy-attack.mp3");
-AM.addMusic("./sound/fairy-dead.mp3");
-
 AM.queueDownload("./img/background/back.png");
 AM.queueDownload("./img/background/highlight.png");
 AM.queueDownload("./img/background/unit.png");
@@ -81,17 +94,25 @@ AM.downloadAll(function () {
 	var animArr = [];
 	var soundArr = [];
 	
-	soundArr[ELF_SOUND_DEPLOY] = AM.getMusic("./sound/elf-deploy.mp3");
-	soundArr[ELF_SOUND_ATTACK] = AM.getMusic("./sound/elf-attack.mp3");
-	soundArr[ELF_SOUND_DEAD] = AM.getMusic("./sound/elf-dead.mp3");
+	soundArr[ELF_SOUND_DEPLOY] = AM.getMusic("./sound/elf/elf-deploy.mp3");
+	soundArr[ELF_SOUND_ATTACK] = AM.getMusic("./sound/elf/elf-attack.mp3");
+	soundArr[ELF_SOUND_DEAD] = AM.getMusic("./sound/elf/elf-dead.mp3");
 	
-	soundArr[KNIGHT_SOUND_DEPLOY] = AM.getMusic("./sound/knight-deploy.mp3");
-	soundArr[KNIGHT_SOUND_ATTACK] = AM.getMusic("./sound/knight-attack.mp3");
-	soundArr[KNIGHT_SOUND_DEAD] = AM.getMusic("./sound/knight_dead.wav");
+	soundArr[KNIGHT_SOUND_DEPLOY] = AM.getMusic("./sound/knight/knight-deploy.mp3");
+	soundArr[KNIGHT_SOUND_ATTACK] = AM.getMusic("./sound/knight/knight-attack.mp3");
+	soundArr[KNIGHT_SOUND_DEAD] = AM.getMusic("./sound/knight/knight-dead.mp3");
 	
-	soundArr[FAIRY_SOUND_DEPLOY] = AM.getMusic("./sound/fairy-deploy.mp3");
-	soundArr[FAIRY_SOUND_ATTACK] = AM.getMusic("./sound/fairy-attack.mp3");
-	soundArr[FAIRY_SOUND_DEAD] = AM.getMusic("./sound/fairy-dead.mp3");
+	soundArr[FAIRY_SOUND_DEPLOY] = AM.getMusic("./sound/fairy/fairy-deploy.mp3");
+	soundArr[FAIRY_SOUND_ATTACK] = AM.getMusic("./sound/fairy/fairy-attack.mp3");
+	soundArr[FAIRY_SOUND_DEAD] = AM.getMusic("./sound/fairy/fairy-dead.mp3");
+	
+	soundArr[ORC_SOUND_DEPLOY] = AM.getMusic("./sound/orc/orc-deploy.mp3");
+	soundArr[ORC_SOUND_ATTACK] = AM.getMusic("./sound/orc/orc-attack.mp3");
+	soundArr[ORC_SOUND_DEAD] = AM.getMusic("./sound/orc/orc-dead.mp3");
+	
+	soundArr[DRAGON_SOUND_DEPLOY] = AM.getMusic("./sound/dragon/dragon-deploy.mp3");
+	soundArr[DRAGON_SOUND_ATTACK] = AM.getMusic("./sound/dragon/dragon-attack.mp3");
+	soundArr[DRAGON_SOUND_DEAD] = AM.getMusic("./sound/dragon/dragon-dead.mp3");
 	
 	animArr[ELF_LEFT_IDLE] = AM.getAsset("./img/elf/1/IDLE.png");
 	animArr[ELF_LEFT_WALK] = AM.getAsset("./img/elf/1/WALK.png");
@@ -182,7 +203,7 @@ AM.downloadAll(function () {
 //    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
     
     /** Play the background music, continuously looping. */
-    var theme = AM.getMusic("./sound/combat.mp3");
+    var theme = AM.getMusic("./sound/menu/music.mp3");
     theme.loop = true;
     theme.play();
 	
