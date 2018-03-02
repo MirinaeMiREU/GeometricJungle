@@ -105,11 +105,11 @@ function spawnUnit(game, animArr, soundArr, lane, unit, team) {
 		game.addEntity(new Fairy(game, animArr, soundArr, lane, team));
 		soundArr[FAIRY_SOUND_DEPLOY].play();
 	} else if (unit === 4) {
-		game.addEntity(new Orc(game, animArr, soundArr, lane, team));
-		soundArr[ORC_SOUND_DEPLOY].play();
+		//game.addEntity(new Orc(game, animArr, soundArr, lane, team));
+		soundArr[MENU_ERROR].play();
 	} else if (unit === 5) {
-		game.addEntity(new Dragon(game, animArr, soundArr, lane, team));
-		soundArr[DRAGON_SOUND_DEPLOY].play();
+		//game.addEntity(new Dragon(game, animArr, soundArr, lane, team));
+		soundArr[MENU_ERROR].play();
 	}
 }
 

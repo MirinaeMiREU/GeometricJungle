@@ -6,7 +6,7 @@
  * TCSS491 - Winter 2018
  */
 function HighlightUnit(game, spritesheet) {
-	this.loc = -2;
+	this.loc = 0;
     this.spritesheet = spritesheet;
     this.game = game;
     this.ctx = game.ctx;
@@ -14,7 +14,7 @@ function HighlightUnit(game, spritesheet) {
 	
 	Entity.call(this, game, 0, 0, 0);
 	this.draw = function () {
-		this.ctx.drawImage(this.spritesheet, this.loc * 54 + 6, 6, 48, 48);
+		this.ctx.drawImage(this.spritesheet, this.loc * 54 + 245, 140, 48, 48);
 	};
 	
 	this.changeLoc = function(loc) {

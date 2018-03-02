@@ -43,7 +43,7 @@ function Controller(game, manager, animArr, soundArr) {
     var that = this;
 	
 	this.init = function(ctx) {
-		this.highlight = new Highlight(game, manager.getAsset("./img/background/highlight.png"), 6); 
+		this.highlight = new Highlight(game, manager.getAsset("./img/background/highlight.png"), 1); 
 		this.unitHighlight = new HighlightUnit(game, manager.getAsset("./img/background/unit.png"));
 		this.ctx = ctx;
 		game.addEntity(this.highlight);
@@ -54,11 +54,13 @@ function Controller(game, manager, animArr, soundArr) {
      * The method hooks the key
      * pressed with the mapping key
      */
-    this.keydown = function(event) {
-	
+    this.keydown = function(event) {	
+    	soundArr[MENU_NAVSOUNDS].play();
+    	
 		if (event.code === KEY_1) {
 			that.selectedLane = 1;
 			that.highlight.changeLane(1);
+			
 		} else if (event.code === KEY_2) {
 			that.selectedLane = 2;
 			that.highlight.changeLane(2);
@@ -86,8 +88,8 @@ function Controller(game, manager, animArr, soundArr) {
 			if (that.unitSelected) {
 				that.unitSelected = false;
 				that.laneSelected = false;
-				that.highlight.changeLane(6);
-				that.unitHighlight.changeLoc(-2);
+				that.highlight.changeLane(1);
+				that.unitHighlight.changeLoc(0);
 				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
@@ -124,13 +126,11 @@ function Controller(game, manager, animArr, soundArr) {
 			if (that.laneSelected) {
 				that.laneSelected = false;
 				that.unitSelected = false;
-				that.highlight.changeLane(6);
-				that.unitHighlight.changeLoc(-2);
+				that.highlight.changeLane(1);
+				that.unitHighlight.changeLoc(0);
 				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
-		
-
 		
         that.keymap[event.keyCode] = true;
 		
@@ -147,38 +147,40 @@ function Controller(game, manager, animArr, soundArr) {
         that.keymap[event.keyCode] = false;
         event.preventDefault();
     }
-	
     
-	this.mouseclick = function(event) {
+	this.mouseclick = function(event) {	
+		soundArr[MENU_NAVSOUNDS].play();
+		
 		if (event.button === 0) {
-			if (event.x > 4 && event.x < 163 &&
-			    event.y > 4 && event.y < 55) {
-				if (event.x > 4 && event.x < 55) {
+			if (event.x > 246 && event.x < 405 &&
+			    event.y > 140 && event.y < 190) {
+				if (event.x > 245 && event.x < 295) {
 					that.selectedUnit = 1;
 					that.unitHighlight.changeLoc(0);
-				} else if (event.x > 58 && event.x < 109) {
+				} else if (event.x > 300 && event.x < 350) {
 					that.selectedUnit = 2;
 					that.unitHighlight.changeLoc(1);
-				} else if (event.x > 112 && event.x < 163) {
+				} else if (event.x > 355 && event.x < 405) {
 					that.selectedUnit = 3;
 					that.unitHighlight.changeLoc(2);
 				}
 				that.unitSelected = true;
 			}
-			if (event.y > 145 && event.y < 545) {
-				if (event.y < 225) {
+			
+			if (event.x > 240 && event.x < 1200) {
+				if (event.y < 355) {
 					that.selectedLane = 1;
 					that.highlight.changeLane(1);
-				} else if (event.y < 305) {
+				} else if (event.y < 435) {
 					that.selectedLane = 2;
 					that.highlight.changeLane(2);
-				} else if (event.y < 385) {
+				} else if (event.y < 515) {
 					that.selectedLane = 3;
 					that.highlight.changeLane(3);
-				} else if (event.y < 465) {
+				} else if (event.y < 595) {
 					that.selectedLane = 4;
 					that.highlight.changeLane(4);  
-				} else {
+				} else if (event.y < 675) {
 					that.selectedLane = 5;
 					that.highlight.changeLane(5); 
 				}
@@ -188,19 +190,19 @@ function Controller(game, manager, animArr, soundArr) {
 			if (that.laneSelected && that.unitSelected) {
 				that.laneSelected = false;
 				that.unitSelected = false;
-				that.highlight.changeLane(6);
-				that.unitHighlight.changeLoc(-2);
+				that.highlight.changeLane(1);
+				that.unitHighlight.changeLoc(0);
 				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
 		if (event.button == 2) {
 			if (that.laneSelected) {
 				that.laneSelected = false;
-				that.highlight.changeLane(6);
+				that.highlight.changeLane(1);
 			}
 			if (that.unitSelected) {
 				that.unitSelected = false;
-				that.unitHighlight.changeLoc(-2);
+				that.unitHighlight.changeLoc(0);
 			}
 		}
 		/*
@@ -223,8 +225,7 @@ function Controller(game, manager, animArr, soundArr) {
 			that.laneSelected = false;
 		}
 		*/
-		if (event.y < 545 && event.x < 960)
-			event.preventDefault();
+
 	}
 	
     // strictly hook event listener to the methods

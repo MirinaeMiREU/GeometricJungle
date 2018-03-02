@@ -77,6 +77,14 @@ const DRAGON_SOUND_DEPLOY = "dragon.sound.deploy";
 const DRAGON_SOUND_ATTACK = "dragon.sound.attack";
 const DRAGON_SOUND_DEAD = "dragon.sound.dead";
 
+const MENU_ERROR = "menu.error";
+const MENU_ACHIEVEMENT = "menu.achievement";
+const MENU_BGMUSIC = "menu.bgmusic";
+const MENU_MUSIC = "menu.music";
+const MENU_NAVSOUNDS = "menu.navsounds";
+const MENU_SUCCESS = "menu.success";
+const MENU_YOU_LOSE_MUSIC = "menu.youlosemusic";
+
 /** ----------- UNIT PROPERTIES -----------------  */
 const ELF_SPEED_1 = 50;
 const ELF_SPEED_2 = 35;
@@ -128,8 +136,8 @@ const FAIRY_RIGHT_MAGIC_STAR = "fairy.right.magicstar";
 
 /** ----------- OTHER -----------------  */
 const BAR_SIZE = 80;
-const LANE_1 = 55;
-const LANE_2 = 135;
-const LANE_3 = 215;
-const LANE_4 = 295;
-const LANE_5 = 375;
+const LANE_1 = 210;
+const LANE_2 = 290;
+const LANE_3 = 370;
+const LANE_4 = 450;
+const LANE_5 = 530;

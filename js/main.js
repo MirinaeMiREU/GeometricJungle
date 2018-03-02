@@ -38,50 +38,49 @@ AM.addMusic("./sound/dragon/dragon-attack.mp3");
 AM.addMusic("./sound/dragon/dragon-dead.mp3");
 
 AM.addMusic("./sound/menu/achievement.mp3");
-AM.addMusic("./sound/menu/combat.mp3");
 AM.addMusic("./sound/menu/error.mp3");
 AM.addMusic("./sound/menu/achievement.mp3");
-AM.addMusic("./sound/menu/menu_music.mp3");
 AM.addMusic("./sound/menu/music.mp3");
 AM.addMusic("./sound/menu/navsounds.mp3");
-AM.addMusic("./sound/menu/pop.mp3");
 AM.addMusic("./sound/menu/success.mp3");
 AM.addMusic("./sound/menu/you_lose_music.mp3");
 
 /** Queueing download of all art assets. */
-AM.queueDownload("./img/background/back.png");
+AM.queueDownload("./img/background/forestbg.png");
+AM.queueDownload("./img/background/blizzardbg.png");
+AM.queueDownload("./img/background/volcanobg.png");
 AM.queueDownload("./img/background/highlight.png");
 AM.queueDownload("./img/background/unit.png");
 
-AM.queueDownload("./img/elf/1/IDLE.png");
-AM.queueDownload("./img/elf/1/WALK.png");
-AM.queueDownload("./img/elf/1/ATTACK.png");
-AM.queueDownload("./img/elf/1/DIE.png");
+AM.queueDownload("./img/elf/player1/IDLE.png");
+AM.queueDownload("./img/elf/player1/WALK.png");
+AM.queueDownload("./img/elf/player1/ATTACK.png");
+AM.queueDownload("./img/elf/player1/DIE.png");
 
-AM.queueDownload("./img/elf/2/IDLE.png");
-AM.queueDownload("./img/elf/2/WALK.png");
-AM.queueDownload("./img/elf/2/ATTACK.png");
-AM.queueDownload("./img/elf/2/DIE.png");
+AM.queueDownload("./img/elf/player2/IDLE.png");
+AM.queueDownload("./img/elf/player2/WALK.png");
+AM.queueDownload("./img/elf/player2/ATTACK.png");
+AM.queueDownload("./img/elf/player2/DIE.png");
 
-AM.queueDownload("./img/fairy/1/WALK.png");
-AM.queueDownload("./img/fairy/1/ATTACK.png");
-AM.queueDownload("./img/fairy/1/IDLE.png");
-AM.queueDownload("./img/fairy/1/DIE.png");
+AM.queueDownload("./img/fairy/player1/WALK.png");
+AM.queueDownload("./img/fairy/player1/ATTACK.png");
+AM.queueDownload("./img/fairy/player1/IDLE.png");
+AM.queueDownload("./img/fairy/player1/DIE.png");
 
-AM.queueDownload("./img/fairy/2/WALK.png");
-AM.queueDownload("./img/fairy/2/ATTACK.png");
-AM.queueDownload("./img/fairy/2/IDLE.png");
-AM.queueDownload("./img/fairy/2/DIE.png");
+AM.queueDownload("./img/fairy/player2/WALK.png");
+AM.queueDownload("./img/fairy/player2/ATTACK.png");
+AM.queueDownload("./img/fairy/player2/IDLE.png");
+AM.queueDownload("./img/fairy/player2/DIE.png");
 
-AM.queueDownload("./img/knight/1/WALK.png");
-AM.queueDownload("./img/knight/1/ATTACK.png");
-AM.queueDownload("./img/knight/1/IDLE.png");
-AM.queueDownload("./img/knight/1/DIE.png");
+AM.queueDownload("./img/knight/player1/WALK.png");
+AM.queueDownload("./img/knight/player1/ATTACK.png");
+AM.queueDownload("./img/knight/player1/IDLE.png");
+AM.queueDownload("./img/knight/player1/DIE.png");
 
-AM.queueDownload("./img/knight/2/WALK.png");
-AM.queueDownload("./img/knight/2/ATTACK.png");
-AM.queueDownload("./img/knight/2/IDLE.png");
-AM.queueDownload("./img/knight/2/DIE.png");
+AM.queueDownload("./img/knight/player2/WALK.png");
+AM.queueDownload("./img/knight/player2/ATTACK.png");
+AM.queueDownload("./img/knight/player2/IDLE.png");
+AM.queueDownload("./img/knight/player2/DIE.png");
 
 AM.queueDownload("./img/projectile/elf1.png");
 AM.queueDownload("./img/projectile/elf2.png");
@@ -114,41 +113,54 @@ AM.downloadAll(function () {
 	soundArr[DRAGON_SOUND_ATTACK] = AM.getMusic("./sound/dragon/dragon-attack.mp3");
 	soundArr[DRAGON_SOUND_DEAD] = AM.getMusic("./sound/dragon/dragon-dead.mp3");
 	
-	animArr[ELF_LEFT_IDLE] = AM.getAsset("./img/elf/1/IDLE.png");
-	animArr[ELF_LEFT_WALK] = AM.getAsset("./img/elf/1/WALK.png");
-	animArr[ELF_LEFT_ATTACK] = AM.getAsset("./img/elf/1/ATTACK.png");
-	animArr[ELF_LEFT_DIE] = AM.getAsset("./img/elf/1/DIE.png");
+	soundArr[MENU_ERROR] = AM.getMusic("./sound/menu/error.mp3");
+	soundArr[MENU_ACHIEVEMENT] = AM.getMusic("./sound/menu/achievement.mp3");
+	soundArr[MENU_MUSIC] = AM.getMusic("./sound/menu/music.mp3");
+	soundArr[MENU_NAVSOUNDS] = AM.getMusic("./sound/menu/navsounds.mp3");
+	soundArr[MENU_SUCCESS] = AM.getMusic("./sound/menu/success.mp3");
+	soundArr[MENU_YOU_LOSE_MUSIC] = AM.getMusic("./sound/menu/you_lose_music.mp3");
 	
-	animArr[ELF_RIGHT_IDLE] = AM.getAsset("./img/elf/2/IDLE.png");
-	animArr[ELF_RIGHT_WALK] = AM.getAsset("./img/elf/2/WALK.png");
-	animArr[ELF_RIGHT_ATTACK] = AM.getAsset("./img/elf/2/ATTACK.png");
-	animArr[ELF_RIGHT_DIE] = AM.getAsset("./img/elf/2/DIE.png");
+	animArr[ELF_LEFT_IDLE] = AM.getAsset("./img/elf/player1/IDLE.png");
+	animArr[ELF_LEFT_WALK] = AM.getAsset("./img/elf/player1/WALK.png");
+	animArr[ELF_LEFT_ATTACK] = AM.getAsset("./img/elf/player1/ATTACK.png");
+	animArr[ELF_LEFT_DIE] = AM.getAsset("./img/elf/player1/DIE.png");
 	
-	animArr[KNIGHT_LEFT_IDLE] = AM.getAsset("./img/knight/1/IDLE.png");
-	animArr[KNIGHT_LEFT_WALK] = AM.getAsset("./img/knight/1/WALK.png");
-	animArr[KNIGHT_LEFT_ATTACK] = AM.getAsset("./img/knight/1/ATTACK.png");
-	animArr[KNIGHT_LEFT_DIE] = AM.getAsset("./img/knight/1/DIE.png");
+	animArr[ELF_RIGHT_IDLE] = AM.getAsset("./img/elf/player2/IDLE.png");
+	animArr[ELF_RIGHT_WALK] = AM.getAsset("./img/elf/player2/WALK.png");
+	animArr[ELF_RIGHT_ATTACK] = AM.getAsset("./img/elf/player2/ATTACK.png");
+	animArr[ELF_RIGHT_DIE] = AM.getAsset("./img/elf/player2/DIE.png");
 	
-	animArr[KNIGHT_RIGHT_IDLE] = AM.getAsset("./img/knight/2/IDLE.png");
-	animArr[KNIGHT_RIGHT_WALK] = AM.getAsset("./img/knight/2/WALK.png");
-	animArr[KNIGHT_RIGHT_ATTACK] = AM.getAsset("./img/knight/2/ATTACK.png");
-	animArr[KNIGHT_RIGHT_DIE] = AM.getAsset("./img/knight/2/DIE.png");
+	animArr[KNIGHT_LEFT_IDLE] = AM.getAsset("./img/knight/player1/IDLE.png");
+	animArr[KNIGHT_LEFT_WALK] = AM.getAsset("./img/knight/player1/WALK.png");
+	animArr[KNIGHT_LEFT_ATTACK] = AM.getAsset("./img/knight/player1/ATTACK.png");
+	animArr[KNIGHT_LEFT_DIE] = AM.getAsset("./img/knight/player1/DIE.png");
 	
-	animArr[FAIRY_LEFT_IDLE] = AM.getAsset("./img/fairy/1/IDLE.png");
-	animArr[FAIRY_LEFT_WALK] = AM.getAsset("./img/fairy/1/WALK.png");
-	animArr[FAIRY_LEFT_ATTACK] = AM.getAsset("./img/fairy/1/ATTACK.png");
-	animArr[FAIRY_LEFT_DIE] = AM.getAsset("./img/fairy/1/DIE.png");
+	animArr[KNIGHT_RIGHT_IDLE] = AM.getAsset("./img/knight/player2/IDLE.png");
+	animArr[KNIGHT_RIGHT_WALK] = AM.getAsset("./img/knight/player2/WALK.png");
+	animArr[KNIGHT_RIGHT_ATTACK] = AM.getAsset("./img/knight/player2/ATTACK.png");
+	animArr[KNIGHT_RIGHT_DIE] = AM.getAsset("./img/knight/player2/DIE.png");
 	
-	animArr[FAIRY_RIGHT_IDLE] = AM.getAsset("./img/fairy/2/IDLE.png");
-	animArr[FAIRY_RIGHT_WALK] = AM.getAsset("./img/fairy/2/WALK.png");
-	animArr[FAIRY_RIGHT_ATTACK] = AM.getAsset("./img/fairy/2/ATTACK.png");
-	animArr[FAIRY_RIGHT_DIE] = AM.getAsset("./img/fairy/2/DIE.png");
+	animArr[FAIRY_LEFT_IDLE] = AM.getAsset("./img/fairy/player1/IDLE.png");
+	animArr[FAIRY_LEFT_WALK] = AM.getAsset("./img/fairy/player1/WALK.png");
+	animArr[FAIRY_LEFT_ATTACK] = AM.getAsset("./img/fairy/player1/ATTACK.png");
+	animArr[FAIRY_LEFT_DIE] = AM.getAsset("./img/fairy/player1/DIE.png");
+	
+	animArr[FAIRY_RIGHT_IDLE] = AM.getAsset("./img/fairy/player2/IDLE.png");
+	animArr[FAIRY_RIGHT_WALK] = AM.getAsset("./img/fairy/player2/WALK.png");
+	animArr[FAIRY_RIGHT_ATTACK] = AM.getAsset("./img/fairy/player2/ATTACK.png");
+	animArr[FAIRY_RIGHT_DIE] = AM.getAsset("./img/fairy/player2/DIE.png");
 	
 	animArr[FAIRY_LEFT_MAGIC_STAR] = AM.getAsset("./img/projectile/fairy1.png");
 	animArr[FAIRY_RIGHT_MAGIC_STAR] = AM.getAsset("./img/projectile/fairy2.png");
 	
 	/** Setting up page canvas and context. */
     var canvas = document.getElementById("gameWorld");
+    canvas.style.margin = "auto";
+    canvas.style.position = "absolute";
+    canvas.style.top = 0;
+    canvas.style.bottom = 0;
+    canvas.style.left = 0;
+    canvas.style.right = 0;
     var ctx = canvas.getContext("2d");
 	ctx.fillStyle = "white";
 
@@ -158,7 +170,7 @@ AM.downloadAll(function () {
     gameEngine.start();
     
     /** Adding entities into the game.*/
-    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background/back.png"), 960, 540));
+    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background/blizzardbg.png"), 1440, 810));
     gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 0));
     gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 1));
     gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 1));

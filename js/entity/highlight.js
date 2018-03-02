@@ -14,7 +14,7 @@ function Highlight(game, spritesheet, lane) {
 	
 	Entity.call(this, game, 0, 0, 0);
 	this.draw = function () {
-		this.ctx.drawImage(this.spritesheet,this.x, 60 + this.hlane * 80, 960, 80);
+		this.ctx.drawImage(this.spritesheet, 240 + this.x, 195 + this.hlane * 80, 960, 80);
 	};
 	
 	this.changeLane = function(lane) {
