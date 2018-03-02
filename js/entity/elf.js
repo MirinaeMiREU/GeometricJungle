@@ -157,9 +157,9 @@ Elf.prototype.drawBar = function()
 {
 	var max = this.team === 0 ? ELF_HEALTH_1 : ELF_HEALTH_2;
 	var current = getPercentBar(this.health, max, BAR_SIZE);
-	this.ctx.fillStyle = "green";
-	this.ctx.fillRect(this.x, this.y + 130, current, 5);
 	this.ctx.fillStyle = "red";
+	this.ctx.fillRect(this.x, this.y + 130, current, 5);
+	this.ctx.fillStyle = "green";
 	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
 }
 

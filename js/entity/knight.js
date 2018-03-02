@@ -111,7 +111,7 @@ Knight.prototype.update = function()
 	
 	if (this.state === DEAD && this.animation.isDone()) {
 		this.game.removeEntity(this);
-		Entity.prototype.draw.call(this);
+		
 		
 	}
 
@@ -155,9 +155,9 @@ Knight.prototype.drawBar = function()
 {
 	var max = this.team === 0 ? KNIGHT_HEALTH_1 : KNIGHT_HEALTH_2;
 	var current = getPercentBar(this.health, max, BAR_SIZE);
-	this.ctx.fillStyle = "green";
-	this.ctx.fillRect(this.x, this.y + 130, current, 5);
 	this.ctx.fillStyle = "red";
+	this.ctx.fillRect(this.x, this.y + 130, current, 5);
+	this.ctx.fillStyle = "green";
 	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
 }
 
@@ -191,7 +191,7 @@ Knight.prototype.attack = function() {
 
 Knight.prototype.die = function() {
 	this.animation = this.createAnimation(DEAD, this.team, this.animations);
-	this.sounds[KNIGHT_SOUND_DEAD].play();
+	//this.sounds[KNIGHT_SOUND_DEAD].play();
 	this.state = DEAD;
 	this.speed = 0;
 }
