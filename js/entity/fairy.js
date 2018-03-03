@@ -118,9 +118,7 @@ Fairy.prototype.update = function()
 	}
 	
 	if (this.state === DEAD && this.animation.isDone()) {
-		//this.game.removeEntity(this);
-		this.idle();
-		this.health = this.team === 0 ? FAIRY_HEALTH_1 : FAIRY_HEALTH_2;
+		this.game.removeEntity(this);
 	}
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);

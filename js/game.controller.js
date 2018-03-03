@@ -30,6 +30,7 @@ function Controller(game, manager, animArr, soundArr) {
 	this.selectedUnit = 0;
 	this.highlight;
 	this.unitHighlight;
+	this.energy = 100;
 	
 	/**
 	 * The mapping key
@@ -43,7 +44,7 @@ function Controller(game, manager, animArr, soundArr) {
     var that = this;
 	
 	this.init = function(ctx) {
-		this.highlight = new Highlight(game, manager.getAsset("./img/background/highlight.png"), 1); 
+		this.highlight = new Highlight(game, manager.getAsset("./img/background/highlight.png"), 100); 
 		this.unitHighlight = new HighlightUnit(game, manager.getAsset("./img/background/unit.png"));
 		this.ctx = ctx;
 		game.addEntity(this.highlight);
@@ -88,8 +89,8 @@ function Controller(game, manager, animArr, soundArr) {
 			if (that.unitSelected) {
 				that.unitSelected = false;
 				that.laneSelected = false;
-				that.highlight.changeLane(1);
-				that.unitHighlight.changeLoc(0);
+				that.highlight.changeLane(100);
+				that.unitHighlight.changeLoc(-100);
 				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
@@ -122,12 +123,13 @@ function Controller(game, manager, animArr, soundArr) {
 			
 			that.unitSelected = true;
 			console.log("unit selected");
+			console.log("unit selected");
 			
 			if (that.laneSelected) {
 				that.laneSelected = false;
 				that.unitSelected = false;
-				that.highlight.changeLane(1);
-				that.unitHighlight.changeLoc(0);
+				that.highlight.changeLane(100);
+				that.unitHighlight.changeLoc(-100);
 				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
@@ -152,17 +154,17 @@ function Controller(game, manager, animArr, soundArr) {
 		soundArr[MENU_NAVSOUNDS].play();
 		
 		if (event.button === 0) {
-			if (event.x > 242 && event.x < 408 &&
-			    event.y > 120 && event.y < 170) {			
-				if (event.x > 242 && event.x < 292) {	
+			if (event.x >= 245 && event.x <= 402 &&
+			    event.y >= 140 && event.y <= 190) {			
+				if (event.x >= 245 && event.x <= 294) {	
 					console.log('unit 1');
 					that.selectedUnit = 1;
 					that.unitHighlight.changeLoc(0);
-				} else if (event.x > 296 && event.x < 346) {			
+				} else if (event.x >= 299 && event.x <= 348) {			
 					console.log('unit 2');
 					that.selectedUnit = 2;
 					that.unitHighlight.changeLoc(1);
-				} else if (event.x > 350 && event.x < 400) {
+				} else if (event.x >= 353 && event.x <= 402) {
 					console.log('unit 3');
 					that.selectedUnit = 3;
 					that.unitHighlight.changeLoc(2);
@@ -170,42 +172,46 @@ function Controller(game, manager, animArr, soundArr) {
 				that.unitSelected = true;
 			}
 			
-			if (event.x > 240 && event.x < 1200) {
-				if (event.y > 255 && event.y < 335) {
+			if (event.x > 240 && event.x < 1200 &&
+				event.y >= 275 && event.y < 675) {
+				if (event.y >= 275 && event.y < 355) {
 					that.selectedLane = 1;
 					that.highlight.changeLane(1);
-				} else if (event.y > 335 && event.y < 415) {
+				} else if (event.y >= 355 && event.y < 435) {
 					that.selectedLane = 2;
 					that.highlight.changeLane(2);
-				} else if (event.y > 415 && event.y < 495) {
+				} else if (event.y >= 435 && event.y < 515) {
 					that.selectedLane = 3;
 					that.highlight.changeLane(3);
-				} else if (event.y > 495 && event.y < 575) {
+				} else if (event.y >= 515 && event.y < 595) {
 					that.selectedLane = 4;
 					that.highlight.changeLane(4);  
-				} else if (event.y > 575 && event.y < 655) {
+				} else if (event.y >= 595 && event.y < 675) {
 					that.selectedLane = 5;
 					that.highlight.changeLane(5); 
 				}
 				that.laneSelected = true;
 			}
 			
-			if (that.laneSelected && that.unitSelected) {
+			if (that.laneSelected === true && that.unitSelected) {
 				that.laneSelected = false;
 				that.unitSelected = false;
-				that.highlight.changeLane(1);
-				that.unitHighlight.changeLoc(0);
+				that.highlight.changeLane(100);
+				that.unitHighlight.changeLoc(-100);
 				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
 		if (event.button == 2) {
 			if (that.laneSelected) {
 				that.laneSelected = false;
-				that.highlight.changeLane(1);
+				that.highlight.changeLane(100);
 			}
 			if (that.unitSelected) {
 				that.unitSelected = false;
-				that.unitHighlight.changeLoc(0);
+				that.unitHighlight.changeLoc(-100);
+			}
+			if (event.y <= 810 && event.x <= 810) {
+				event.preventDefault();
 			}
 		}
 		/*

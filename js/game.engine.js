@@ -25,6 +25,7 @@ function GameEngine(manager, animArr, soundArr) {
     this.entities = [];    
     this.surfaceWidth = null;
     this.surfaceHeight = null;
+	this.energy = 100;
     this.controller = new Controller(this, manager, animArr, soundArr);
     
     /**

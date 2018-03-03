@@ -6,7 +6,7 @@
  * TCSS491 - Winter 2018
  */
 function HighlightUnit(game, spritesheet) {
-	this.loc = 0;
+	this.loc = -100;
     this.spritesheet = spritesheet;
     this.game = game;
     this.ctx = game.ctx;
