@@ -159,7 +159,9 @@ Elf.prototype.drawBar = function()
 	var current = getPercentBar(this.health, max, BAR_SIZE);
 	this.ctx.fillStyle = "red";
 	this.ctx.fillRect(this.x, this.y + 130, current, 5);
+
 	this.ctx.fillStyle = "white";
+
 	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
 }
 

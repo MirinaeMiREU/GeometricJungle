@@ -152,19 +152,18 @@ function Controller(game, manager, animArr, soundArr) {
 		soundArr[MENU_NAVSOUNDS].play();
 		
 		if (event.button === 0) {
-			if (event.x > 160 && event.x < 320 &&
-			    event.y > 96 && event.y < 148) {
-				
-				if (event.x > 160 && event.x < 215) {
-					
+			if (event.x > 242 && event.x < 408 &&
+			    event.y > 120 && event.y < 170) {			
+				if (event.x > 242 && event.x < 292) {	
+					console.log('unit 1');
 					that.selectedUnit = 1;
 					that.unitHighlight.changeLoc(0);
-				} else if (event.x > 217 && event.x < 268) {
-					
+				} else if (event.x > 296 && event.x < 346) {			
+					console.log('unit 2');
 					that.selectedUnit = 2;
 					that.unitHighlight.changeLoc(1);
-				} else if (event.x > 270 && event.x < 320) {
-					console.log("sdfsafasfdasfdas");
+				} else if (event.x > 350 && event.x < 400) {
+					console.log('unit 3');
 					that.selectedUnit = 3;
 					that.unitHighlight.changeLoc(2);
 				}
@@ -172,19 +171,19 @@ function Controller(game, manager, animArr, soundArr) {
 			}
 			
 			if (event.x > 240 && event.x < 1200) {
-				if (event.y < 355) {
+				if (event.y > 255 && event.y < 335) {
 					that.selectedLane = 1;
 					that.highlight.changeLane(1);
-				} else if (event.y < 435) {
+				} else if (event.y > 335 && event.y < 415) {
 					that.selectedLane = 2;
 					that.highlight.changeLane(2);
-				} else if (event.y < 515) {
+				} else if (event.y > 415 && event.y < 495) {
 					that.selectedLane = 3;
 					that.highlight.changeLane(3);
-				} else if (event.y < 595) {
+				} else if (event.y > 495 && event.y < 575) {
 					that.selectedLane = 4;
 					that.highlight.changeLane(4);  
-				} else if (event.y < 675) {
+				} else if (event.y > 575 && event.y < 655) {
 					that.selectedLane = 5;
 					that.highlight.changeLane(5); 
 				}

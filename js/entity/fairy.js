@@ -20,21 +20,22 @@ function Fairy(game, spritesheets, sounds, lane, team) {
 	this.isTargeting = null;
 	this.isBehind = null;
 	this.ctx = game.ctx;
+	this.position = this.getPosition(team);
 	switch (lane) {
 		case 1:
-			Entity.call(this, game, this.getPosition(team), LANE_1, 1);
+			Entity.call(this, game, this.position, LANE_1, 1);
 			break;
 		case 2:
-			Entity.call(this, game, this.getPosition(team), LANE_2, 2);
+			Entity.call(this, game, this.position, LANE_2, 2);
 			break;
 		case 3:
-			Entity.call(this, game, this.getPosition(team), LANE_3, 3);
+			Entity.call(this, game, this.position, LANE_3, 3);
 			break;
 		case 4:
-			Entity.call(this, game, this.getPosition(team), LANE_4, 4);
+			Entity.call(this, game, this.position, LANE_4, 4);
 			break;
 		case 5:
-			Entity.call(this, game, this.getPosition(team), LANE_5, 5);
+			Entity.call(this, game, this.position, LANE_5, 5);
 	}
 }
 
@@ -91,9 +92,9 @@ Fairy.prototype.update = function()
 			this.isTargeting = null;
 			this.walk();
 		}
-		else if (this.state === WALK || this.state === IDLE)
+		else if (this.state === WALK || this.state === IDLE) {
 			this.attack(); // change the status from walk and idle to attack
-		else if (this.state === ATTACK && this.animation.elapsedTime > 0.7 &&
+		}	else if (this.state === ATTACK && this.animation.elapsedTime > 0.7 &&
 				 this.animation.elapsedTime < 0.8 && !this.isAttacking)
 		{
 			this.isAttacking = true;
@@ -105,6 +106,7 @@ Fairy.prototype.update = function()
 		{
 			console.log("fairy attacked");
 			this.isAttacking = false;
+			
 			this.isTargeting.health -= this.hit;
 		}
 	}
@@ -116,9 +118,10 @@ Fairy.prototype.update = function()
 	}
 	
 	if (this.state === DEAD && this.animation.isDone()) {
-		this.game.removeEntity(this);
+		//this.game.removeEntity(this);
+		this.idle();
+		this.health = this.team === 0 ? FAIRY_HEALTH_1 : FAIRY_HEALTH_2;
 	}
-	
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
 }
@@ -161,6 +164,7 @@ Fairy.prototype.drawBar = function()
 	var current = getPercentBar(this.health, max, BAR_SIZE);
 	this.ctx.fillStyle = "red";
 	this.ctx.fillRect(this.x, this.y + 130, current, 5);
+
 	this.ctx.fillStyle = "white";
 	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
 }
@@ -169,6 +173,7 @@ Fairy.prototype.idle = function() {
 	this.animation = this.createAnimation(IDLE, this.team, this.animations);
 	this.state = IDLE;
 	this.speed = 0;
+	
 }
 
 Fairy.prototype.walk = function() {
@@ -188,6 +193,11 @@ Fairy.prototype.die = function() {
 	this.sounds[FAIRY_SOUND_DEAD].play();
 	this.state = DEAD;
 	this.speed = 0;
+}
+
+Fairy.prototype.magicStar = function() {
+	this.animation = this.createMagicStar(this.team, this.magicstars);
+	this.speed = 5;
 }
 
 Fairy.prototype.isTouching = function(other) {
