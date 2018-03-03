@@ -96,13 +96,37 @@ function getPercentBar(currentHealth, maxHealth, barMaxSize) {
  */
 function spawnUnit(game, animArr, soundArr, lane, unit, team) {
 	if (unit === 1) {
-		game.addEntity(new Elf(game, animArr, soundArr, lane, team));
+		if (team === 0) {
+			if (game.energy >= 30) {
+				game.energy -= 30;
+				game.addEntity(new Elf(game, animArr, soundArr, lane, team));
+			}
+		}
+		if (team === 1) {
+			game.addEntity(new Elf(game, animArr, soundArr, lane, team));
+		}
 		soundArr[ELF_SOUND_DEPLOY].play();
 	} else if (unit === 2) {
-		game.addEntity(new Knight(game, animArr, soundArr, lane, team));
+		if (team === 0) {
+			if (game.energy >= 20) {
+				game.energy -= 20;
+				game.addEntity(new Knight(game, animArr, soundArr, lane, team));
+			}
+		}
+		if (team === 1) {
+			game.addEntity(new Knight(game, animArr, soundArr, lane, team));
+		}
 		soundArr[KNIGHT_SOUND_DEPLOY].play();
 	} else if (unit === 3) {
-		game.addEntity(new Fairy(game, animArr, soundArr, lane, team));
+		if (team === 0) {
+			if (game.energy >= 50) {
+				game.energy -= 50;
+				game.addEntity(new Fairy(game, animArr, soundArr, lane, team));
+			}
+		}
+		if (team === 1) {
+			game.addEntity(new Fairy(game, animArr, soundArr, lane, team));
+		}
 		soundArr[FAIRY_SOUND_DEPLOY].play();
 	} else if (unit === 4) {
 		//game.addEntity(new Orc(game, animArr, soundArr, lane, team));

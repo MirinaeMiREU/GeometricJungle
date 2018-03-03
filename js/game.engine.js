@@ -26,6 +26,7 @@ function GameEngine(manager, animArr, soundArr) {
     this.surfaceWidth = null;
     this.surfaceHeight = null;
 	this.energy = 100;
+	this.ticked = false;
     this.controller = new Controller(this, manager, animArr, soundArr);
     
     /**
@@ -89,7 +90,9 @@ function GameEngine(manager, animArr, soundArr) {
         for (var i = 0; i < this.entities.length; i++) 
             this.entities[i].draw(this.ctx);
 
+		this.updateEnergy();
         this.ctx.restore();
+		
     }
 
     /**
@@ -99,8 +102,34 @@ function GameEngine(manager, animArr, soundArr) {
     this.update = function() {
         for (var i = 0; i < this.entities.length; i++)
             this.entities[i].update();
+		if (this.timer.gameTime % 0.25 >= 0 &&
+			this.timer.gameTime % 0.25 <= 0.1) {
+			this.ticked = true;
+			console.log(this.energy);
+		}
+		if (this.timer.gameTime % 0.25 > 0.1 &&
+			this.ticked) {
+			if (this.energy < 100) {
+				this.energy += 1;
+			}
+			this.ticked = false;
+		}
+		
     }
 
+	this.updateEnergy = function() {
+		var max = 100;
+		var current = getPercentBar(this.energy, max, 300);
+		
+		this.ctx.fillStyle = "black";
+		this.ctx.fillRect(420, 170, 300, 30);
+		
+		this.ctx.fillStyle = "white";
+		this.ctx.fillRect(420, 170, current, 30);
+		
+		
+	}
+	
     /**
      * The method loops based on the
      * timer to update information
