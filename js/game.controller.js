@@ -30,7 +30,6 @@ function Controller(game, manager, animArr, soundArr) {
 	this.selectedUnit = 0;
 	this.highlight;
 	this.unitHighlight;
-	this.energy = 100;
 	
 	/**
 	 * The mapping key
