@@ -155,12 +155,12 @@ AM.downloadAll(function () {
 	
 	/** Setting up page canvas and context. */
     var canvas = document.getElementById("gameWorld");
-    canvas.style.margin = "auto";
-    canvas.style.position = "absolute";
-    canvas.style.top = 0;
-    canvas.style.bottom = 0;
-    canvas.style.left = 0;
-    canvas.style.right = 0;
+    //canvas.style.margin = "auto";
+    //canvas.style.position = "absolute";
+    //canvas.style.top = 0;
+    //canvas.style.bottom = 0;
+    //canvas.style.left = 0;
+    //canvas.style.right = 0;
     var ctx = canvas.getContext("2d");
 	ctx.fillStyle = "white";
 
