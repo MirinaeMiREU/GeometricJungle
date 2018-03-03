@@ -1,7 +1,8 @@
-/** 
- * The Animation class. This class manages displaying sprites and animating them.
+2/** 
+ * This file manages displaying sprites and animating them.
  * 
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * Based on code created by Seth Ladd and edited for use by Chris Marriott.
  * TCSS491 - Winter 2018
  */
 function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale) {
@@ -23,8 +24,8 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y) {
         if (this.loop) this.elapsedTime = 0;
     }
     var frame = this.currentFrame();
-    var xindex = 0;
-    var yindex = 0;
+    var xindex = 440;
+    var yindex = 210;
     xindex = frame % this.sheetWidth;
     yindex = Math.floor(frame / this.sheetWidth);
 

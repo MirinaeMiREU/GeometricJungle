@@ -2,6 +2,7 @@
  * The Knight class. Represents the Knight character.
  * 
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * Based on code created by Seth Ladd and edited for use by Chris Marriott.
  * TCSS491 - Winter 2018
  */
 function Knight(game, spritesheets, sounds, lane, team) {
@@ -110,8 +111,10 @@ Knight.prototype.update = function()
 	
 	if (this.state === DEAD && this.animation.isDone()) {
 		this.game.removeEntity(this);
+		
+		
 	}
-	
+
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
 }
@@ -152,9 +155,11 @@ Knight.prototype.drawBar = function()
 {
 	var max = this.team === 0 ? KNIGHT_HEALTH_1 : KNIGHT_HEALTH_2;
 	var current = getPercentBar(this.health, max, BAR_SIZE);
-	this.ctx.fillStyle = "green";
-	this.ctx.fillRect(this.x, this.y + 130, current, 5);
 	this.ctx.fillStyle = "red";
+	this.ctx.fillRect(this.x, this.y + 130, current, 5);
+
+	this.ctx.fillStyle = "white";
+
 	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
 }
 
@@ -188,7 +193,7 @@ Knight.prototype.attack = function() {
 
 Knight.prototype.die = function() {
 	this.animation = this.createAnimation(DEAD, this.team, this.animations);
-	this.sounds[KNIGHT_SOUND_DEAD].play();
+	//this.sounds[KNIGHT_SOUND_DEAD].play();
 	this.state = DEAD;
 	this.speed = 0;
 }
@@ -213,8 +218,8 @@ Knight.prototype.getSpeed = function(team) {
 
 Knight.prototype.getPosition = function(team) {
 	if (team === 0)
-		return 0;
-	else return 600; // should be constant
+		return 220;
+	else return 1000; // should be constant
 }
 
 Knight.prototype.createAnimation = function(status, team, animations) {

@@ -1,7 +1,8 @@
 /** 
- * The Controller class. This class manages keyboard input.
+ * This file manages keyboard input.
  * 
- * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford 
+ * Based on code created by Seth Ladd and edited for use by Chris Marriott.
  * TCSS491 - Winter 2018
  */
 
@@ -42,7 +43,7 @@ function Controller(game, manager, animArr, soundArr) {
     var that = this;
 	
 	this.init = function(ctx) {
-		this.highlight = new Highlight(game, manager.getAsset("./img/background/highlight.png"), 6); 
+		this.highlight = new Highlight(game, manager.getAsset("./img/background/highlight.png"), 1); 
 		this.unitHighlight = new HighlightUnit(game, manager.getAsset("./img/background/unit.png"));
 		this.ctx = ctx;
 		game.addEntity(this.highlight);
@@ -53,11 +54,13 @@ function Controller(game, manager, animArr, soundArr) {
      * The method hooks the key
      * pressed with the mapping key
      */
-    this.keydown = function(event) {
-	
+    this.keydown = function(event) {	
+    	soundArr[MENU_NAVSOUNDS].play();
+    	
 		if (event.code === KEY_1) {
 			that.selectedLane = 1;
 			that.highlight.changeLane(1);
+			
 		} else if (event.code === KEY_2) {
 			that.selectedLane = 2;
 			that.highlight.changeLane(2);
@@ -85,8 +88,8 @@ function Controller(game, manager, animArr, soundArr) {
 			if (that.unitSelected) {
 				that.unitSelected = false;
 				that.laneSelected = false;
-				that.highlight.changeLane(6);
-				that.unitHighlight.changeLoc(-2);
+				that.highlight.changeLane(1);
+				that.unitHighlight.changeLoc(0);
 				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
@@ -123,13 +126,11 @@ function Controller(game, manager, animArr, soundArr) {
 			if (that.laneSelected) {
 				that.laneSelected = false;
 				that.unitSelected = false;
-				that.highlight.changeLane(6);
-				that.unitHighlight.changeLoc(-2);
+				that.highlight.changeLane(1);
+				that.unitHighlight.changeLoc(0);
 				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
-		
-
 		
         that.keymap[event.keyCode] = true;
 		
@@ -146,38 +147,43 @@ function Controller(game, manager, animArr, soundArr) {
         that.keymap[event.keyCode] = false;
         event.preventDefault();
     }
-	
     
-	this.mouseclick = function(event) {
+	this.mouseclick = function(event) {	
+		soundArr[MENU_NAVSOUNDS].play();
+		
 		if (event.button === 0) {
-			if (event.x > 4 && event.x < 163 &&
-			    event.y > 4 && event.y < 55) {
-				if (event.x > 4 && event.x < 55) {
+			if (event.x > 242 && event.x < 408 &&
+			    event.y > 120 && event.y < 170) {			
+				if (event.x > 242 && event.x < 292) {	
+					console.log('unit 1');
 					that.selectedUnit = 1;
 					that.unitHighlight.changeLoc(0);
-				} else if (event.x > 58 && event.x < 109) {
+				} else if (event.x > 296 && event.x < 346) {			
+					console.log('unit 2');
 					that.selectedUnit = 2;
 					that.unitHighlight.changeLoc(1);
-				} else if (event.x > 112 && event.x < 163) {
+				} else if (event.x > 350 && event.x < 400) {
+					console.log('unit 3');
 					that.selectedUnit = 3;
 					that.unitHighlight.changeLoc(2);
 				}
 				that.unitSelected = true;
 			}
-			if (event.y > 145 && event.y < 545) {
-				if (event.y < 225) {
+			
+			if (event.x > 240 && event.x < 1200) {
+				if (event.y > 255 && event.y < 335) {
 					that.selectedLane = 1;
 					that.highlight.changeLane(1);
-				} else if (event.y < 305) {
+				} else if (event.y > 335 && event.y < 415) {
 					that.selectedLane = 2;
 					that.highlight.changeLane(2);
-				} else if (event.y < 385) {
+				} else if (event.y > 415 && event.y < 495) {
 					that.selectedLane = 3;
 					that.highlight.changeLane(3);
-				} else if (event.y < 465) {
+				} else if (event.y > 495 && event.y < 575) {
 					that.selectedLane = 4;
 					that.highlight.changeLane(4);  
-				} else {
+				} else if (event.y > 575 && event.y < 655) {
 					that.selectedLane = 5;
 					that.highlight.changeLane(5); 
 				}
@@ -187,19 +193,19 @@ function Controller(game, manager, animArr, soundArr) {
 			if (that.laneSelected && that.unitSelected) {
 				that.laneSelected = false;
 				that.unitSelected = false;
-				that.highlight.changeLane(6);
-				that.unitHighlight.changeLoc(-2);
+				that.highlight.changeLane(1);
+				that.unitHighlight.changeLoc(0);
 				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
 		if (event.button == 2) {
 			if (that.laneSelected) {
 				that.laneSelected = false;
-				that.highlight.changeLane(6);
+				that.highlight.changeLane(1);
 			}
 			if (that.unitSelected) {
 				that.unitSelected = false;
-				that.unitHighlight.changeLoc(-2);
+				that.unitHighlight.changeLoc(0);
 			}
 		}
 		/*
@@ -222,8 +228,7 @@ function Controller(game, manager, animArr, soundArr) {
 			that.laneSelected = false;
 		}
 		*/
-		if (event.y < 545 && event.x < 960)
-			event.preventDefault();
+
 	}
 	
     // strictly hook event listener to the methods

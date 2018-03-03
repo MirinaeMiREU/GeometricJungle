@@ -1,8 +1,8 @@
 /** 
- * The game.engine.js file. This class constitues the game engine;
- * animations and the time interacted between them.
+ * This file constitues the game engine, animations, and the time interacted between them.
  * 
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
+ * Based on code created by Seth Ladd and edited for use by Chris Marriott.
  * TCSS491 - Winter 2018
  */
 
@@ -20,10 +20,9 @@ function () {
 
 
 function GameEngine(manager, animArr, soundArr) {
-	this.manager = manager;
+	this.manager = manager;	
 	this.ctx = null;
-    this.entities = [];
-    
+    this.entities = [];    
     this.surfaceWidth = null;
     this.surfaceHeight = null;
     this.controller = new Controller(this, manager, animArr, soundArr);
@@ -68,6 +67,10 @@ function GameEngine(manager, animArr, soundArr) {
 		});
     }
 	
+    /**
+     * The method removes an animation
+     * (entity) from the canvas (context).
+     */
 	this.removeEntity = function(entity) {
 		console.log('Removed entity.');
 		var index = this.entities.indexOf(entity);

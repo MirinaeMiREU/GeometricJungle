@@ -6,11 +6,11 @@ Cuong Tran - Logan Stafford - Peter Bae - Varik Hoang
 
 **Introduction**
 
-We plan to make a 2D tower defense/battle arena game mechanically based on the game Clash Royale (website found [here](https://clashroyale.com/)) and aesthetically based on the Geometry Wars series (example game found [here](http://store.steampowered.com/app/310790/Geometry_Wars_3_Dimensions_Evolved/)) and some mechanics from the Plants vs Zombies series. In this game, the player will control a series of geometrical &quot;towers&quot; alongside procedurally spawned &quot;underlings&quot; and a randomly picked list of various heroes to use against a single enemy (AIcontrolled, or Human) which is set on the opposite side of a given &quot;arena&quot; playing area in the game. Each character&#39;s spawned minions and enemies will walk towards and begin attacking the closest enemies and towers. The objective of the game is to completely destroy the enemy&#39;s towers to collect money, points, and end the game.
+We plan to make a 2D tower defense/battle arena game mechanically similar to Plants Vs. Zombies (website found [here](https://www.ea.com/games/plantsvszombies/plantsvszombies2)) or  Clash Royale (website found [here](https://clashroyale.com/)) with a light fantasy theme. In this game, the player will control a series of allied &quot;towers&quot; alongside procedurally spawned &quot;underlings&quot; and a randomly picked list of various heroes to use against a single enemy (AIcontrolled, or Human) which is set on the opposite side of a given &quot;arena&quot; playing area in the game. Each character&#39;s spawned minions and enemies will walk towards and begin attacking the closest enemies and towers. The objective of the game is to completely destroy the enemy&#39;s towers to collect money, points, and end the game.
 
 **Animated Resources**
 
- ****** Underlings (Barbarian, Archer, Wizard, Dragon, Bomb, ...)**
+ ****** Underlings (Elf, Fairy, Dragon, Knight, Orc)**
 
 These user controlled characters will have several different animations depending on the characters state.
 
