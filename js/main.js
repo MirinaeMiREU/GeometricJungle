@@ -223,9 +223,9 @@ AM.downloadAll(function () {
 //    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
     
     /** Play the background music, continuously looping. */
-//    var theme = AM.getMusic("./sound/menu/music.mp3");
-//    theme.loop = true;
-//    theme.play();
+    var theme = AM.getMusic("./sound/menu/music.mp3");
+    theme.loop = true;
+    theme.play();
 	
 	/** Log to console once completed. */
     console.log("All Done!");    
