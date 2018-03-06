@@ -105,7 +105,7 @@ function GameEngine(manager, animArr, soundArr) {
 		if (this.timer.gameTime % 0.25 >= 0 &&
 			this.timer.gameTime % 0.25 <= 0.1) {
 			this.ticked = true;
-			console.log(this.energy);
+//			console.log(this.energy);
 		}
 		if (this.timer.gameTime % 0.25 > 0.1 &&
 			this.ticked) {

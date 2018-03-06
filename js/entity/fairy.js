@@ -6,10 +6,12 @@
  * TCSS491 - Winter 2018
  */
 function Fairy(game, spritesheets, sounds, lane, team) {
+	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
 	this.sounds = sounds;
 	this.animation = this.createAnimation(WALK, team, spritesheets);
-	this.magicstar = this.createMagicStar(      team, spritesheets);
+	this.magic = null;
+	this.magicFromFairy = 0;
 	this.speed = this.getSpeed(team);
 	this.state = WALK;
 	this.lane = lane;
@@ -23,19 +25,19 @@ function Fairy(game, spritesheets, sounds, lane, team) {
 	this.position = this.getPosition(team);
 	switch (lane) {
 		case 1:
-			Entity.call(this, game, this.position, LANE_1, 1);
+			Entity.call(this, game, this.position, LANE_1 - VERTICAL_LANE_SIZE, 1);
 			break;
 		case 2:
-			Entity.call(this, game, this.position, LANE_2, 2);
+			Entity.call(this, game, this.position, LANE_2 - VERTICAL_LANE_SIZE, 2);
 			break;
 		case 3:
-			Entity.call(this, game, this.position, LANE_3, 3);
+			Entity.call(this, game, this.position, LANE_3 - VERTICAL_LANE_SIZE, 3);
 			break;
 		case 4:
-			Entity.call(this, game, this.position, LANE_4, 4);
+			Entity.call(this, game, this.position, LANE_4 - VERTICAL_LANE_SIZE, 4);
 			break;
 		case 5:
-			Entity.call(this, game, this.position, LANE_5, 5);
+			Entity.call(this, game, this.position, LANE_5 - VERTICAL_LANE_SIZE, 5);
 	}
 }
 
@@ -132,14 +134,14 @@ Fairy.prototype.updateStatus = function()
 			if (isEnemy(this,entity)) {
 				if (this.isTargeting === null &&
 					distanceAbs(this, entity) <= this.range) {
-					console.log('fairy found enemy ... ');
+//					console.log('fairy found enemy ... ');
 					this.isTargeting = entity;
 				}
 			} else {
 				if (this.collide(entity) && 
 					this.isBehind === null) {
 						
-					console.log('fairy colliding...');
+//					console.log('fairy colliding...');
 					this.isBehind = entity;
 					if (entity.speed < this.speed) {
 						this.speed = entity.speed;
@@ -153,6 +155,7 @@ Fairy.prototype.updateStatus = function()
 Fairy.prototype.draw = function() {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
 	this.drawBar();
+	this.drawMagic(this.isTargeting);
     Entity.prototype.draw.call(this);
 }
 
@@ -165,6 +168,30 @@ Fairy.prototype.drawBar = function()
 
 	this.ctx.fillStyle = "white";
 	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
+}
+
+Fairy.prototype.drawMagic = function(enemy)
+{
+	if (this.state === ATTACK)
+	{
+		this.magic = this.createMagicStar(this.team, this.animations);
+		if (this.team === 0)
+		{
+			if (this.x + 80 + this.magicFromFairy > enemy.x)
+				this.magicFromFairy = 0;
+			else this.magicFromFairy += 5; // need to mathematically calculate this factor
+			this.magic.drawFrame(this.game.clockTick, this.ctx, 
+				this.x + 80 + this.magicFromFairy, this.y + 70); // this adjusts the arrow based on the fairy
+		}
+		else
+		{
+			if (this.x - 80 / 2 - this.magicFromFairy < enemy.x)
+				this.magicFromFairy = 0;
+			else this.magicFromFairy += 5; // need to mathematically calculate this factor
+			this.magic.drawFrame(this.game.clockTick, this.ctx, 
+				this.x - 80 / 2 - this.magicFromFairy, this.y + 70); // this adjusts the arrow based on the fairy
+		}
+	}
 }
 
 Fairy.prototype.idle = function() {
@@ -244,9 +271,9 @@ Fairy.prototype.createAnimation = function(status, team, animations) {
 	}
 }
 
-Fairy.prototype.createMagicStar = function(team, animations)
-{
+Fairy.prototype.createMagicStar = function(team, animations) {
 	if (team === 0)
-		return new Animation(animations[FAIRY_LEFT_MAGIC_STAR], 144, 128, 5, 0.3, 1, true, 1);
-	else return new Animation(animations[FAIRY_RIGHT_MAGIC_STAR], 144, 128, 5, 0.3, 1, true, 1);
+		return new Animation(animations[FAIRY_LEFT_MAGIC], 76, 73, 1, 1, 1, false, 1);
+	else return new Animation(animations[FAIRY_RIGHT_MAGIC], 76, 73, 1, 1, 1, false, 1);
 }
+

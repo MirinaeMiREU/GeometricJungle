@@ -23,19 +23,19 @@ function Dragon(game, spritesheets, sounds, lane, team) {
 	this.team = team;
 	switch (lane) {
 		case 1:
-			Entity.call(this, game, this.getPosition(team), LANE_1, 1);
+			Entity.call(this, game, this.getPosition(team), LANE_1 - VERTICAL_LANE_SIZE, 1);
 			break;
 		case 2:
-			Entity.call(this, game, this.getPosition(team), LANE_2, 2);
+			Entity.call(this, game, this.getPosition(team), LANE_2 - VERTICAL_LANE_SIZE, 2);
 			break;
 		case 3:
-			Entity.call(this, game, this.getPosition(team), LANE_3, 3);
+			Entity.call(this, game, this.getPosition(team), LANE_3 - VERTICAL_LANE_SIZE, 3);
 			break;
 		case 4:
-			Entity.call(this, game, this.getPosition(team), LANE_4, 4);
+			Entity.call(this, game, this.getPosition(team), LANE_4 - VERTICAL_LANE_SIZE, 4);
 			break;
 		case 5:
-			Entity.call(this, game, this.getPosition(team), LANE_5, 5);
+			Entity.call(this, game, this.getPosition(team), LANE_5 - VERTICAL_LANE_SIZE, 5);
 	}
 }
 
@@ -94,13 +94,13 @@ Dragon.prototype.update = function() {
 				   this.animation.elapsedTime < 0.8 &&
 				   !this.isAttacking) {
 			this.isAttacking = true;
-			console.log("dragon is attacking");
+//			console.log("dragon is attacking");
 			this.sounds[DRAGON_SOUND_ATTACK].play();
 		} 
 		if (this.state === ATTACK &&
 		    this.isAttacking &&
 			this.animation.elapsedTime > 0.9) {
-			console.log("dragon attacked");
+//			console.log("dragon attacked");
 			this.isAttacking = false;
 			this.isTargeting.health -= this.hit;
 		}
@@ -129,14 +129,14 @@ Dragon.prototype.updateStatus = function()
 			if (isEnemy(this,entity)) {
 				if (this.isTargeting === null &&
 					distanceAbs(this, entity) <= this.range) {
-					console.log('dragon found enemy ... ');
+//					console.log('dragon found enemy ... ');
 					this.isTargeting = entity;
 				}
 			} else {
 				if (this.collide(entity) && 
 					this.isBehind === null) {
 						
-					console.log('dragon colliding...');
+//					console.log('dragon colliding...');
 					this.isBehind = entity;
 					if (entity.speed < this.speed) {
 						this.speed = entity.speed;

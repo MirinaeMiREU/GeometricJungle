@@ -25,19 +25,19 @@ function Elf(game, spritesheets, sounds, lane, team) {
 	this.team = team;
 	switch (lane) {
 		case 1:
-			Entity.call(this, game, this.getPosition(team), LANE_1, 1);
+			Entity.call(this, game, this.getPosition(team), LANE_1 - VERTICAL_LANE_SIZE, 1);
 			break;
 		case 2:
-			Entity.call(this, game, this.getPosition(team), LANE_2, 2);
+			Entity.call(this, game, this.getPosition(team), LANE_2 - VERTICAL_LANE_SIZE, 2);
 			break;
 		case 3:
-			Entity.call(this, game, this.getPosition(team), LANE_3, 3);
+			Entity.call(this, game, this.getPosition(team), LANE_3 - VERTICAL_LANE_SIZE, 3);
 			break;
 		case 4:
-			Entity.call(this, game, this.getPosition(team), LANE_4, 4);
+			Entity.call(this, game, this.getPosition(team), LANE_4 - VERTICAL_LANE_SIZE, 4);
 			break;
 		case 5:
-			Entity.call(this, game, this.getPosition(team), LANE_5, 5);
+			Entity.call(this, game, this.getPosition(team), LANE_5 - VERTICAL_LANE_SIZE, 5);
 	}
 }
 
@@ -96,13 +96,13 @@ Elf.prototype.update = function() {
 				   this.animation.elapsedTime < 0.8 &&
 				   !this.isAttacking) {
 			this.isAttacking = true;
-			console.log("elf is attacking");
+//			console.log("elf is attacking");
 			this.sounds[ELF_SOUND_ATTACK].play();
 		} 
 		if (this.state === ATTACK &&
 		    this.isAttacking &&
 			this.animation.elapsedTime > 0.9) {
-			console.log("elf attacked");
+//			console.log("elf attacked");
 			this.isAttacking = false;
 			this.isTargeting.health -= this.hit;
 		}
@@ -131,14 +131,14 @@ Elf.prototype.updateStatus = function()
 			if (isEnemy(this,entity)) {
 				if (this.isTargeting === null &&
 					distanceAbs(this, entity) <= this.range) {
-					console.log('elf found enemy ... ');
+//					console.log('elf found enemy ... ');
 					this.isTargeting = entity;
 				}
 			} else {
 				if (this.collide(entity) && 
 					this.isBehind === null) {
 						
-					console.log('elf colliding...');
+//					console.log('elf colliding...');
 					this.isBehind = entity;
 					if (entity.speed < this.speed) {
 						this.speed = entity.speed;
@@ -173,11 +173,18 @@ Elf.prototype.drawArrow = function(enemy)
 	if (this.state === ATTACK)
 	{
 		this.arrow = this.createFlyingArrow(this.team, this.animations);
-		if (this.x + 80 + this.arrowFromElf > enemy.x)
-			this.arrowFromElf = 0;
-		else this.arrowFromElf += 5; // this constant MUST be related to the frame duration while attacking
-		this.arrow.drawFrame(this.game.clockTick, this.ctx, 
+		if (this.team === 0)
+		{
+			if (this.x + 80 + this.arrowFromElf > enemy.x)
+				this.arrowFromElf = 0;
+			else this.arrowFromElf += 5; // need to mathematically calculate this factor
+			this.arrow.drawFrame(this.game.clockTick, this.ctx, 
 				this.x + 80 + this.arrowFromElf, this.y + 70); // this adjusts the arrow based on the elf
+		}
+		else
+		{
+			// the elf on the other side uses sword instead
+		}
 	}
 }
 
