@@ -4,28 +4,28 @@ Project Plan for Gold Two
 
 Cuong Tran - Logan Stafford - Peter Bae - Varik Hoang
 
- - Introduction - 
+ - Introduction 
 
 We plan to make a 2D tower defense game similar to Plants Vs. Zombies (website found [here](https://www.ea.com/games/plantsvszombies/plantsvszombies2)) or Clash Royale (website found [here](https://clashroyale.com/)) with a light fantasy theme. In this game, the player will control a series of allied  minions that begin walking towards the enemy side of the map,  playing area in the game. Each character&#39;s spawned minions and enemies will walk towards and begin attacking the closest enemies. Each minion does have a spawn cost, which deplete's the game's spawn meter (self-replenishing) that must be managed by the player. The objective of the game is to survive the waves of enemies without depleting your spawn meter to win the game.
 
- - Animated Resources - 
+ - Animated Resources 
 
 Minions (Elf, Fairy, Dragon, Knight, Orc)
 These minions have several different animations depending on the characters state. (I.E., starting from both sides after users dropping the troops, moving to the other side and attack any enemy's troops that face)
 
- - Background - 
+ - Background
 
 The background will be static.
 
- - Music - 
-
+ - Music
+ 
 The music and sound effects used for the game will make the game seem more responsive and engaging. (music is made by Logan)
 
- - Control - 
+ - Control
 
 The controls in the game is going to be simple, mostly driven by mouse clicks, with keyboard hotkeys available.
 
- - Interaction - 
+ - Interaction
 
 Interaction in our game will be based on collision and coordination of animated assets.
 
@@ -33,7 +33,7 @@ Specifically we track collisions between minions. Certain minions are ranged and
 
 There will be multiple lanes for interactions similar to lanes in Plants vs. Zombies.
 
- - Extras - 
+ - Extras 
 
 In addition to these components we will explore expanding one or more of the following areas:
 
@@ -43,7 +43,7 @@ The game will have a more complete feeling with more than one level. We think th
 
 2. Minions that either attack multiple lanes or take up multiple lanes.
 
- - Timeline - 
+ - Timeline
 
 1. Prototype
 
@@ -57,7 +57,7 @@ This minimal deliverable will consist of a single level of the game including al
 
 The final game will include all the features of the minimal deliverable along with one or more of the extras as time permits. We expect the improvements to interaction with curved surfaces will be the simplest followed by a high score database. These will be our first targets.
 
- - References - 
+ - References
 
 [Clash Royale](https://clashroyale.com/)
 
