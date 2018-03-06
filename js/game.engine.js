@@ -27,7 +27,13 @@ function GameEngine(manager, animArr, soundArr) {
     this.surfaceHeight = null;
 	this.energy = 100;
 	this.ticked = false;
+	this.animations = animArr;
+	this.effects = soundArr;
     this.controller = new Controller(this, manager, animArr, soundArr);
+    this.timer = new Timer();
+    this.freq = AI_FREQ_INIT;
+    this.backgrounds = [];
+    this.currentBG;
     
     /**
      * The method initialize the context (canvas).
@@ -37,7 +43,7 @@ function GameEngine(manager, animArr, soundArr) {
 		this.controller.init(ctx);
         this.surfaceWidth = this.ctx.canvas.width;
         this.surfaceHeight = this.ctx.canvas.height;
-        this.timer = new Timer();
+        this.currentBG = 0;
         console.log('Game initialized.');
     }
 
@@ -49,8 +55,9 @@ function GameEngine(manager, animArr, soundArr) {
         var that = this;
         (function gameLoop() 
         {
-            that.loop();
-            requestAnimFrame(gameLoop, that.ctx.canvas);
+        	if (!that.timer.status)
+        		that.loop();
+        	requestAnimFrame(gameLoop, that.ctx.canvas);
         })();
     }
 
@@ -59,7 +66,7 @@ function GameEngine(manager, animArr, soundArr) {
      * (entity) into the canvas (context).
      */
     this.addEntity = function(entity) {
-        console.log('Added entity.');
+//        console.log('Added entity.');
         this.entities.push(entity);
 		this.entities.sort(function(a, b) {
 			if (a.z === b.z) {
@@ -67,6 +74,11 @@ function GameEngine(manager, animArr, soundArr) {
 			}
 			return a.z - b.z;
 		});
+    }
+    
+    this.addBackground = function(entity) {
+//        console.log('Added background.');
+    	this.backgrounds.push(entity);
     }
 	
     /**
@@ -86,7 +98,9 @@ function GameEngine(manager, animArr, soundArr) {
     this.draw = function() {
         this.ctx.clearRect(0, 0, this.surfaceWidth , this.surfaceHeight);
         this.ctx.save();
-
+        
+//        console.log(this.backgrounds[this.currentBG]);
+        this.backgrounds[this.currentBG].draw(this.ctx);
         for (var i = 0; i < this.entities.length; i++) 
             this.entities[i].draw(this.ctx);
 
@@ -137,7 +151,16 @@ function GameEngine(manager, animArr, soundArr) {
      */
     this.loop = function() {
         this.clockTick = this.timer.tick();
-        this.update();
+        if (Math.round(this.timer.gameTime / this.freq) > this.timer.gameCount)
+        {
+        	this.timer.gameCount++;
+        	spawnUnit(this, this.animations, this.effects, 
+        			Math.floor(Math.random() * 5) + 1, 
+        			Math.floor(Math.random() * 3), 1);
+        }
+        
+        if (!this.timer.isPause())
+        	this.update(); // update if the game is not pause
         this.draw();
     }
 }

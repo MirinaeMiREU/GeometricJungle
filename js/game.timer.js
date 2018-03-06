@@ -7,8 +7,10 @@
  */
 function Timer() {
     this.gameTime = 0;
+    this.gameCount = 0;
     this.maxStep = 0.05;
     this.wallLastTimestamp = 0;
+    this.status = false;
     
     this.tick = function () {
         var wallCurrent = Date.now();
@@ -18,5 +20,17 @@ function Timer() {
         var gameDelta = Math.min(wallDelta, this.maxStep);
         this.gameTime += gameDelta;
         return gameDelta;
+    }
+    
+    this.isPause = function() {
+    	return this.status;
+    }
+    
+    this.pause = function() {
+    	this.status = true;
+    }
+    
+    this.resume = function() {
+    	this.status = false;
     }
 }

@@ -113,6 +113,23 @@ Orc.prototype.update = function()
 		this.game.removeEntity(this);
 	}
 	
+	if (this.x > NEXT_LEVEL_POS) {
+		this.game.removeEntity(this);
+		this.game.freq -= AI_FREQ_FACTOR;
+		if (this.game.freq < 2)
+			this.game.freq = 2;
+		this.game.currentBG++;
+		if (this.game.currentBG >= this.game.backgrounds.length)
+			this.game.currentBG = 0;
+		this.sounds[GAME_NEXT_LEVEL].play();
+	}
+	
+	if (this.x < LOST_POS)
+	{
+		this.game.timer.pause();
+		this.sounds[GAME_LOST].play();
+	}
+	
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
 }
