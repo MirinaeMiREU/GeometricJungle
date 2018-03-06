@@ -57,11 +57,13 @@ AM.queueDownload("./img/elf/player1/IDLE.png");
 AM.queueDownload("./img/elf/player1/WALK.png");
 AM.queueDownload("./img/elf/player1/ATTACK.png");
 AM.queueDownload("./img/elf/player1/DIE.png");
+AM.queueDownload("./img/projectile/elf1.png");
 
 AM.queueDownload("./img/elf/player2/IDLE.png");
 AM.queueDownload("./img/elf/player2/WALK.png");
 AM.queueDownload("./img/elf/player2/ATTACK.png");
 AM.queueDownload("./img/elf/player2/DIE.png");
+AM.queueDownload("./img/projectile/elf2.png");
 
 AM.queueDownload("./img/fairy/player1/WALK.png");
 AM.queueDownload("./img/fairy/player1/ATTACK.png");
@@ -125,11 +127,13 @@ AM.downloadAll(function () {
 	animArr[ELF_LEFT_WALK] = AM.getAsset("./img/elf/player1/WALK.png");
 	animArr[ELF_LEFT_ATTACK] = AM.getAsset("./img/elf/player1/ATTACK.png");
 	animArr[ELF_LEFT_DIE] = AM.getAsset("./img/elf/player1/DIE.png");
+	animArr[ELF_LEFT_ARROW] = AM.getAsset("./img/projectile/elf1.png");
 	
 	animArr[ELF_RIGHT_IDLE] = AM.getAsset("./img/elf/player2/IDLE.png");
 	animArr[ELF_RIGHT_WALK] = AM.getAsset("./img/elf/player2/WALK.png");
 	animArr[ELF_RIGHT_ATTACK] = AM.getAsset("./img/elf/player2/ATTACK.png");
 	animArr[ELF_RIGHT_DIE] = AM.getAsset("./img/elf/player2/DIE.png");
+	animArr[ELF_RIGHT_ARROW] = AM.getAsset("./img/projectile/elf2.png");
 	
 	animArr[KNIGHT_LEFT_IDLE] = AM.getAsset("./img/knight/player1/IDLE.png");
 	animArr[KNIGHT_LEFT_WALK] = AM.getAsset("./img/knight/player1/WALK.png");

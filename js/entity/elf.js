@@ -10,6 +10,8 @@ function Elf(game, spritesheets, sounds, lane, team) {
 	this.animations = spritesheets;
 	this.sounds = sounds;
 	this.animation = this.createAnimation(WALK, team, spritesheets);
+	this.arrow = null;
+	this.arrowFromElf = 0;
 	this.speed = this.getSpeed(team);
 	this.state = WALK;
 	this.isBehind = null;
@@ -150,6 +152,7 @@ Elf.prototype.updateStatus = function()
 Elf.prototype.draw = function() {
 	this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
 	this.drawBar();
+	this.drawArrow(this.isTargeting);
     Entity.prototype.draw.call(this);
 }
 
@@ -163,6 +166,18 @@ Elf.prototype.drawBar = function()
 	this.ctx.fillStyle = "white";
 
 	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
+}
+
+Elf.prototype.drawArrow = function(enemy)
+{
+	if (this.state === ATTACK)
+	{
+		this.arrow = this.createFlyingArrow(this.team, this.animations);
+		if (this.x + 80 + this.arrowFromElf > enemy.x)
+			this.arrowFromElf = 0;
+		else this.arrowFromElf += 5; // this constant MUST be related to the frame duration while attacking
+		this.arrow.drawFrame(this.game.clockTick, this.ctx, this.x + 80 + this.arrowFromElf, this.y + 70);
+	}
 }
 
 Elf.prototype.idle = function() {
@@ -235,3 +250,10 @@ Elf.prototype.createAnimation = function(status, team, animations) {
 		default: return null;
 	}
 }
+
+Elf.prototype.createFlyingArrow = function(team, animations) {
+	if (team === 0)
+		return new Animation(animations[ELF_LEFT_ARROW], 58, 12, 1, 1, 1, false, 1);
+	else return new Animation(animations[ELF_RIGHT_ARROW], 58, 12, 1, 1, 1, false, 1);
+}
+
