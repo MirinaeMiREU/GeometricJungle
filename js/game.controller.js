@@ -150,20 +150,21 @@ function Controller(game, manager, animArr, soundArr) {
     }
     
 	this.mouseclick = function(event) {	
-		soundArr[MENU_NAVSOUNDS].play();
+//		soundArr[MENU_NAVSOUNDS].play();
 		
-		if (event.button === 0) {
-			if (event.x >= 245 && event.x <= 402 &&
-			    event.y >= 140 && event.y <= 190) {			
-				if (event.x >= 245 && event.x <= 294) {	
+		if (event.button === MOUSE_RIGHT_CLICK) {
+			if (event.x >= ICON_ELF_POS_START_X && event.x <= ICON_FAIRY_POS_END_X &&
+			    event.y >= ICON_POS_START_Y && event.y <= ICON_POS_END_Y) {	
+				soundArr[MENU_NAVSOUNDS].play(); // sound on when click right position
+				if (event.x >= ICON_ELF_POS_START_X && event.x <= ICON_ELF_POS_END_X) {	
 					console.log('unit 1');
 					that.selectedUnit = 1;
 					that.unitHighlight.changeLoc(0);
-				} else if (event.x >= 299 && event.x <= 348) {			
+				} else if (event.x >= ICON_KNIGHT_POS_START_X && event.x <= ICON_KNIGHT_POS_END_X) {			
 					console.log('unit 2');
 					that.selectedUnit = 2;
 					that.unitHighlight.changeLoc(1);
-				} else if (event.x >= 353 && event.x <= 402) {
+				} else if (event.x >= ICON_FAIRY_POS_START_X && event.x <= ICON_FAIRY_POS_END_X) {
 					console.log('unit 3');
 					that.selectedUnit = 3;
 					that.unitHighlight.changeLoc(2);
@@ -171,21 +172,22 @@ function Controller(game, manager, animArr, soundArr) {
 				that.unitSelected = true;
 			}
 			
-			if (event.x > 240 && event.x < 1200 &&
-				event.y >= 275 && event.y < 675) {
-				if (event.y >= 275 && event.y < 355) {
+			else if (event.x > MARGIN_X && event.x < MARGIN_X + HORIZONTAL_LANE_SIZE &&
+				event.y >= LANE_1 && event.y < LANE_OFF) {
+				soundArr[MENU_NAVSOUNDS].play(); // sound on when click right position
+				if (event.y >= LANE_1 && event.y < LANE_2) {
 					that.selectedLane = 1;
 					that.highlight.changeLane(1);
-				} else if (event.y >= 355 && event.y < 435) {
+				} else if (event.y >= LANE_2 && event.y < LANE_3) {
 					that.selectedLane = 2;
 					that.highlight.changeLane(2);
-				} else if (event.y >= 435 && event.y < 515) {
+				} else if (event.y >= LANE_3 && event.y < LANE_4) {
 					that.selectedLane = 3;
 					that.highlight.changeLane(3);
-				} else if (event.y >= 515 && event.y < 595) {
+				} else if (event.y >= LANE_4 && event.y < LANE_5) {
 					that.selectedLane = 4;
-					that.highlight.changeLane(4);  
-				} else if (event.y >= 595 && event.y < 675) {
+					that.highlight.changeLane(4);
+				} else if (event.y >= LANE_5 && event.y < LANE_OFF) {
 					that.selectedLane = 5;
 					that.highlight.changeLane(5); 
 				}

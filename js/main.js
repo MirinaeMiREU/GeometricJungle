@@ -175,13 +175,10 @@ AM.downloadAll(function () {
     
     /** Adding entities into the game.*/
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background/blizzardbg.png"), 1440, 810));
-    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 0));
-    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 1));
+    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 2, 1));
     gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 1));
-    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 0));
     gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
     gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 1));
-    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 0));
     gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
     
     /** Testing the animation */
