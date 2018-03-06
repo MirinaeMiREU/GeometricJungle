@@ -46,7 +46,6 @@ AM.addMusic("./sound/menu/success.mp3");
 AM.addMusic("./sound/menu/you_lose_music.mp3");
 
 /** Queueing download of all art assets. */
-AM.queueDownload("./img/background/start_screen.png");
 AM.queueDownload("./img/background/forestbg.png");
 AM.queueDownload("./img/background/blizzardbg.png");
 AM.queueDownload("./img/background/volcanobg.png");
@@ -149,17 +148,22 @@ AM.downloadAll(function () {
 	animArr[FAIRY_LEFT_WALK] = AM.getAsset("./img/fairy/player1/WALK.png");
 	animArr[FAIRY_LEFT_ATTACK] = AM.getAsset("./img/fairy/player1/ATTACK.png");
 	animArr[FAIRY_LEFT_DIE] = AM.getAsset("./img/fairy/player1/DIE.png");
+	animArr[FAIRY_LEFT_MAGIC] = AM.getAsset("./img/projectile/fairy1.png");
 	
 	animArr[FAIRY_RIGHT_IDLE] = AM.getAsset("./img/fairy/player2/IDLE.png");
 	animArr[FAIRY_RIGHT_WALK] = AM.getAsset("./img/fairy/player2/WALK.png");
 	animArr[FAIRY_RIGHT_ATTACK] = AM.getAsset("./img/fairy/player2/ATTACK.png");
 	animArr[FAIRY_RIGHT_DIE] = AM.getAsset("./img/fairy/player2/DIE.png");
-	
-	animArr[FAIRY_LEFT_MAGIC_STAR] = AM.getAsset("./img/projectile/fairy1.png");
-	animArr[FAIRY_RIGHT_MAGIC_STAR] = AM.getAsset("./img/projectile/fairy2.png");
+	animArr[FAIRY_RIGHT_MAGIC] = AM.getAsset("./img/projectile/fairy2.png");
 	
 	/** Setting up page canvas and context. */
     var canvas = document.getElementById("gameWorld");
+    //canvas.style.margin = "auto";
+    //canvas.style.position = "absolute";
+    //canvas.style.top = 0;
+    //canvas.style.bottom = 0;
+    //canvas.style.left = 0;
+    //canvas.style.right = 0;
     var ctx = canvas.getContext("2d");
 	ctx.fillStyle = "white";
 
@@ -176,21 +180,44 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 1));
     gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
     
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 0));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 1));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 0));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
+    /** Testing the animation */
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 1, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 2, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 4, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 5, 0));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 1, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 2, 1));
 //    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 4, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 5, 1));
+    
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 3, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 4, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 5, 0));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 2, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 3, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 4, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 5, 1));
+    
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 1, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 2, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 3, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 0));
 //    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 0));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 1, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 2, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 3, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
 //    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
     
-    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background/start_screen.png"), 1440, 810));
-    
     /** Play the background music, continuously looping. */
-    var theme = AM.getMusic("./sound/menu/music.mp3");
-    theme.loop = true;
-    theme.play();
+//    var theme = AM.getMusic("./sound/menu/music.mp3");
+//    theme.loop = true;
+//    theme.play();
 	
 	/** Log to console once completed. */
     console.log("All Done!");    

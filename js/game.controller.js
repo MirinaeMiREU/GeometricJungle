@@ -150,59 +150,68 @@ function Controller(game, manager, animArr, soundArr) {
     }
     
 	this.mouseclick = function(event) {	
-//		soundArr[MENU_NAVSOUNDS].play();
+		var eventX = event.pageX;
+		var eventY = event.pageY;
 		
 		if (event.button === MOUSE_RIGHT_CLICK) {
-			if (event.x >= ICON_ELF_POS_START_X && event.x <= ICON_FAIRY_POS_END_X &&
-			    event.y >= ICON_POS_START_Y && event.y <= ICON_POS_END_Y) {	
-				soundArr[MENU_NAVSOUNDS].play(); // sound on when click right position
-				if (event.x >= ICON_ELF_POS_START_X && event.x <= ICON_ELF_POS_END_X) {	
-					console.log('unit 1');
+			if (eventX >= ICON_ELF_POS_START_X && eventX <= ICON_FAIRY_POS_END_X &&
+			    eventY >= ICON_POS_START_Y && eventY <= ICON_POS_END_Y) {	
+				soundArr[MENU_NAVSOUNDS].play(); // sound on when click at the right position
+				if (eventX >= ICON_ELF_POS_START_X && eventX <= ICON_ELF_POS_END_X) {	
 					that.selectedUnit = 1;
 					that.unitHighlight.changeLoc(0);
-				} else if (event.x >= ICON_KNIGHT_POS_START_X && event.x <= ICON_KNIGHT_POS_END_X) {			
-					console.log('unit 2');
+				} else if (eventX >= ICON_KNIGHT_POS_START_X && eventX <= ICON_KNIGHT_POS_END_X) {			
 					that.selectedUnit = 2;
 					that.unitHighlight.changeLoc(1);
-				} else if (event.x >= ICON_FAIRY_POS_START_X && event.x <= ICON_FAIRY_POS_END_X) {
-					console.log('unit 3');
+				} else if (eventX >= ICON_FAIRY_POS_START_X && eventX <= ICON_FAIRY_POS_END_X) {
 					that.selectedUnit = 3;
 					that.unitHighlight.changeLoc(2);
 				}
 				that.unitSelected = true;
 			}
 			
-			else if (event.x > MARGIN_X && event.x < MARGIN_X + HORIZONTAL_LANE_SIZE &&
-				event.y >= LANE_1 && event.y < LANE_OFF) {
-				soundArr[MENU_NAVSOUNDS].play(); // sound on when click right position
-				if (event.y >= LANE_1 && event.y < LANE_2) {
+			else if (eventX > MARGIN_X && eventX < MARGIN_X + HORIZONTAL_LANE_SIZE &&
+				eventY >= LANE_1 && eventY < LANE_OFF) {
+				soundArr[MENU_NAVSOUNDS].play(); // sound on when click at the right position
+				if (eventY >= LANE_1 && eventY < LANE_2) {
 					that.selectedLane = 1;
 					that.highlight.changeLane(1);
-				} else if (event.y >= LANE_2 && event.y < LANE_3) {
+					that.laneSelected = true;
+				} else if (eventY >= LANE_2 && eventY < LANE_3) {
 					that.selectedLane = 2;
 					that.highlight.changeLane(2);
-				} else if (event.y >= LANE_3 && event.y < LANE_4) {
+					that.laneSelected = true;
+				} else if (eventY >= LANE_3 && eventY < LANE_4) {
 					that.selectedLane = 3;
 					that.highlight.changeLane(3);
-				} else if (event.y >= LANE_4 && event.y < LANE_5) {
+					that.laneSelected = true;
+				} else if (eventY >= LANE_4 && eventY < LANE_5) {
 					that.selectedLane = 4;
 					that.highlight.changeLane(4);
-				} else if (event.y >= LANE_5 && event.y < LANE_OFF) {
+					that.laneSelected = true;
+				} else if (eventY >= LANE_5 && eventY < LANE_OFF) {
 					that.selectedLane = 5;
-					that.highlight.changeLane(5); 
+					that.highlight.changeLane(5);
+					that.laneSelected = true;
 				}
-				that.laneSelected = true;
+				
 			}
 			
-			if (that.laneSelected === true && that.unitSelected) {
-				that.laneSelected = false;
+			if (that.unitSelected)
+			{
+				if (that.laneSelected)
+				{
+					that.laneSelected = false;
+					spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
+				}
+
 				that.unitSelected = false;
 				that.highlight.changeLane(100);
 				that.unitHighlight.changeLoc(-100);
-				spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 			}
 		}
-		if (event.button == 2) {
+		
+		else if (event.button == 2) {
 			if (that.laneSelected) {
 				that.laneSelected = false;
 				that.highlight.changeLane(100);
@@ -215,26 +224,6 @@ function Controller(game, manager, animArr, soundArr) {
 				event.preventDefault();
 			}
 		}
-		/*
-		if (event.button === 0 && that.laneSelected) {
-			console.log("x: " + event.x + " y: " + event.y);
-			if (event.y > 145) {
-				if (event.y < 225) {
-					game.addEntity(new Elf(game, animArr[0], 1, 0));  
-				} else if (event.y < 305) {
-					game.addEntity(new Elf(game, animArr[0], 2, 0));  
-				} else if (event.y < 385) {
-					game.addEntity(new Elf(game, animArr[0], 3, 0));  
-				} else if (event.y < 465) {
-					game.addEntity(new Elf(game, animArr[0], 4, 0));  
-				} else if (event.y < 545) {
-					game.addEntity(new Elf(game, animArr[0], 5, 0));  
-				}
-			}
-			that.highlight.changeLane(6);
-			that.laneSelected = false;
-		}
-		*/
 
 	}
 	

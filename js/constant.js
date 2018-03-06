@@ -32,11 +32,13 @@ const FAIRY_LEFT_IDLE = "fairy.left.idle";
 const FAIRY_LEFT_WALK = "fairy.left.walk";
 const FAIRY_LEFT_ATTACK = "fairy.left.attack";
 const FAIRY_LEFT_DIE = "fairy.left.die";
+const FAIRY_LEFT_MAGIC = "fairy.left.magic";
 
 const FAIRY_RIGHT_IDLE = "fairy.right.idle";
 const FAIRY_RIGHT_WALK = "fairy.right.walk";
 const FAIRY_RIGHT_ATTACK = "fairy.right.attack";
 const FAIRY_RIGHT_DIE = "fairy.right.die";
+const FAIRY_RIGHT_MAGIC = "fairy.right.magic";
 
 const ORC_LEFT_IDLE = "orc.left.idle";
 const ORC_LEFT_WALK = "orc.left.walk";
@@ -140,27 +142,27 @@ const FAIRY_RIGHT_MAGIC_STAR = "fairy.right.magicstar";
 const MOUSE_RIGHT_CLICK = 0;
 
 /** ----------- UNIT SELECTION---------  */
-const ICON_POS_START_Y = 50; // use this if all icons stand on same vertical position
-const ICON_POS_END_Y = 100; // use this if all icons stand on same vertical position
+const ICON_POS_START_Y = 150; // use this if all icons stand on same vertical position
+const ICON_POS_END_Y = 197; // use this if all icons stand on same vertical position
 
-const ICON_ELF_POS_START_X = 245;
-const ICON_ELF_POS_END_X = 294;
+const ICON_ELF_POS_START_X = 253;
+const ICON_ELF_POS_END_X = 302;
 const ICON_ELF_POS_START_Y = ICON_POS_START_Y;
 const ICON_ELF_POS_END_Y = ICON_POS_END_Y;
 
-const ICON_KNIGHT_POS_START_X = 299;
-const ICON_KNIGHT_POS_END_X = 384;
+const ICON_KNIGHT_POS_START_X = 307;
+const ICON_KNIGHT_POS_END_X = 355;
 const ICON_KNIGHT_POS_START_Y = ICON_POS_START_Y;
 const ICON_KNIGHT_POS_END_Y = ICON_POS_END_Y;
 
-const ICON_FAIRY_POS_START_X = 353;
-const ICON_FAIRY_POS_END_X = 402;
+const ICON_FAIRY_POS_START_X = 362;
+const ICON_FAIRY_POS_END_X = 409;
 const ICON_FAIRY_POS_START_Y = ICON_POS_START_Y;
 const ICON_FAIRY_POS_END_Y = ICON_POS_END_Y;
 
 /** ----------- BOARD -----------------  */
 const MARGIN_X = 240;
-const MARGIN_Y = 195;
+const MARGIN_Y = 275;
 const VERTICAL_LANE_SIZE	= 80;
 const HORIZONTAL_LANE_SIZE	= 960;
 const LANE_1	= MARGIN_Y;

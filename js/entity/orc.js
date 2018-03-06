@@ -24,19 +24,19 @@ function Orc(game, spritesheets, sounds, lane, team) {
 	this.ctx = game.ctx;
 	switch (lane) {
 	case 1:
-		Entity.call(this, game, this.getPosition(team), LANE_1, 1);
+		Entity.call(this, game, this.getPosition(team), LANE_1 - VERTICAL_LANE_SIZE, 1);
 		break;
 	case 2:
-		Entity.call(this, game, this.getPosition(team), LANE_2, 2);
+		Entity.call(this, game, this.getPosition(team), LANE_2 - VERTICAL_LANE_SIZE, 2);
 		break;
 	case 3:
-		Entity.call(this, game, this.getPosition(team), LANE_3, 3);
+		Entity.call(this, game, this.getPosition(team), LANE_3 - VERTICAL_LANE_SIZE, 3);
 		break;
 	case 4:
-		Entity.call(this, game, this.getPosition(team), LANE_4, 4);
+		Entity.call(this, game, this.getPosition(team), LANE_4 - VERTICAL_LANE_SIZE, 4);
 		break;
 	case 5:
-		Entity.call(this, game, this.getPosition(team), LANE_5, 5);
+		Entity.call(this, game, this.getPosition(team), LANE_5 - VERTICAL_LANE_SIZE, 5);
 	}
 }
 
@@ -94,12 +94,12 @@ Orc.prototype.update = function()
 		} else if (this.state === ATTACK && this.animation.elapsedTime > 0.7 &&
 				 this.animation.elapsedTime < 0.8 && !this.isAttacking) {
 			this.isAttacking = true;
-			console.log("orc is attacking");
+//			console.log("orc is attacking");
 			this.sounds[KNIGHT_SOUND_ATTACK].play();
 		} 
 		
 		if (this.state === ATTACK && this.isAttacking && this.animation.elapsedTime > 0.9) {
-			console.log("orc attacked");
+//			console.log("orc attacked");
 			this.isAttacking = false;
 			this.isTargeting.health -= this.hit;
 		}
@@ -125,14 +125,14 @@ Orc.prototype.updateStatus = function()
 			if (isEnemy(this,entity)) {
 				if (this.isTargeting === null &&
 					distanceAbs(entity, this) <= this.range) {
-					console.log('orc found enemy ... ');
+//					console.log('orc found enemy ... ');
 					this.isTargeting = entity;
 				}
 			} else {
 				if (this.collide(entity) && 
 					this.isBehind === null) {
 						
-					console.log('orc colliding...');
+//					console.log('orc colliding...');
 					this.isBehind = entity;
 					if (entity.speed < this.speed) {
 						this.speed = entity.speed;
