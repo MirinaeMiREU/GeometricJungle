@@ -5,7 +5,7 @@
  * Based on code created by Seth Ladd and edited for use by Chris Marriott.
  * TCSS491 - Winter 2018
  */
-function Highlight(game, spritesheet, lane) {
+function Highlight(game, spritesheet, lane, pos_x, pos_y) {
 	this.x = 0;
     this.spritesheet = spritesheet;
     this.game = game;
@@ -14,7 +14,9 @@ function Highlight(game, spritesheet, lane) {
 	
 	Entity.call(this, game, 0, 0, 0);
 	this.draw = function () {
-		this.ctx.drawImage(this.spritesheet, 240 + this.x, 195 + this.hlane * 80, 960, 80);
+		this.ctx.drawImage(this.spritesheet, 
+				MARGIN_X + this.x, MARGIN_Y + this.hlane * VERTICAL_LANE_SIZE, 
+				HORIZONTAL_LANE_SIZE, VERTICAL_LANE_SIZE);
 	};
 	
 	this.changeLane = function(lane) {

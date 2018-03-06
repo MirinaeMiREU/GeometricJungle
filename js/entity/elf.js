@@ -176,7 +176,8 @@ Elf.prototype.drawArrow = function(enemy)
 		if (this.x + 80 + this.arrowFromElf > enemy.x)
 			this.arrowFromElf = 0;
 		else this.arrowFromElf += 5; // this constant MUST be related to the frame duration while attacking
-		this.arrow.drawFrame(this.game.clockTick, this.ctx, this.x + 80 + this.arrowFromElf, this.y + 70);
+		this.arrow.drawFrame(this.game.clockTick, this.ctx, 
+				this.x + 80 + this.arrowFromElf, this.y + 70); // this adjusts the arrow based on the elf
 	}
 }
 

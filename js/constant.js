@@ -136,10 +136,40 @@ const DRAGON_RANGE_2 = 100;
 const FAIRY_LEFT_MAGIC_STAR = "fairy.left.magicstar";
 const FAIRY_RIGHT_MAGIC_STAR = "fairy.right.magicstar";
 
+/** ----------- EVENT -----------------  */
+const MOUSE_RIGHT_CLICK = 0;
+
+/** ----------- UNIT SELECTION---------  */
+const ICON_POS_START_Y = 50; // use this if all icons stand on same vertical position
+const ICON_POS_END_Y = 100; // use this if all icons stand on same vertical position
+
+const ICON_ELF_POS_START_X = 245;
+const ICON_ELF_POS_END_X = 294;
+const ICON_ELF_POS_START_Y = ICON_POS_START_Y;
+const ICON_ELF_POS_END_Y = ICON_POS_END_Y;
+
+const ICON_KNIGHT_POS_START_X = 299;
+const ICON_KNIGHT_POS_END_X = 384;
+const ICON_KNIGHT_POS_START_Y = ICON_POS_START_Y;
+const ICON_KNIGHT_POS_END_Y = ICON_POS_END_Y;
+
+const ICON_FAIRY_POS_START_X = 353;
+const ICON_FAIRY_POS_END_X = 402;
+const ICON_FAIRY_POS_START_Y = ICON_POS_START_Y;
+const ICON_FAIRY_POS_END_Y = ICON_POS_END_Y;
+
+/** ----------- BOARD -----------------  */
+const MARGIN_X = 240;
+const MARGIN_Y = 195;
+const VERTICAL_LANE_SIZE	= 80;
+const HORIZONTAL_LANE_SIZE	= 960;
+const LANE_1	= MARGIN_Y;
+const LANE_2	= LANE_1 + VERTICAL_LANE_SIZE;
+const LANE_3	= LANE_2 + VERTICAL_LANE_SIZE;
+const LANE_4	= LANE_3 + VERTICAL_LANE_SIZE;
+const LANE_5	= LANE_4 + VERTICAL_LANE_SIZE;
+const LANE_OFF	= LANE_5 + VERTICAL_LANE_SIZE;
+
 /** ----------- OTHER -----------------  */
 const BAR_SIZE = 80;
-const LANE_1 = 210;
-const LANE_2 = 290;
-const LANE_3 = 370;
-const LANE_4 = 450;
-const LANE_5 = 530;
+
