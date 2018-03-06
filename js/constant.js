@@ -60,6 +60,10 @@ const DRAGON_RIGHT_WALK = "dragon.right.walk";
 const DRAGON_RIGHT_ATTACK = "dragon.right.attack";
 const DRAGON_RIGHT_DIE = "dragon.right.die";
 
+const BACKGROUND_BLIZZARD = "background.blizzard";
+const BACKGROUND_FOREST = "background.forest";
+const BACKGROUND_VOCANO = "background.volcano";
+
 /** ----------- SOUND -----------------  */
 const ELF_SOUND_DEPLOY = "elf.sound.deploy";
 const ELF_SOUND_ATTACK = "elf.sound.attack";
@@ -88,6 +92,9 @@ const MENU_MUSIC = "menu.music";
 const MENU_NAVSOUNDS = "menu.navsounds";
 const MENU_SUCCESS = "menu.success";
 const MENU_YOU_LOSE_MUSIC = "menu.youlosemusic";
+
+const GAME_NEXT_LEVEL = "game.next.level";
+const GAME_LOST = "game.lost";
 
 /** ----------- UNIT PROPERTIES -----------------  */
 const ELF_SPEED_1 = 50;
@@ -174,4 +181,8 @@ const LANE_OFF	= LANE_5 + VERTICAL_LANE_SIZE;
 
 /** ----------- OTHER -----------------  */
 const BAR_SIZE = 80;
+const AI_FREQ_INIT = 10;
+const AI_FREQ_FACTOR = 0.2;
+const NEXT_LEVEL_POS = MARGIN_X + HORIZONTAL_LANE_SIZE;
+const LOST_POS = MARGIN_X - 20;
 
