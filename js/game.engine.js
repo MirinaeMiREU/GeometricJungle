@@ -109,11 +109,11 @@ function GameEngine(manager, animArr, soundArr) {
         if (!this.gameOver) {
 	//        console.log(this.backgrounds[this.currentBG]);
 	        this.backgrounds[this.currentBG].draw(this.ctx);
-	    	for (var i = 0; i < this.entities.length; i++) {
-	    		this.entities[i].draw(this.ctx);
-	    	}         
+		    	for (var i = 0; i < this.entities.length; i++) {
+		    		this.entities[i].draw(this.ctx);
+		    	}         
         } else if (this.gameOver){
-        	this.backgrounds[this.currentBG].draw(this.ctx);
+        		this.backgrounds[this.currentBG].draw(this.ctx);
         }
 
 		this.updateEnergy();
@@ -121,11 +121,11 @@ function GameEngine(manager, animArr, soundArr) {
     }
     
     this.endGame = function() {
-    	for (var i = 0; i < this.entities.length; i++) {
-    		this.removeEntity(this.entities[i]);
-    	}
-    	this.currentBG = 3
-    	this.gameOver = true;
+	    	for (var i = 0; i < this.entities.length; i++) {
+	    		this.removeEntity(this.entities[i]);
+	    	}
+	    	this.currentBG = 3
+	    	this.gameOver = true;
     }
 
     /**

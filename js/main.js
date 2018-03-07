@@ -218,11 +218,11 @@ AM.downloadAll(function () {
 //    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
 //    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
     
-    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 2, 1));
-    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 1));
-    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
-    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 1));
-    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 2, 1));
+//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
+//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 1));
+//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
 	
 	/** Log to console once completed. */
     console.log("All Done!");    

@@ -59,8 +59,7 @@ function Controller(game, manager, animArr, soundArr) {
     	
 		if (event.code === KEY_1) {
 			that.selectedLane = 1;
-			that.highlight.changeLane(1);
-			
+			that.highlight.changeLane(1);			
 		} else if (event.code === KEY_2) {
 			that.selectedLane = 2;
 			that.highlight.changeLane(2);
@@ -203,6 +202,7 @@ function Controller(game, manager, animArr, soundArr) {
 				{
 					that.laneSelected = false;
 					spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
+					soundArr[MENU_NAVSOUNDS].play();
 				}
 
 				that.unitSelected = false;
