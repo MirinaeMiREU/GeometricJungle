@@ -34,6 +34,8 @@ function GameEngine(manager, animArr, soundArr) {
     this.freq = AI_FREQ_INIT;
     this.backgrounds = [];
     this.currentBG;
+    this.theme = soundArr[MENU_MUSIC];
+    this.gameOver = false;
     
     /**
      * The method initialize the context (canvas).
@@ -43,7 +45,7 @@ function GameEngine(manager, animArr, soundArr) {
 		this.controller.init(ctx);
         this.surfaceWidth = this.ctx.canvas.width;
         this.surfaceHeight = this.ctx.canvas.height;
-        this.currentBG = 0;
+        this.currentBG = 0;        
         console.log('Game initialized.');
     }
 
@@ -80,6 +82,11 @@ function GameEngine(manager, animArr, soundArr) {
 //        console.log('Added background.');
     	this.backgrounds.push(entity);
     }
+    
+    this.addMusic = function() {    	
+    	this.theme.loop = true;
+    	this.theme.play();
+    }
 	
     /**
      * The method removes an animation
@@ -99,14 +106,26 @@ function GameEngine(manager, animArr, soundArr) {
         this.ctx.clearRect(0, 0, this.surfaceWidth , this.surfaceHeight);
         this.ctx.save();
         
-//        console.log(this.backgrounds[this.currentBG]);
-        this.backgrounds[this.currentBG].draw(this.ctx);
-        for (var i = 0; i < this.entities.length; i++) 
-            this.entities[i].draw(this.ctx);
+        if (!this.gameOver) {
+	//        console.log(this.backgrounds[this.currentBG]);
+	        this.backgrounds[this.currentBG].draw(this.ctx);
+	    	for (var i = 0; i < this.entities.length; i++) {
+	    		this.entities[i].draw(this.ctx);
+	    	}         
+        } else if (this.gameOver){
+        	this.backgrounds[this.currentBG].draw(this.ctx);
+        }
 
 		this.updateEnergy();
-        this.ctx.restore();
-		
+        this.ctx.restore();		
+    }
+    
+    this.endGame = function() {
+    	for (var i = 0; i < this.entities.length; i++) {
+    		this.removeEntity(this.entities[i]);
+    	}
+    	this.currentBG = 3
+    	this.gameOver = true;
     }
 
     /**
@@ -127,21 +146,26 @@ function GameEngine(manager, animArr, soundArr) {
 				this.energy += 1;
 			}
 			this.ticked = false;
-		}
-		
+		}		
     }
 
 	this.updateEnergy = function() {
-		var max = 100;
-		var current = getPercentBar(this.energy, max, 300);
-		
-		this.ctx.fillStyle = "black";
-		this.ctx.fillRect(420, 170, 300, 30);
-		
-		this.ctx.fillStyle = "white";
-		this.ctx.fillRect(420, 170, current, 30);
-		
-		
+		if (!this.gameOver) {
+			var max = 100;
+			var current = getPercentBar(this.energy, max, 300);		
+			this.ctx.fillStyle = "black";
+			this.ctx.fillRect(420, 170, 300, 30);		
+			this.ctx.fillStyle = "white";
+			this.ctx.fillRect(420, 170, current, 30);	
+		}
+	}
+	
+	this.toggleMusic = function(boolean) {
+	    if (boolean == true) {
+	    	this.theme.play();
+	    } else if (boolean == false) {
+	    	this.theme.pause();
+	    }
 	}
 	
     /**

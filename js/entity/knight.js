@@ -119,7 +119,7 @@ Knight.prototype.update = function()
 		if (this.game.freq < 2)
 			this.game.freq = 2;
 		this.game.currentBG++;
-		if (this.game.currentBG >= this.game.backgrounds.length)
+		if (this.game.currentBG >= this.game.backgrounds.length - 1)
 			this.game.currentBG = 0;
 		this.sounds[GAME_NEXT_LEVEL].play();
 	}
@@ -127,7 +127,10 @@ Knight.prototype.update = function()
 	if (this.x < LOST_POS)
 	{
 		this.game.timer.pause();
+		this.game.toggleMusic(false);
+		this.game.currentBG = 0;
 		this.sounds[GAME_LOST].play();
+		this.game.endGame();
 	}
 
 	this.x += this.game.clockTick * this.speed;
@@ -172,9 +175,7 @@ Knight.prototype.drawBar = function()
 	var current = getPercentBar(this.health, max, BAR_SIZE);
 	this.ctx.fillStyle = "red";
 	this.ctx.fillRect(this.x, this.y + 130, current, 5);
-
 	this.ctx.fillStyle = "white";
-
 	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
 }
 
@@ -208,7 +209,7 @@ Knight.prototype.attack = function() {
 
 Knight.prototype.die = function() {
 	this.animation = this.createAnimation(DEAD, this.team, this.animations);
-	//this.sounds[KNIGHT_SOUND_DEAD].play();
+	this.sounds[KNIGHT_SOUND_DEAD].play();
 	this.state = DEAD;
 	this.speed = 0;
 }

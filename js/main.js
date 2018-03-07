@@ -39,9 +39,11 @@ AM.addMusic("./sound/dragon/dragon-dead.mp3");
 
 AM.addMusic("./sound/menu/achievement.mp3");
 AM.addMusic("./sound/menu/error.mp3");
+AM.addMusic("./sound/menu/game_over.mp3");
 AM.addMusic("./sound/menu/achievement.mp3");
 AM.addMusic("./sound/menu/music.mp3");
 AM.addMusic("./sound/menu/navsounds.mp3");
+AM.addMusic("./sound/menu/next_level.mp3");
 AM.addMusic("./sound/menu/success.mp3");
 AM.addMusic("./sound/menu/you_lose_music.mp3");
 
@@ -49,6 +51,8 @@ AM.addMusic("./sound/menu/you_lose_music.mp3");
 AM.queueDownload("./img/background/forestbg.png");
 AM.queueDownload("./img/background/blizzardbg.png");
 AM.queueDownload("./img/background/volcanobg.png");
+AM.queueDownload("./img/background/start_screen.png");
+AM.queueDownload("./img/background/game_over_screen.png");
 AM.queueDownload("./img/background/highlight.png");
 AM.queueDownload("./img/background/unit.png");
 
@@ -122,8 +126,8 @@ AM.downloadAll(function () {
 	soundArr[MENU_SUCCESS] = AM.getMusic("./sound/menu/success.mp3");
 	soundArr[MENU_YOU_LOSE_MUSIC] = AM.getMusic("./sound/menu/you_lose_music.mp3");
 	
-	soundArr[GAME_NEXT_LEVEL] = AM.getMusic("./sound/menu/you_lose_music.mp3"); // DO NOT forget to download it first
-	soundArr[GAME_LOST] = AM.getMusic("./sound/menu/you_lose_music.mp3"); // DO NOT forget to download it first
+	soundArr[GAME_NEXT_LEVEL] = AM.getMusic("./sound/menu/next_level.mp3");
+	soundArr[GAME_LOST] = AM.getMusic("./sound/menu/game_over.mp3");
 	
 	animArr[ELF_LEFT_IDLE] = AM.getAsset("./img/elf/player1/IDLE.png");
 	animArr[ELF_LEFT_WALK] = AM.getAsset("./img/elf/player1/WALK.png");
@@ -162,24 +166,22 @@ AM.downloadAll(function () {
 	animArr[BACKGROUND_BLIZZARD] = AM.getAsset("./img/background/blizzardbg.png");
 	animArr[BACKGROUND_FOREST] = AM.getAsset("./img/background/forestbg.png");
 	animArr[BACKGROUND_VOCANO] = AM.getAsset("./img/background/volcanobg.png");
+	animArr[BACKGROUND_GAMEOVER] = AM.getAsset("./img/background/game_over_screen.png");
+	animArr[BACKGROUND_GAMESTART] = AM.getAsset("./img/background/start_screen.png");
 	
 	/** Setting up page canvas and context. */
     var canvas = document.getElementById("gameWorld");
-    //canvas.style.margin = "auto";
-    //canvas.style.position = "absolute";
-    //canvas.style.top = 0;
-    //canvas.style.bottom = 0;
-    //canvas.style.left = 0;
-    //canvas.style.right = 0;
     var ctx = canvas.getContext("2d");
 	ctx.fillStyle = "white";
 	
 	/** Setting up game engine. */
     var gameEngine = new GameEngine(AM, animArr, soundArr);
     gameEngine.init(ctx);
-    gameEngine.addBackground(new Background(gameEngine, animArr[BACKGROUND_BLIZZARD], 1440, 810));
     gameEngine.addBackground(new Background(gameEngine, animArr[BACKGROUND_FOREST], 1440, 810));
+    gameEngine.addBackground(new Background(gameEngine, animArr[BACKGROUND_BLIZZARD], 1440, 810));
     gameEngine.addBackground(new Background(gameEngine, animArr[BACKGROUND_VOCANO], 1440, 810));
+    gameEngine.addBackground(new Background(gameEngine, animArr[BACKGROUND_GAMEOVER], 1440, 810));
+    gameEngine.addMusic(soundArr[MENU_MUSIC]);
     gameEngine.start();
     
     /** Testing the animation */
@@ -216,16 +218,11 @@ AM.downloadAll(function () {
 //    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
 //    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
     
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 2, 1));
-//    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 1));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
-//    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 1));
-//    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
-    
-    /** Play the background music, continuously looping. */
-    var theme = AM.getMusic("./sound/menu/music.mp3");
-    theme.loop = true;
-    theme.play();
+    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 2, 1));
+    gameEngine.addEntity(new Knight(gameEngine, animArr, soundArr, 1, 1));
+    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 4, 1));
+    gameEngine.addEntity(new Elf(gameEngine, animArr, soundArr, 3, 1));
+    gameEngine.addEntity(new Fairy(gameEngine, animArr, soundArr, 5, 1));
 	
 	/** Log to console once completed. */
     console.log("All Done!");    

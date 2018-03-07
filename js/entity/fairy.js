@@ -137,7 +137,10 @@ Fairy.prototype.update = function()
 	if (this.x < LOST_POS)
 	{
 		this.game.timer.pause();
+		this.game.toggleMusic(false);
+		this.game.currentBG = 0;
 		this.sounds[GAME_LOST].play();
+		this.game.endGame();
 	}
 	
 	

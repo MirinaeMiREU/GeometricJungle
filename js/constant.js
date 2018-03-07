@@ -63,6 +63,8 @@ const DRAGON_RIGHT_DIE = "dragon.right.die";
 const BACKGROUND_BLIZZARD = "background.blizzard";
 const BACKGROUND_FOREST = "background.forest";
 const BACKGROUND_VOCANO = "background.volcano";
+const BACKGROUND_GAMESTART = "background.gamestart";
+const BACKGROUND_GAMEOVER = "background.gameover";
 
 /** ----------- SOUND -----------------  */
 const ELF_SOUND_DEPLOY = "elf.sound.deploy";
