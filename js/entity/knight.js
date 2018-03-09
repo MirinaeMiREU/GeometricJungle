@@ -132,7 +132,9 @@ Knight.prototype.update = function()
 		this.sounds[GAME_LOST].play();
 		this.game.endGame();
 	}
-
+	if (this.x > 1440) {
+		this.game.removeEntity(this);
+	}
 	this.x += this.game.clockTick * this.speed;
 	Entity.prototype.update.call(this);
 }
