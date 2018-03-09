@@ -127,7 +127,7 @@ Fairy.prototype.update = function()
 		if (this.game.freq < 2)
 			this.game.freq = 2;
 		this.game.currentBG++;
-		if (this.game.currentBG >= this.game.backgrounds.length - 1)
+		if (this.game.currentBG >= this.game.backgrounds.length - 4)
 			this.game.currentBG = 0;
 		this.sounds[GAME_NEXT_LEVEL].play();
 	}
