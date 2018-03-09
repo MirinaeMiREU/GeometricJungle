@@ -243,7 +243,7 @@ function GameEngine(manager, animArr, soundArr) {
         	if (Math.round(this.timer.gameTime / this.freq) > this.timer.gameCount) {
         		this.timer.gameCount++;
             	spawnUnit(this, this.animations, this.effects, Math.floor(Math.random() * 5) + 1, 
-                			Math.floor(Math.random() * 3), 1); 
+                			Math.floor(Math.random() * 3) + 1, 1); 
             	
             }
         }

@@ -236,8 +236,8 @@ Knight.prototype.getSpeed = function(team) {
 
 Knight.prototype.getPosition = function(team) {
 	if (team === 0)
-		return 220;
-	else return 1000; // should be constant
+		return START_POS_TEAM_1;
+	else return START_POS_TEAM_2;
 }
 
 Knight.prototype.createAnimation = function(status, team, animations) {

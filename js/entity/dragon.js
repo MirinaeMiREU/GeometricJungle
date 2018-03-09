@@ -225,8 +225,8 @@ Dragon.prototype.getSpeed = function(team) {
 
 Dragon.prototype.getPosition = function(team) {
 	if (team === 0)
-		return 0;
-	else return 600; // should be constant
+		return START_POS_TEAM_1;
+	else return START_POS_TEAM_2;
 }
 
 Dragon.prototype.createAnimation = function(status, team, animations) {
