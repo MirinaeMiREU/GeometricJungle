@@ -153,8 +153,8 @@ function Controller(game, manager, animArr, soundArr) {
 		var eventY = event.pageY;
 		
 		if (event.button === MOUSE_RIGHT_CLICK) {
-			if (eventX >= ICON_ELF_POS_START_X && eventX <= ICON_FAIRY_POS_END_X &&
-			    eventY >= ICON_POS_START_Y && eventY <= ICON_POS_END_Y) {	
+			if ((eventX >= ICON_ELF_POS_START_X && eventX <= ICON_FAIRY_POS_END_X &&
+			    eventY >= ICON_POS_START_Y && eventY <= ICON_POS_END_Y) && (game.currentBG != 4 && game.currentBG != 5)) {	
 				soundArr[MENU_NAVSOUNDS].play(); // sound on when click at the right position
 				if (eventX >= ICON_ELF_POS_START_X && eventX <= ICON_ELF_POS_END_X) {	
 					that.selectedUnit = 1;
@@ -167,10 +167,8 @@ function Controller(game, manager, animArr, soundArr) {
 					that.unitHighlight.changeLoc(2);
 				}
 				that.unitSelected = true;
-			}
-			
-			else if (eventX > MARGIN_X && eventX < MARGIN_X + HORIZONTAL_LANE_SIZE &&
-				eventY >= LANE_1 && eventY < LANE_OFF) {
+			} else if ((eventX > MARGIN_X && eventX < MARGIN_X + HORIZONTAL_LANE_SIZE &&
+				eventY >= LANE_1 && eventY < LANE_OFF) && (game.currentBG != 4 && game.currentBG != 5)) {
 				soundArr[MENU_NAVSOUNDS].play(); // sound on when click at the right position
 				if (eventY >= LANE_1 && eventY < LANE_2) {
 					that.selectedLane = 1;
@@ -192,14 +190,34 @@ function Controller(game, manager, animArr, soundArr) {
 					that.selectedLane = 5;
 					that.highlight.changeLane(5);
 					that.laneSelected = true;
-				}
-				
+				}				
+			} else if (eventX >= ICON_MUSIC_TOGGLE_X && eventX < 1440 && eventY >= ICON_MUSIC_TOGGLE_Y && eventY < 810) {
+				game.toggleMusic();
+				soundArr[MENU_NAVSOUNDS].play();
+			} else if ((eventX >= ICON_PLAY_START_X && eventX < ICON_PLAY_END_X && eventY >= ICON_PLAY_START_Y && eventY < ICON_PLAY_END_Y) && (game.currentBG == 4)) {
+				game.newGame();
+				soundArr[MENU_NAVSOUNDS].play();
+			} else if ((eventX >= ICON_PAUSE_START_X && eventX < ICON_PAUSE_END_X && eventY >= ICON_PAUSE_START_Y && eventY < ICON_PAUSE_END_Y) && (game.currentBG == 0 || game.currentBG == 1
+					|| game.currentBG == 2)) {
+				game.pauseGame();
+				soundArr[MENU_NAVSOUNDS].play();
+			} else if ((eventX >= ICON_GAME_PAUSED_START_X && eventX < ICON_GAME_PAUSED_END_X && eventY >= ICON_GAME_PAUSED_START_Y && eventY < ICON_GAME_PAUSED_END_Y) && (game.currentBG == 5)) {
+				game.pauseGame();
+				soundArr[MENU_NAVSOUNDS].play();
+			} else if ((eventX >= ICON_HOW_TO_PLAY_START_X && eventX < ICON_HOW_TO_PLAY_END_X && eventY >= ICON_HOW_TO_PLAY_START_Y && eventY < ICON_HOW_TO_PLAY_END_Y) && (game.currentBG == 4)) {
+				game.showTutorial();
+				soundArr[MENU_NAVSOUNDS].play();
+			} else if ((eventX >= ICON_CLOSEHELP_START_X && eventX < ICON_CLOSEHELP_END_X && eventY >= ICON_CLOSEHELP_START_Y && eventY < ICON_CLOSEHELP_END_Y) && (game.currentBG == 6)) {
+				game.showTutorial();
+				soundArr[MENU_NAVSOUNDS].play();
+			} else if ((eventX >= ICON_TRYAGAIN_START_X && eventX < ICON_TRYAGAIN_END_X && eventY >= ICON_TRYAGAIN_START_Y && eventY < ICON_TRYAGAIN_END_Y) && (game.currentBG == 3)) {
+				game.start();
+				soundArr[MENU_NAVSOUNDS].play();
 			}
 			
-			if (that.unitSelected)
-			{
-				if (that.laneSelected)
-				{
+			
+			if (that.unitSelected) {
+				if (that.laneSelected) {
 					that.laneSelected = false;
 					spawnUnit(game, animArr, soundArr, that.selectedLane, that.selectedUnit, 0);
 					soundArr[MENU_NAVSOUNDS].play();

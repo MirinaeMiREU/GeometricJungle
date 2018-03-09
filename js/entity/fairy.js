@@ -3,9 +3,9 @@
  * 
  * Author(s): Varik Hoang, Peter Bae, Cuong Tran, Logan Stafford
  * Based on code created by Seth Ladd and edited for use by Chris Marriott.
- * TCSS491 - Winter 2018
  */
 function Fairy(game, spritesheets, sounds, lane, team) {
+	
 	/** Sprite coordinates must be modified if spritesheets are changed! */
 	this.animations = spritesheets;
 	this.sounds = sounds;
@@ -113,8 +113,6 @@ Fairy.prototype.update = function()
 		}
 	}
 	
-
-	
 	if (this.health <= 0 && this.state !== DEAD) {
 		this.die();
 	}
@@ -134,8 +132,7 @@ Fairy.prototype.update = function()
 		this.sounds[GAME_NEXT_LEVEL].play();
 	}
 	
-	if (this.x < LOST_POS)
-	{
+	if (this.x < LOST_POS) {
 		this.game.timer.pause();
 		this.game.toggleMusic(false);
 		this.game.currentBG = 0;
@@ -148,8 +145,7 @@ Fairy.prototype.update = function()
 	Entity.prototype.update.call(this);
 }
 
-Fairy.prototype.updateStatus = function()
-{
+Fairy.prototype.updateStatus = function() {
 	for (var i = 0; i < this.game.entities.length; i++) {
 		var entity = this.game.entities[i];
 		if (entity !== this && entity.state !== DEAD) {
@@ -181,8 +177,7 @@ Fairy.prototype.draw = function() {
     Entity.prototype.draw.call(this);
 }
 
-Fairy.prototype.drawBar = function()
-{
+Fairy.prototype.drawBar = function() {
 	var max = this.team === 0 ? FAIRY_HEALTH_1 : FAIRY_HEALTH_2;
 	var current = getPercentBar(this.health, max, BAR_SIZE);
 	this.ctx.fillStyle = "red";
@@ -192,8 +187,7 @@ Fairy.prototype.drawBar = function()
 	this.ctx.fillRect(this.x + current, this.y + 130, BAR_SIZE - current, 5);
 }
 
-Fairy.prototype.drawMagic = function(enemy)
-{
+Fairy.prototype.drawMagic = function(enemy) {
 	if (this.state === ATTACK)
 	{
 		this.magic = this.createMagicStar(this.team, this.animations);
@@ -298,4 +292,3 @@ Fairy.prototype.createMagicStar = function(team, animations) {
 		return new Animation(animations[FAIRY_LEFT_MAGIC], 76, 73, 1, 1, 1, false, 1);
 	else return new Animation(animations[FAIRY_RIGHT_MAGIC], 76, 73, 1, 1, 1, false, 1);
 }
-

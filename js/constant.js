@@ -65,6 +65,8 @@ const BACKGROUND_FOREST = "background.forest";
 const BACKGROUND_VOCANO = "background.volcano";
 const BACKGROUND_GAMESTART = "background.gamestart";
 const BACKGROUND_GAMEOVER = "background.gameover";
+const BACKGROUND_GAMEPAUSE = "background.gamepause";
+const BACKGROUND_GAMETUTORIAL = "background.gametutorial";
 
 /** ----------- SOUND -----------------  */
 const ELF_SOUND_DEPLOY = "elf.sound.deploy";
@@ -89,7 +91,6 @@ const DRAGON_SOUND_DEAD = "dragon.sound.dead";
 
 const MENU_ERROR = "menu.error";
 const MENU_ACHIEVEMENT = "menu.achievement";
-const MENU_BGMUSIC = "menu.bgmusic";
 const MENU_MUSIC = "menu.music";
 const MENU_NAVSOUNDS = "menu.navsounds";
 const MENU_SUCCESS = "menu.success";
@@ -97,6 +98,7 @@ const MENU_YOU_LOSE_MUSIC = "menu.youlosemusic";
 
 const GAME_NEXT_LEVEL = "game.next.level";
 const GAME_LOST = "game.lost";
+const GAME_MUSIC = "menu.gamemusic";
 
 /** ----------- UNIT PROPERTIES -----------------  */
 const ELF_SPEED_1 = 50;
@@ -169,6 +171,39 @@ const ICON_FAIRY_POS_END_X = 409;
 const ICON_FAIRY_POS_START_Y = ICON_POS_START_Y;
 const ICON_FAIRY_POS_END_Y = ICON_POS_END_Y;
 
+const ICON_MUSIC_TOGGLE_X = 1319;
+const ICON_MUSIC_TOGGLE_Y = 770;
+
+const ICON_PLAY_START_X = 644;
+const ICON_PLAY_START_Y = 512;
+const ICON_PLAY_END_X = 767;
+const ICON_PLAY_END_Y = 570;
+
+const ICON_PAUSE_START_X = 5;
+const ICON_PAUSE_START_Y = 745;
+const ICON_PAUSE_END_X = 270;
+const ICON_PAUSE_END_Y = 802;
+
+const ICON_GAME_PAUSED_START_X = 567;
+const ICON_GAME_PAUSED_START_Y = 715;
+const ICON_GAME_PAUSED_END_X = 865;
+const ICON_GAME_PAUSED_END_Y = 773;
+
+const ICON_HOW_TO_PLAY_START_X = 564;
+const ICON_HOW_TO_PLAY_START_Y = 587;
+const ICON_HOW_TO_PLAY_END_X = 855;
+const ICON_HOW_TO_PLAY_END_Y = 643;
+
+const ICON_CLOSEHELP_START_X = 8;
+const ICON_CLOSEHELP_START_Y = 9;
+const ICON_CLOSEHELP_END_X = 189;
+const ICON_CLOSEHELP_END_Y = 70;
+
+const ICON_TRYAGAIN_START_X = 529;
+const ICON_TRYAGAIN_START_Y = 632;
+const ICON_TRYAGAIN_END_X = 886;
+const ICON_TRYAGAIN_END_Y = 689;
+
 /** ----------- BOARD -----------------  */
 const MARGIN_X = 240;
 const MARGIN_Y = 275;
@@ -184,7 +219,8 @@ const LANE_OFF	= LANE_5 + VERTICAL_LANE_SIZE;
 /** ----------- OTHER -----------------  */
 const BAR_SIZE = 80;
 const AI_FREQ_INIT = 10;
-const AI_FREQ_FACTOR = 0.2;
+const AI_FREQ_FACTOR = 0.5;
 const NEXT_LEVEL_POS = MARGIN_X + HORIZONTAL_LANE_SIZE;
 const LOST_POS = MARGIN_X - 20;
-
+const GAMESIZE_X = 1440;
+const GAMESIZE_Y = 810;

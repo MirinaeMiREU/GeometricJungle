@@ -34,8 +34,11 @@ function GameEngine(manager, animArr, soundArr) {
     this.freq = AI_FREQ_INIT;
     this.backgrounds = [];
     this.currentBG;
-    this.theme = soundArr[MENU_MUSIC];
-    this.gameOver = false;
+    this.gametheme = soundArr[GAME_MUSIC];
+    this.menutheme = soundArr[MENU_MUSIC];
+    this.gameOver = true;
+    this.musicPlaying = false;
+    this.gamePaused = false;
     
     /**
      * The method initialize the context (canvas).
@@ -45,7 +48,10 @@ function GameEngine(manager, animArr, soundArr) {
 		this.controller.init(ctx);
         this.surfaceWidth = this.ctx.canvas.width;
         this.surfaceHeight = this.ctx.canvas.height;
-        this.currentBG = 0;        
+        this.currentBG = 0;     
+        this.menutheme.loop = true;
+    	this.menutheme.play();
+    	this.musicPlaying = true;
         console.log('Game initialized.');
     }
 
@@ -55,12 +61,34 @@ function GameEngine(manager, animArr, soundArr) {
     this.start = function() {
         console.log("Starting game...");
         var that = this;
+    	this.currentBG = 4;
+    	this.draw();
+    	this.menutheme.play();
+    	
         (function gameLoop() 
         {
         	if (!that.timer.status)
         		that.loop();
         	requestAnimFrame(gameLoop, that.ctx.canvas);
-        })();
+        })();       
+    }
+    
+    this.newGame = function() {
+    	console.log("Starting a new game.");
+    	var that = this;
+    	
+    	this.gameOver = false;
+    	this.currentBG = 0;
+    	this.draw();
+		this.menutheme.pause();
+		this.gametheme.play();
+		
+		(function gameLoop() 
+        {
+        	if (!that.timer.status)
+        		that.loop();
+        	requestAnimFrame(gameLoop, that.ctx.canvas);
+        })();      
     }
 
     /**
@@ -82,11 +110,6 @@ function GameEngine(manager, animArr, soundArr) {
 //        console.log('Added background.');
     	this.backgrounds.push(entity);
     }
-    
-    this.addMusic = function() {    	
-    	this.theme.loop = true;
-    	this.theme.play();
-    }
 	
     /**
      * The method removes an animation
@@ -106,26 +129,55 @@ function GameEngine(manager, animArr, soundArr) {
         this.ctx.clearRect(0, 0, this.surfaceWidth , this.surfaceHeight);
         this.ctx.save();
         
-        if (!this.gameOver) {
+        if (!this.gameOver && !this.timer.isPause()) {
 	//        console.log(this.backgrounds[this.currentBG]);
 	        this.backgrounds[this.currentBG].draw(this.ctx);
-		    	for (var i = 0; i < this.entities.length; i++) {
-		    		this.entities[i].draw(this.ctx);
-		    	}         
-        } else if (this.gameOver){
+	    	for (var i = 0; i < this.entities.length; i++) {
+	    		this.entities[i].draw(this.ctx);
+	    	}  	
+        } else if (this.gameOver || this.timer.isPause()){
         		this.backgrounds[this.currentBG].draw(this.ctx);
         }
-
-		this.updateEnergy();
+        
+        this.updateEnergy();
         this.ctx.restore();		
+    }
+    
+    this.showTutorial = function() {
+    	if (this.currentBG == 4) {
+    		console.log('Tutorial opened.');
+    		this.currentBG = 6;
+    		this.draw();
+    	} else if (this.currentBG == 6) {
+    		console.log('Tutorial closed.');
+    		this.currentBG = 4;
+    		this.draw();
+    	}
+    }
+    
+    this.pauseGame = function() {
+    	var tempBG = this.currentBG;
+    	    	
+    	if (!this.timer.isPause()) {
+    		console.log('Game paused.');
+    		this.currentBG = 5;    		
+    		this.timer.pause();    
+    		this.draw();
+    	} else if (this.timer.isPause()) {
+    		this.timer.resume();
+    		console.log('Game resumed.');    		   		
+    		this.currentBG = 0;    		    
+    	}
     }
     
     this.endGame = function() {
 	    	for (var i = 0; i < this.entities.length; i++) {
 	    		this.removeEntity(this.entities[i]);
 	    	}
-	    	this.currentBG = 3
+	    	this.currentBG = 3;
 	    	this.gameOver = true;
+	    	this.gametheme.pause();	  
+	    	console.log('Game ended.');
     }
 
     /**
@@ -150,7 +202,7 @@ function GameEngine(manager, animArr, soundArr) {
     }
 
 	this.updateEnergy = function() {
-		if (!this.gameOver) {
+		if (!this.gameOver && (this.currentBG != 5)) {
 			var max = 100;
 			var current = getPercentBar(this.energy, max, 300);		
 			this.ctx.fillStyle = "black";
@@ -160,11 +212,23 @@ function GameEngine(manager, animArr, soundArr) {
 		}
 	}
 	
-	this.toggleMusic = function(boolean) {
-	    if (boolean == true) {
-	    	this.theme.play();
-	    } else if (boolean == false) {
-	    	this.theme.pause();
+	this.toggleMusic = function() {
+	    if (this.musicPlaying == false) {
+	    	if (this.currentBG === 3 | this.currentBG == 4) {
+	    		this.menutheme.play();
+	    		this.musicPlaying = true;
+	    	} else {
+	    		this.gametheme.play();
+	    		this.musicPlaying = true;
+	    	}
+	    } else if (this.musicPlaying == true) {
+	    	if (this.currentBG === 3 | this.currentBG == 4) {
+	    		this.menutheme.pause();
+	    		this.musicPlaying = false;
+	    	} else {
+	    		this.gametheme.pause();
+	    		this.musicPlaying = false;
+	    	}	    	
 	    }
 	}
 	
@@ -175,16 +239,18 @@ function GameEngine(manager, animArr, soundArr) {
      */
     this.loop = function() {
         this.clockTick = this.timer.tick();
-        if (Math.round(this.timer.gameTime / this.freq) > this.timer.gameCount)
-        {
-        	this.timer.gameCount++;
-        	spawnUnit(this, this.animations, this.effects, 
-        			Math.floor(Math.random() * 5) + 1, 
-        			Math.floor(Math.random() * 3), 1);
+        if (!this.gameOver && !this.gamePaused) {
+        	if (Math.round(this.timer.gameTime / this.freq) > this.timer.gameCount) {
+        		this.timer.gameCount++;
+            	spawnUnit(this, this.animations, this.effects, Math.floor(Math.random() * 5) + 1, 
+                			Math.floor(Math.random() * 3), 1); 
+            	
+            }
         }
-        
+        	
         if (!this.timer.isPause())
         	this.update(); // update if the game is not pause
-        this.draw();
+        this.draw(); 
     }
+    
 }
