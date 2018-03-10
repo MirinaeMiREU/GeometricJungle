@@ -123,9 +123,8 @@ Fairy.prototype.update = function()
 	
 	if (this.x > NEXT_LEVEL_POS) {
 		this.game.removeEntity(this);
-		this.game.freq -= AI_FREQ_FACTOR;
-		if (this.game.freq < 2)
-			this.game.freq = 2;
+		if (this.game.freq - AI_FREQ_FACTOR >= 2)
+			this.game.freq -= AI_FREQ_FACTOR;
 		this.game.currentBG++;
 		if (this.game.currentBG >= this.game.backgrounds.length - 4)
 			this.game.currentBG = 0;
