@@ -231,7 +231,7 @@ const START_POS_TEAM_2 = 1100;
 /** ----------- OTHER -----------------  */
 const BAR_SIZE = 80;
 const AI_FREQ_INIT = 10;
-const AI_FREQ_FACTOR = 0.5;
+const AI_FREQ_FACTOR = 0.2;
 const NEXT_LEVEL_POS = START_POS_TEAM_2 + 20;
 const LOST_POS = START_POS_TEAM_1 - 20;
 const GAMESIZE_X = 1440;
